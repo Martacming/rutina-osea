@@ -58,7 +58,16 @@
           "progresion": "goblet → multipower → barra",
           "notas": "Espalda neutra. La estrella para columna + cadera",
           "sitiosOseos": ["columna_lumbar", "cadera"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Flexionar cadera y rodilla a la vez, bajando el cuerpo como si te sentaras en una silla.",
+            "colocacion": "Pies a la anchura de los hombros, puntas ligeramente hacia fuera.",
+            "ejecucion": ["Inicia sacando cadera hacia atrás y flexionando rodillas a la vez", "Baja manteniendo el pecho erguido", "Rodillas siguen la dirección de los pies", "Sube empujando el suelo con toda la planta del pie"],
+            "debesNotar": "Cuádriceps y glúteo. Peso repartido en toda la planta.",
+            "errores": ["Rodillas hacia dentro al subir → baja el peso", "Talones se levantan → prueba con alza bajo el talón", "Espalda se redondea → para antes en el recorrido"],
+            "porqueHueso": "Carga axial directa sobre columna y cadera."
+          }
         },
         {
           "id": "a_peso_muerto_rumano",
@@ -71,7 +80,17 @@
           "progresion": "mancuernas → barra",
           "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar",
           "sitiosOseos": ["columna_lumbar", "cadera"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Bisagra de cadera. Las rodillas apenas se mueven.",
+            "colocacion": "Pies a la anchura de la cadera, peso por delante de los muslos, rodillas con flexión suave y fija.",
+            "ejecucion": ["Empuja el glúteo hacia atrás", "El peso baja pegado a las piernas", "Espalda recta, sin redondear ni arquear", "Baja hasta notar tirón en isquiotibiales", "Sube con el glúteo"],
+            "debesNotar": "Isquiotibiales y glúteo. Nunca la zona lumbar.",
+            "errores": ["Doblar espalda en vez de cadera → PARAR, es el error de mayor riesgo de la rutina", "El peso se separa de las piernas", "Doblar rodillas como sentadilla"],
+            "truco": "Practica sin peso de espaldas a una pared, a dos palmos: lleva el culo hasta rozarla sin doblar rodillas.",
+            "porqueHueso": "El mejor estímulo para L1-L4 con técnica correcta. Revisar con el monitor antes de progresar en peso."
+          }
         },
         {
           "id": "a_zancadas",
@@ -84,7 +103,15 @@
           "registraCarga": true,
           "notas": "Carga unilateral de cadera — trabajo específico para tu sitio prioritario. Empieza sin peso",
           "sitiosOseos": ["cadera", "cuello_femoral"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Paso largo bajando la rodilla trasera, o subir un escalón con una pierna.",
+            "ejecucion": ["Paso largo hacia delante", "Baja hasta que la rodilla trasera casi toque el suelo", "Rodilla delantera no sobrepasa mucho la punta del pie", "Empuja con la pierna delantera para volver"],
+            "debesNotar": "Cuádriceps y glúteo de la pierna que trabaja.",
+            "errores": ["Rodilla delantera colapsando hacia dentro", "Perder equilibrio lateral → reduce el paso"],
+            "porqueHueso": "Trabajo unilateral de cadera en varios planos."
+          }
         },
         {
           "id": "a_prensa",
@@ -95,7 +122,15 @@
           "repsMax": 12,
           "registraCarga": true,
           "notas": "Accesorio, aquí sí vale la máquina",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada, empujas una plataforma con las piernas.",
+            "colocacion": "Pies a la anchura de los hombros, espalda pegada al respaldo.",
+            "ejecucion": ["Flexiona controlando la bajada", "Empuja sin bloquear del todo la rodilla"],
+            "debesNotar": "Cuádriceps.",
+            "errores": ["Despegar la lumbar del respaldo → reduce el rango"]
+          }
         },
         {
           "id": "a_curl_femoral",
@@ -106,7 +141,13 @@
           "repsMax": 12,
           "registraCarga": true,
           "notas": "Accesorio",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada, flexionas la rodilla contra resistencia.",
+            "ejecucion": ["Movimiento controlado, sin tirones", "Aprieta al final del recorrido"],
+            "debesNotar": "Parte trasera del muslo."
+          }
         },
         {
           "id": "a_farmer",
@@ -117,7 +158,16 @@
           "registraCarga": true,
           "notas": "Carga axial + core + agarre. Muy infravalorado",
           "sitiosOseos": ["columna_lumbar", "muñeca"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
+            "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
+            "ejecucion": ["Camina con pasos normales, core activo, sin inclinarte"],
+            "debesNotar": "Agarre, antebrazos, core.",
+            "errores": ["Encoger hombros hacia las orejas → baja el peso"],
+            "porqueHueso": "Carga axial en columna + tracción en muñeca."
+          }
         }
       ]
     },
@@ -151,7 +201,16 @@
           "progresion": "mancuernas → barra",
           "notas": "DE PIE, no sentada. Aquí está la clave: carga axial + tu punto débil",
           "sitiosOseos": ["columna_lumbar", "humero"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Empujar el peso por encima de la cabeza de pie.",
+            "colocacion": "Pies a la anchura de la cadera, peso a la altura de los hombros, codos ligeramente delante.",
+            "ejecucion": ["Aprieta glúteo y abdomen antes de empezar", "Empuja en línea recta hacia arriba", "Cabeza pasa ligeramente delante al final", "Baja con control"],
+            "debesNotar": "Hombros y tríceps. Abdomen estabilizando.",
+            "errores": ["Arquear la lumbar para ayudar a empujar → baja el peso", "Empujar hacia delante en vez de arriba"],
+            "porqueHueso": "De pie, carga axial directa sobre columna y húmero. Tu ejercicio más débil documentado."
+          }
         },
         {
           "id": "b_remo",
@@ -163,7 +222,15 @@
           "registraCarga": true,
           "notas": "Si es con barra, remo Pendlay de pie: mejor para columna",
           "sitiosOseos": ["columna_toracica"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Tirar del peso hacia el cuerpo trabajando la espalda.",
+            "colocacion": "De pie con barra: cadera hacia delante, espalda recta (igual que el PM rumano).",
+            "ejecucion": ["Tira hacia el abdomen apretando omóplatos", "Baja con control"],
+            "debesNotar": "Espalda media y alta.",
+            "errores": ["Redondear la espalda al tirar"]
+          }
         },
         {
           "id": "b_press_pecho",
@@ -174,7 +241,13 @@
           "repsMax": 10,
           "registraCarga": true,
           "notas": "Prueba el agarre neutro: más amable con el hombro",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada, empujas el peso hacia delante desde el pecho.",
+            "ejecucion": ["Prueba agarre neutro si el hombro molesta"],
+            "debesNotar": "Pecho y tríceps."
+          }
         },
         {
           "id": "b_jalon",
@@ -185,7 +258,13 @@
           "repsMax": 10,
           "registraCarga": true,
           "notas": "",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Tirar de una barra hacia el pecho desde arriba.",
+            "ejecucion": ["Codos hacia abajo y ligeramente atrás, sin balancear el cuerpo"],
+            "debesNotar": "Espalda ancha."
+          }
         },
         {
           "id": "b_elevaciones",
@@ -196,7 +275,14 @@
           "repsMax": 15,
           "registraCarga": true,
           "notas": "Deltoides medio, complementario al press",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Levantar los brazos hacia los lados con mancuernas.",
+            "ejecucion": ["Brazos casi rectos, sube hasta el hombro, sin impulso"],
+            "debesNotar": "Parte media del hombro.",
+            "errores": ["Usar impulso del cuerpo → baja el peso"]
+          }
         },
         {
           "id": "b_biceps_triceps",
@@ -207,7 +293,12 @@
           "repsMax": 12,
           "registraCarga": true,
           "notas": "El aislamiento que faltaba en tu rutina anterior",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Curl de bíceps y extensión de tríceps, aislamiento de brazo.",
+            "ejecucion": ["Codos fijos en ambos ejercicios", "Movimiento controlado en ambas direcciones"]
+          }
         },
         {
           "id": "b_flexiones",
@@ -219,7 +310,16 @@
           "registraCarga": false,
           "notas": "Banco o multipower. CARGA AXIAL SOBRE LA MUÑECA — no es opcional. La fractura de radio distal suele ser la primera por fragilidad",
           "sitiosOseos": ["muñeca", "radio_distal"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Flexión de brazos con manos elevadas en banco o barra.",
+            "colocacion": "Manos en el borde del banco, cuerpo en línea recta.",
+            "ejecucion": ["Baja el pecho hacia el banco flexionando codos", "Sube empujando"],
+            "debesNotar": "Pecho, hombro, tríceps. Compresión en la muñeca.",
+            "errores": ["Cadera hundida o elevada → mantén línea recta"],
+            "porqueHueso": "Único ejercicio que carga el radio distal, donde suele aparecer la primera fractura por fragilidad."
+          }
         },
         {
           "id": "b_plancha_alta",
@@ -230,7 +330,13 @@
           "registraCarga": false,
           "notas": "En manos, NO en antebrazos. Core anti-flexión + compresión en radio distal",
           "sitiosOseos": ["muñeca", "radio_distal"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Mantener la posición de flexión apoyada en las manos.",
+            "ejecucion": ["Manos bajo los hombros, cuerpo recto", "Aprieta abdomen y glúteo"],
+            "errores": ["Cadera hacia arriba o hundida → busca la línea recta"]
+          }
         }
       ]
     },
@@ -263,7 +369,16 @@
           "registraCarga": true,
           "notas": "Carga más alta que el martes, menos reps",
           "sitiosOseos": ["columna_lumbar", "cadera"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Levantar el peso del suelo hasta quedar de pie con la espalda recta.",
+            "colocacion": "Convencional: pies a la anchura de la cadera. Sumo: pies más separados, puntas hacia fuera.",
+            "ejecucion": ["Cadera hacia atrás y abajo, espalda recta, pecho arriba", "Agarra el peso con brazos rectos por fuera de las piernas", "Empuja el suelo para levantarte, cadera hacia delante al final", "El peso sube pegado al cuerpo", "Baja controlado, no lo dejes caer"],
+            "debesNotar": "Piernas, glúteo y espalda juntos. Nunca dolor lumbar.",
+            "errores": ["Espalda redondeada al iniciar → el error más importante de toda la rutina, si pasa el peso es excesivo", "Tirar con la espalda antes que con las piernas"],
+            "porqueHueso": "El ejercicio con más carga de toda la rutina. Máxima prioridad para revisar con el monitor."
+          }
         },
         {
           "id": "c_hip_thrust",
@@ -274,7 +389,15 @@
           "repsMax": 10,
           "registraCarga": true,
           "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Empujar la cadera hacia arriba con la espalda apoyada en un banco.",
+            "colocacion": "Espalda alta en el borde de un banco, pies en el suelo, peso sobre la cadera.",
+            "ejecucion": ["Empuja la cadera arriba hasta línea recta hombros-rodillas", "Aprieta glúteo arriba", "Baja controlando"],
+            "debesNotar": "Glúteo, muy concentrado.",
+            "errores": ["Arquear la lumbar en vez de subir con el glúteo → sube menos rango"]
+          }
         },
         {
           "id": "c_press_hombro",
@@ -286,7 +409,12 @@
           "registraCarga": true,
           "notas": "Arnold press, push press o landmine",
           "sitiosOseos": ["humero"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Variante del press militar: Arnold press o landmine.",
+            "nota": "Pide al monitor la variante disponible en Viding."
+          }
         },
         {
           "id": "c_remo_jalon",
@@ -297,7 +425,11 @@
           "repsMax": 10,
           "registraCarga": true,
           "notas": "",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Mismo patrón que remo o jalón de la sesión B."
+          }
         },
         {
           "id": "c_pallof",
@@ -308,7 +440,15 @@
           "porLado": true,
           "registraCarga": true,
           "notas": "Anti-rotación, protege columna",
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Ejercicio anti-rotación con polea o goma a la altura del pecho.",
+            "colocacion": "De pie, de lado a la polea, peso a la altura del pecho.",
+            "ejecucion": ["Empuja hacia delante en línea recta, sin dejar girar el tronco", "Mantén 2 segundos, vuelve"],
+            "debesNotar": "Abdomen resistiendo el giro. No debe doler la espalda.",
+            "porqueHueso": "Protege la columna entrenando resistencia a la rotación, en vez de rotar bajo carga."
+          }
         },
         {
           "id": "c_extension_espalda",
@@ -320,7 +460,15 @@
           "registraCarga": false,
           "notas": "Extensores dorsales — se asocian inversamente con fracturas vertebrales. Controlado, sin hiperextender",
           "sitiosOseos": ["columna_toracica"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Fortalecer los músculos que mantienen la espalda erguida.",
+            "colocacion": "Banco romano: caderas apoyadas, piernas fijas. Superman: tumbada boca abajo, brazos extendidos.",
+            "ejecucion": ["Banco romano: sube el tronco hasta línea recta con las piernas, sin hiperextender", "Superman: levanta brazos y piernas a la vez, unos centímetros, mantén 1-2 segundos"],
+            "debesNotar": "Lumbar y glúteo controlados, sin dolor.",
+            "errores": ["Subir de más buscando hiperextensión → el objetivo es fuerza, no rango extra"]
+          }
         },
         {
           "id": "c_farmer",
@@ -331,7 +479,16 @@
           "registraCarga": true,
           "notas": "",
           "sitiosOseos": ["columna_lumbar", "muñeca"],
-          "video": ""
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
+            "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
+            "ejecucion": ["Camina con pasos normales, core activo, sin inclinarte"],
+            "debesNotar": "Agarre, antebrazos, core.",
+            "errores": ["Encoger hombros hacia las orejas → baja el peso"],
+            "porqueHueso": "Carga axial en columna + tracción en muñeca."
+          }
         }
       ]
     }
