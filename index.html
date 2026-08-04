@@ -1287,7 +1287,16 @@ function renderHistorialDetalle(sesionUuid){
     html += '</div>';
   });
 
+  html += '<button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="eliminarSesion(\''+s.id+'\')">Eliminar esta sesión</button>';
+
   document.getElementById('app').innerHTML = html;
+}
+function eliminarSesion(sesionUuid){
+  if(!confirm('¿Eliminar esta sesión del historial? No se puede deshacer.')) return;
+  state.sesiones = state.sesiones.filter(x=>x.id!==sesionUuid);
+  saveState();
+  toast('Sesión eliminada');
+  location.hash = '#/historial';
 }
 
 /* ======================= VISTA: AJUSTES ======================= */
