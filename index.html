@@ -153,8 +153,8 @@ button{font-family:inherit;}
 }
 .serie-row:first-of-type{border-top:none;}
 .serie-label{width:34px;color:var(--text-dim);font-size:0.85rem;flex-shrink:0;}
-.peso-group{display:flex;align-items:center;gap:4px;}
-.peso-group button{
+.peso-group,.reps-group{display:flex;align-items:center;gap:4px;}
+.peso-group button,.reps-group button{
   width:38px;height:38px;border-radius:8px;border:1px solid var(--border);
   background:var(--surface2);color:var(--text);font-size:1.2rem;
 }
@@ -1061,7 +1061,11 @@ function renderEjercicioCard(ej, draft, entry){
       html += '<span class="indicador" id="ind-'+ej.id+'-'+i+'"></span>';
     }
     if(showReps){
+      html += '<div class="reps-group">';
+      html += '<button type="button" onclick="ajustarReps(\''+ej.id+'\','+i+',-1)">−</button>';
       html += '<input type="number" class="reps-input" id="reps-'+ej.id+'-'+i+'" placeholder="'+repsTargetText(ej).split(' ')[0]+'" value="'+(s.reps!==null&&s.reps!==undefined?s.reps:'')+'" oninput="onRepsInput(\''+ej.id+'\','+i+')">';
+      html += '<button type="button" onclick="ajustarReps(\''+ej.id+'\','+i+',1)">+</button>';
+      html += '</div>';
     }
     html += '<input type="checkbox" id="hecha-'+ej.id+'-'+i+'" '+(s.hecha?'checked':'')+' onchange="onHechaChange(\''+ej.id+'\','+i+')">';
     html += '</div>';
@@ -1129,6 +1133,15 @@ function onPesoInput(ejercicioId, idx){
     else { indEl.textContent='='; indEl.className='indicador ind-eq'; }
   }
   saveState();
+}
+function ajustarReps(ejercicioId, idx, delta){
+  const input = document.getElementById('reps-'+ejercicioId+'-'+idx);
+  let val = parseInt(input.value, 10);
+  if(isNaN(val)) val = parseInt(input.placeholder, 10) || 0;
+  else val = val + delta;
+  val = Math.max(0, val);
+  input.value = val;
+  onRepsInput(ejercicioId, idx);
 }
 function onRepsInput(ejercicioId, idx){
   const input = document.getElementById('reps-'+ejercicioId+'-'+idx);
@@ -1274,7 +1287,16 @@ function renderHistorialDetalle(sesionUuid){
     html += '</div>';
   });
 
+  html += '<button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="eliminarSesion(\''+s.id+'\')">Eliminar esta sesión</button>';
+
   document.getElementById('app').innerHTML = html;
+}
+function eliminarSesion(sesionUuid){
+  if(!confirm('¿Eliminar esta sesión del historial? No se puede deshacer.')) return;
+  state.sesiones = state.sesiones.filter(x=>x.id!==sesionUuid);
+  saveState();
+  toast('Sesión eliminada');
+  location.hash = '#/historial';
 }
 
 /* ======================= VISTA: AJUSTES ======================= */
