@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#121212">
+<title>Rutina Ósea</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#121212;
+  --surface:#1c1c1e;
+  --surface2:#252528;
+  --border:#333336;
+  --text:#f5f5f5;
+  --text-dim:#a4a4a8;
+  --accent:#f0a500;
+  --accent-dim:#8a6000;
+  --green:#4caf50;
+  --red:#e5534b;
+  --amber:#e5a44b;
+  --radius:14px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:18px;
+  line-height:1.4;
+  padding-bottom:calc(78px + env(safe-area-inset-bottom));
+  -webkit-tap-highlight-color:transparent;
+}
+h1,h2,h3,h4{margin:0 0 8px 0;}
+h1{font-size:1.5rem;}
+h2{font-size:1.3rem;}
+h3{font-size:1.1rem;}
+p{margin:0 0 8px 0;}
+a{color:var(--accent);}
+button{font-family:inherit;}
+#app{padding:16px;max-width:640px;margin:0 auto;}
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;max-width:640px;margin:0 auto;
+}
+.topbar h1{flex:1;font-size:1.25rem;}
+.semana-badge{
+  background:var(--surface2);color:var(--accent);
+  padding:6px 12px;border-radius:20px;font-size:0.85rem;font-weight:600;
+  white-space:nowrap;
+}
+.card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  padding:16px;
+  margin-bottom:14px;
+  border:1px solid var(--border);
+}
+.card-highlight{border-color:var(--accent);}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;
+  padding:10px 18px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  color:var(--text);
+  font-size:1rem;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+}
+.btn:active{opacity:0.7;}
+.btn-primary{
+  background:var(--accent);
+  color:#1a1200;
+  border-color:var(--accent);
+}
+.btn-large{
+  width:100%;
+  min-height:60px;
+  font-size:1.2rem;
+  border-radius:14px;
+}
+.btn-secondary{background:var(--surface2);}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red);}
+.btn-block{width:100%;margin-bottom:10px;}
+.btn-sm{min-height:38px;padding:6px 12px;font-size:0.9rem;}
+.row{display:flex;gap:10px;flex-wrap:wrap;}
+.row > *{flex:1;}
+.text-dim{color:var(--text-dim);font-size:0.9rem;}
+.tag{
+  display:inline-block;
+  background:var(--surface2);
+  color:var(--accent);
+  border:1px solid var(--accent-dim);
+  font-size:0.72rem;
+  padding:2px 8px;
+  border-radius:20px;
+  margin:2px 4px 2px 0;
+}
+.badge-descanso{color:#7fd1ff;}
+
+/* bottom nav */
+.nav-bottom{
+  position:fixed;left:0;right:0;bottom:0;
+  display:flex;
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  padding-bottom:env(safe-area-inset-bottom);
+  z-index:50;
+}
+.nav-item{
+  flex:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;
+  padding:10px 0 8px;
+  color:var(--text-dim);
+  text-decoration:none;
+  font-size:0.72rem;
+  min-height:56px;
+}
+.nav-item.active{color:var(--accent);}
+.nav-item .icon{font-size:1.4rem;line-height:1;}
+
+/* progress bar */
+.progress-outer{
+  height:10px;background:var(--surface2);border-radius:6px;overflow:hidden;margin:12px 0 18px;
+}
+.progress-fill{
+  height:100%;background:var(--accent);width:0%;transition:width .2s;
+}
+
+/* exercise card */
+.ejercicio-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  margin-bottom:12px;
+}
+.ejercicio-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.ejercicio-header h3{flex:1;}
+.ejercicio-meta{color:var(--accent);font-weight:600;font-size:0.95rem;margin-bottom:4px;}
+.ejercicio-notas{color:var(--text-dim);font-size:0.88rem;margin-bottom:10px;}
+.serie-row{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 0;
+  border-top:1px solid var(--border);
+}
+.serie-row:first-of-type{border-top:none;}
+.serie-label{width:34px;color:var(--text-dim);font-size:0.85rem;flex-shrink:0;}
+.peso-group{display:flex;align-items:center;gap:4px;}
+.peso-group button{
+  width:38px;height:38px;border-radius:8px;border:1px solid var(--border);
+  background:var(--surface2);color:var(--text);font-size:1.2rem;
+}
+input[type=number]{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:8px;
+  padding:8px 4px;
+  font-size:1rem;
+  text-align:center;
+  width:64px;
+  min-height:38px;
+}
+input[type=number].reps-input{width:52px;}
+.field-unit{color:var(--text-dim);font-size:0.75rem;margin-left:2px;}
+.indicador{width:18px;text-align:center;font-weight:700;flex-shrink:0;}
+.ind-up{color:var(--green);}
+.ind-down{color:var(--red);}
+.ind-eq{color:var(--text-dim);}
+input[type=checkbox]{
+  width:28px;height:28px;flex-shrink:0;accent-color:var(--accent);
+  margin-left:auto;
+}
+.btn-video{
+  background:var(--surface2);border:1px solid var(--border);color:var(--accent);
+  border-radius:8px;padding:6px 10px;font-size:0.8rem;white-space:nowrap;
+}
+
+/* impact block */
+.impacto-box{border:1px solid var(--accent-dim);background:#20180a;border-radius:12px;padding:14px;margin-bottom:12px;}
+.impacto-fase{color:var(--accent);font-weight:700;font-size:1.05rem;}
+.impacto-regla{background:var(--surface2);border-radius:8px;padding:10px;font-size:0.85rem;color:var(--text-dim);margin:10px 0;}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px;}
+.modal.hidden{display:none;}
+.modal-content{background:var(--surface);border-radius:var(--radius);padding:16px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;}
+.modal-close{float:right;background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;}
+.video-frame{width:100%;aspect-ratio:16/9;border:none;border-radius:10px;}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:96px;transform:translateX(-50%);
+  background:var(--accent);color:#1a1200;padding:10px 18px;border-radius:20px;
+  font-weight:600;z-index:200;box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+.toast.hidden{display:none;}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:0.88rem;}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr.urgencia-alta td{color:var(--red);font-weight:700;}
+tr.urgencia-media td:first-child{color:var(--amber);}
+
+/* history list */
+.hist-item{
+  display:flex;justify-content:space-between;align-items:center;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;
+  padding:12px 14px;margin-bottom:10px;text-decoration:none;color:var(--text);
+}
+.hist-item .estado{font-size:0.78rem;color:var(--text-dim);}
+.estado.completada{color:var(--green);}
+
+select{
+  background:var(--surface2);color:var(--text);border:1px solid var(--border);
+  border-radius:8px;padding:10px;font-size:1rem;width:100%;min-height:44px;
+}
+input[type=text],input[type=number].wide,input[type=date]{
+  background:var(--surface2);color:var(--text);border:1px solid var(--border);
+  border-radius:8px;padding:10px;font-size:1rem;width:100%;min-height:44px;
+}
+label{display:block;margin:10px 0 4px;font-size:0.9rem;color:var(--text-dim);}
+.hidden{display:none !important;}
+.back-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.btn-back{background:none;border:none;color:var(--text);font-size:1.6rem;padding:4px 8px;cursor:pointer;}
+pre.resumen{
+  white-space:pre-wrap;word-break:break-word;background:var(--surface2);
+  border-radius:10px;padding:12px;font-size:0.82rem;color:var(--text);
+  max-height:300px;overflow-y:auto;border:1px solid var(--border);
+}
+svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10px;}
+.opcion-suave{
+  background:var(--surface2);border-radius:10px;padding:10px 12px;margin-bottom:8px;
+  border:1px solid var(--border);
+}
+.opcion-suave.recomendada{border-color:var(--accent);}
+.opcion-suave .nombre{font-weight:700;}
+.opcion-suave .recom-tag{color:var(--accent);font-size:0.75rem;font-weight:700;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1 id="topbar-title">Rutina Ósea</h1>
+  <span class="semana-badge" id="semana-badge"></span>
+</div>
+
+<div id="app"></div>
+
+<div id="toast" class="toast hidden"></div>
+
+<div id="modal-video" class="modal hidden">
+  <div class="modal-content">
+    <button class="modal-close" onclick="cerrarModalVideo()">×</button>
+    <h3>Vídeo</h3>
+    <iframe id="video-iframe" class="video-frame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<div id="modal-suave" class="modal hidden">
+  <div class="modal-content" id="modal-suave-content"></div>
+</div>
+
+<nav class="nav-bottom">
+  <a href="#/" class="nav-item" data-nav="inicio"><span class="icon">🏠</span>Inicio</a>
+  <a href="#/historial" class="nav-item" data-nav="historial"><span class="icon">📈</span>Historial</a>
+  <a href="#/referencia" class="nav-item" data-nav="referencia"><span class="icon">⚠️</span>Referencia</a>
+  <a href="#/ajustes" class="nav-item" data-nav="ajustes"><span class="icon">⚙️</span>Ajustes</a>
+</nav>
+
+<script>
+/* ======================= DATOS DE LA RUTINA =======================
+   Esta es una copia de rutina.json embebida para que la app funcione
+   como un único archivo sin peticiones de red. Para cambiar la rutina,
+   edita este objeto (y opcionalmente refleja el mismo cambio en
+   rutina.json para mantenerlo como referencia legible aparte). */
+const RUTINA =
+{
+  "meta": {
+    "version": "1.0",
+    "fecha": "2026-08-04",
+    "usuario": "Marta",
+    "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
+    "densitometria": {
+      "fecha": "2026-07-14",
+      "columna_L1L4": { "tScore": -1.3, "zScore": -0.6 },
+      "cuelloFemoral": { "tScore": -2.2, "zScore": -1.5 },
+      "caderaTotal": { "tScore": -2.4, "zScore": -2.0 },
+      "frax10a": { "osteoporoticaSevera": 2.1, "cadera": 0.5 }
+    },
+    "nutricion": { "kcalBase": 1750, "proteinaMin": 94, "proteinaMax": 118 }
+  },
+  "semana": [
+    { "dia": "lunes",     "tipo": "descanso" },
+    { "dia": "martes",    "tipo": "fuerza",  "sesionId": "A" },
+    { "dia": "miercoles", "tipo": "suave",   "bloqueId": "carga_osea" },
+    { "dia": "jueves",    "tipo": "fuerza",  "sesionId": "B" },
+    { "dia": "viernes",   "tipo": "suave",   "bloqueId": "descanso_real" },
+    { "dia": "sabado",    "tipo": "fuerza",  "sesionId": "C" },
+    { "dia": "domingo",   "tipo": "suave",   "bloqueId": "equilibrio" }
+  ],
+  "sesiones": [
+    {
+      "id": "A", "nombre": "Fuerza A — Tren inferior + carga axial", "dia": "martes",
+      "intensidad": "alta", "duracionMin": [50, 60],
+      "descripcion": "La sesión más importante de la semana para tu columna lumbar.",
+      "ejercicios": [
+        { "id": "a_calentamiento", "nombre": "Movilidad cadera + tobillo", "tipo": "calentamiento", "series": 1, "duracionMin": [5, 8], "registraCarga": false, "notas": "Sentadilla sin carga, círculos de cadera", "video": "" },
+        { "id": "a_sentadilla", "nombre": "Sentadilla", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "progresion": "goblet → multipower → barra", "notas": "Espalda neutra. La estrella para columna + cadera", "sitiosOseos": ["columna_lumbar", "cadera"], "video": "" },
+        { "id": "a_peso_muerto_rumano", "nombre": "Peso muerto rumano", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "progresion": "mancuernas → barra", "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar", "sitiosOseos": ["columna_lumbar", "cadera"], "video": "" },
+        { "id": "a_zancadas", "nombre": "Zancadas caminando o step-up a cajón", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "porPierna": true, "registraCarga": true, "notas": "Carga unilateral de cadera — trabajo específico para tu sitio prioritario. Empieza sin peso", "sitiosOseos": ["cadera", "cuello_femoral"], "video": "" },
+        { "id": "a_prensa", "nombre": "Prensa de piernas (Biostrength)", "tipo": "accesorio", "series": 3, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Accesorio, aquí sí vale la máquina", "video": "" },
+        { "id": "a_curl_femoral", "nombre": "Curl femoral (Biostrength)", "tipo": "accesorio", "series": 3, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Accesorio", "video": "" },
+        { "id": "a_farmer", "nombre": "Paseo del granjero (farmer's carry)", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "Carga axial + core + agarre. Muy infravalorado", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "" }
+      ]
+    },
+    {
+      "id": "B", "nombre": "Fuerza B — Tren superior, énfasis en hombro", "dia": "jueves",
+      "intensidad": "media-alta", "duracionMin": [45, 55],
+      "descripcion": "El press de hombro es tu punto más débil documentado. De pie, además, aporta carga axial.",
+      "ejercicios": [
+        { "id": "b_calentamiento", "nombre": "Movilidad de hombro", "tipo": "calentamiento", "series": 1, "duracionMin": [5, 8], "registraCarga": false, "notas": "Rotaciones, band pull-apart si hay gomas", "video": "" },
+        { "id": "b_press_militar", "nombre": "Press militar DE PIE", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "progresion": "mancuernas → barra", "notas": "DE PIE, no sentada. Aquí está la clave: carga axial + tu punto débil", "sitiosOseos": ["columna_lumbar", "humero"], "video": "" },
+        { "id": "b_remo", "nombre": "Remo (Biostrength o barra)", "tipo": "principal", "series": 4, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Si es con barra, remo Pendlay de pie: mejor para columna", "sitiosOseos": ["columna_toracica"], "video": "" },
+        { "id": "b_press_pecho", "nombre": "Press de pecho (Biostrength)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Prueba el agarre neutro: más amable con el hombro", "video": "" },
+        { "id": "b_jalon", "nombre": "Jalón al pecho / dominadas asistidas", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "", "video": "" },
+        { "id": "b_elevaciones", "nombre": "Elevaciones laterales", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Deltoides medio, complementario al press", "video": "" },
+        { "id": "b_biceps_triceps", "nombre": "Curl de bíceps + extensión de tríceps", "tipo": "accesorio", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "El aislamiento que faltaba en tu rutina anterior", "video": "" },
+        { "id": "b_flexiones", "nombre": "Flexiones con manos elevadas", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 12, "registraCarga": false, "notas": "Banco o multipower. CARGA AXIAL SOBRE LA MUÑECA — no es opcional. La fractura de radio distal suele ser la primera por fragilidad", "sitiosOseos": ["muñeca", "radio_distal"], "video": "" },
+        { "id": "b_plancha_alta", "nombre": "Plancha alta (apoyada en MANOS)", "tipo": "core", "series": 3, "duracionSeg": [30, 45], "registraCarga": false, "notas": "En manos, NO en antebrazos. Core anti-flexión + compresión en radio distal", "sitiosOseos": ["muñeca", "radio_distal"], "video": "" }
+      ]
+    },
+    {
+      "id": "C", "nombre": "Fuerza C — Full body + impacto", "dia": "sabado",
+      "intensidad": "alta", "duracionMin": [50, 60],
+      "descripcion": "Carga más alta y menos repeticiones. El bloque de impacto va al principio, con el cuerpo fresco.",
+      "ejercicios": [
+        { "id": "c_impacto", "nombre": "Bloque de impacto", "tipo": "impacto", "referenciaProtocolo": "protocolo_impacto", "registraCarga": false, "notas": "Ver protocolo de impacto — la fase depende de la semana. Al principio de la sesión", "sitiosOseos": ["cuello_femoral", "tibia"], "video": "" },
+        { "id": "c_peso_muerto", "nombre": "Peso muerto convencional o sumo", "tipo": "principal", "series": 4, "repsMin": 5, "repsMax": 6, "registraCarga": true, "notas": "Carga más alta que el martes, menos reps", "sitiosOseos": ["columna_lumbar", "cadera"], "video": "" },
+        { "id": "c_hip_thrust", "nombre": "Hip thrust", "tipo": "principal", "series": 4, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente", "video": "" },
+        { "id": "c_press_hombro", "nombre": "Press de hombro (variante distinta al jueves)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Arnold press, push press o landmine", "sitiosOseos": ["humero"], "video": "" },
+        { "id": "c_remo_jalon", "nombre": "Remo o jalón", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "", "video": "" },
+        { "id": "c_pallof", "nombre": "Pallof press", "tipo": "core", "series": 3, "reps": 10, "porLado": true, "registraCarga": true, "notas": "Anti-rotación, protege columna", "video": "" },
+        { "id": "c_extension_espalda", "nombre": "Extensión de espalda (banco romano o superman)", "tipo": "principal", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": false, "notas": "Extensores dorsales — se asocian inversamente con fracturas vertebrales. Controlado, sin hiperextender", "sitiosOseos": ["columna_toracica"], "video": "" },
+        { "id": "c_farmer", "nombre": "Paseo del granjero", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "" }
+      ]
+    }
+  ],
+  "bloquesSuaves": [
+    {
+      "id": "carga_osea", "dia": "miercoles", "nombre": "Carga ósea suave", "nivel": 1,
+      "descripcion": "Cae entre dos sesiones de fuerza: interesa algo que aporte carga ósea sin fatigar.",
+      "opciones": [
+        { "nombre": "Escalera (stair climber)", "duracionMin": [25, 35], "recomendada": true, "notas": "LA MEJOR OPCIÓN. Carga el cuello femoral de forma directa, justo donde tienes el déficit. Ritmo conversacional" },
+        { "nombre": "Cinta andando con inclinación 6-10%", "duracionMin": [30, 40], "recomendada": false, "notas": "Carga axial + cadera y glúteo sin correr. Ritmo cómodo" }
+      ]
+    },
+    {
+      "id": "descanso_real", "dia": "viernes", "nombre": "Descanso real", "nivel": 3,
+      "descripcion": "Precede a la sesión más dura de la semana. Recuperación y cardio, cero hueso.",
+      "opciones": [
+        { "nombre": "Natación", "duracionMin": [40, 45], "notas": "Excelente para descargar articulaciones" },
+        { "nombre": "Spinning suave", "duracionMin": [40, 45], "fcObjetivo": [120, 135], "notas": "120-135 ppm. Si pasa de ahí, deja de ser día de descanso. No entrar en bloques de pie ni subidas duras" },
+        { "nombre": "Elíptica", "duracionMin": [40, 45], "notas": "Los pies nunca despegan: sin pico de carga ósea" }
+      ]
+    },
+    {
+      "id": "equilibrio", "dia": "domingo", "nombre": "Equilibrio y movilidad", "nivel": 2,
+      "descripcion": "Prevención de caídas: en osteopenia de cadera, la fractura llega porque alguien se cae.",
+      "opciones": [
+        { "nombre": "Hatha yoga", "duracionMin": [45, 60], "notas": "Equilibrio, propiocepción, movilidad" },
+        { "nombre": "Barre", "duracionMin": [45, 60], "notas": "De pie, con trabajo de tobillo y cadera. Suma algo de carga" }
+      ]
+    }
+  ],
+  "protocoloImpacto": {
+    "id": "protocolo_impacto", "nombre": "Bloque de impacto",
+    "descripcion": "Progresión más lenta de lo estándar por T-score de cuello femoral −2,2. Es la única parte del plan con riesgo real si se acelera.",
+    "reglaProgresion": "Solo avanzas de fase si en las 48h siguientes NO notas molestia en tibial anterior, planta del pie, ingle o cadera.",
+    "fases": [
+      { "fase": 1, "semanaInicio": 1, "semanaFin": 4, "nombre": "Heel drops", "series": 3, "reps": 10, "descripcion": "De puntillas y dejar caer los talones al suelo con firmeza. Sin salto. Fase alargada respecto al protocolo general" },
+      { "fase": 2, "semanaInicio": 5, "semanaFin": 8, "nombre": "Saltos pequeños en el sitio", "series": 3, "reps": 10, "descripcion": "Aterrizaje suave con rodilla flexionada" },
+      { "fase": 3, "semanaInicio": 9, "semanaFin": 12, "nombre": "Comba o saltos con altura", "series": 3, "repsMin": 10, "repsMax": 15, "descripcion": "" },
+      { "fase": 4, "semanaInicio": 13, "semanaFin": null, "nombre": "Saltos a cajón bajo / drop landings", "series": 3, "repsMin": 8, "repsMax": 10, "descripcion": "Aterrizaje controlado, escalón de 20-30 cm" }
+    ]
+  },
+  "progresionCarga": {
+    "fases": [
+      { "semanaInicio": 1, "semanaFin": 3, "nombre": "Aprender los patrones", "rpe": [6, 7], "objetivo": "Técnica impecable, carga ligera. NO buscar progresar en peso. Pedir revisión de técnica al monitor" },
+      { "semanaInicio": 4, "semanaFin": 8, "nombre": "Progresión de carga", "rpe": [7, 8], "objetivo": "Subir peso al completar todas las series en el rango alto. +2,5 kg superior / +5 kg inferior" },
+      { "semanaInicio": 9, "semanaFin": 16, "nombre": "Intensidad", "rpe": [8, 8], "objetivo": "Bajar a 5-6 reps con más carga en los tres básicos. Aquí el estímulo óseo es más potente" },
+      { "semanaInicio": 17, "semanaFin": null, "nombre": "Consolidación", "rpe": [7, 8], "objetivo": "Mantener y seguir progresando" }
+    ],
+    "descarga": { "cadaSemanas": [6, 8], "descripcion": "Semana de descarga: mismo entrenamiento al 60-70% del peso habitual" }
+  },
+  "evitar": [
+    { "que": "Flexión de columna bajo carga", "ejemplos": ["crunch en máquina", "abdominales con peso tras la nuca", "recoger peso con espalda redondeada"], "motivo": "Asociado a más fracturas vertebrales con masa ósea baja" },
+    { "que": "Rotación de tronco bajo carga alta", "ejemplos": ["giros rusos con peso"], "motivo": "Precaución con osteopenia" },
+    { "que": "Maniobra de Valsalva máxima", "ejemplos": ["bloquear la respiración a tope en la rep más pesada"], "motivo": "PENDIENTE VALIDACIÓN: quiste ovárico 42x31mm. Exhalar en el esfuerzo, core activo sin bloquear del todo" },
+    { "que": "Entrenar fuerte tras comida completa", "ejemplos": [], "motivo": "Reflujo laringofaríngeo pendiente de evaluar. Esperar 2h" },
+    { "que": "Suplementar hierro sin indicación médica", "ejemplos": [], "motivo": "Talasemia minor: el exceso de hierro es riesgo real" }
+  ],
+  "alertas": [
+    { "señal": "Dolor lumbar agudo o punzante (no agujetas)", "accion": "Parar la sesión. Si persiste >48h, consulta", "urgencia": "media" },
+    { "señal": "Dolor en ingle o cadera con la carga", "accion": "Parar. Descartar antes de seguir progresando", "urgencia": "media" },
+    { "señal": "Dolor pélvico agudo e intenso, con náusea", "accion": "URGENCIAS — descartar torsión de quiste", "urgencia": "alta" },
+    { "señal": "Mareo, palpitaciones o disnea desproporcionada", "accion": "Parar. Comentar en consulta (contexto talasemia)", "urgencia": "media" },
+    { "señal": "Pérdida de orina con el esfuerzo", "accion": "No urgente, pero llevarlo a la Dra. Tábara", "urgencia": "baja" },
+    { "señal": "Fatiga que no remite entre sesiones", "accion": "Reducir volumen una semana antes de insistir", "urgencia": "baja" }
+  ],
+  "pendienteMedico": [
+    { "tema": "Quiste ovárico y levantamiento pesado", "quien": "Dra. Tábara", "estado": "pendiente" },
+    { "tema": "Decisión sobre terapia hormonal", "quien": "Dra. Tábara", "estado": "pendiente" },
+    { "tema": "Vitamina D (nunca medida)", "quien": "analítica", "estado": "pendiente", "prioridad": "alta" },
+    { "tema": "Serología celiaquía (antitransglutaminasa + IgA total) — SIN retirar gluten antes", "quien": "analítica", "estado": "pendiente", "prioridad": "alta" },
+    { "tema": "PCR, VSG, factor reumatoide, anti-CCP (madre con AR)", "quien": "analítica", "estado": "pendiente", "prioridad": "media" },
+    { "tema": "Averiguar si hay antecedente de fractura de cadera en padres (variable FRAX)", "quien": "familia", "estado": "pendiente", "prioridad": "media" },
+    { "tema": "Ferritina 22 con talasemia — vigilar", "quien": "Dra. Tábara", "estado": "pendiente", "prioridad": "baja" }
+  ]
+};
+
+/* ======================= ESTADO / ALMACENAMIENTO ======================= */
+const STORAGE_KEY = 'rutinaOseaData';
+const DIAS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
+const DIAS_ABR = {domingo:'dom',lunes:'lun',martes:'mar',miercoles:'mié',jueves:'jue',viernes:'vie',sabado:'sáb'};
+const DIAS_LABEL = {domingo:'domingo',lunes:'lunes',martes:'martes',miercoles:'miércoles',jueves:'jueves',viernes:'viernes',sabado:'sábado'};
+const EJERCICIOS_INFERIOR = new Set(['a_sentadilla','a_peso_muerto_rumano','a_zancadas','a_prensa','a_curl_femoral','c_peso_muerto','c_hip_thrust']);
+const SITIO_LABEL = {
+  columna_lumbar:'columna lumbar', cadera:'cadera', cuello_femoral:'cuello femoral',
+  muñeca:'muñeca', radio_distal:'radio distal', humero:'húmero', columna_toracica:'columna torácica', tibia:'tibia'
+};
+
+function pad(n){ return n<10 ? '0'+n : ''+n; }
+function todayISO(){ const d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function uuid(){
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+    const r=Math.random()*16|0, v = c==='x'?r:(r&0x3|0x8);
+    return v.toString(16);
+  });
+}
+function fmtNum(n){
+  if(n===null||n===undefined||n==='') return '';
+  return (Math.round(n*100)/100).toString().replace('.',',');
+}
+function defaultState(){
+  return { fechaInicio: todayISO(), sesiones: [], diasSuaves: [], impacto: { sinMolestias: [] } };
+}
+function loadState(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(raw){
+    try{
+      const parsed = JSON.parse(raw);
+      if(!parsed.impacto) parsed.impacto = { sinMolestias: [] };
+      if(!parsed.diasSuaves) parsed.diasSuaves = [];
+      if(!parsed.sesiones) parsed.sesiones = [];
+      return parsed;
+    }catch(e){ console.error('Estado corrupto, reiniciando', e); }
+  }
+  const s = defaultState();
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  return s;
+}
+let state = loadState();
+function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+/* ======================= HELPERS DE FECHAS / SEMANA ======================= */
+function parseISO(iso){
+  const [y,m,d] = iso.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+function diaSemanaKey(iso){ return DIAS[parseISO(iso).getDay()]; }
+function addDays(iso, n){
+  const d = parseISO(iso);
+  d.setDate(d.getDate()+n);
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+}
+function getSemanaNumero(iso){
+  const inicio = parseISO(state.fechaInicio);
+  const d = parseISO(iso);
+  const diffDays = Math.floor((d - inicio) / 86400000);
+  return Math.floor(diffDays/7) + 1;
+}
+function getRangoSemana(numero){
+  const inicioSemana = addDays(state.fechaInicio, (numero-1)*7);
+  const finSemana = addDays(inicioSemana, 6);
+  return { inicio: inicioSemana, fin: finSemana };
+}
+function fmtFechaCorta(iso){
+  const d = parseISO(iso);
+  return pad(d.getDate())+'/'+pad(d.getMonth()+1);
+}
+
+/* ======================= HELPERS DE RUTINA ======================= */
+function getSesionDef(id){ return RUTINA.sesiones.find(s=>s.id===id); }
+function getEjercicioDef(sesionDef, ejercicioId){ return sesionDef.ejercicios.find(e=>e.id===ejercicioId); }
+function getIncremento(ejercicioId){ return EJERCICIOS_INFERIOR.has(ejercicioId) ? 5 : 2.5; }
+function repsTargetText(ej){
+  let t = '';
+  if(ej.reps!==undefined) t = ''+ej.reps;
+  else if(ej.repsMin!==undefined && ej.repsMax!==undefined) t = ej.repsMin+'-'+ej.repsMax;
+  if(ej.porPierna) t += ' /pierna';
+  if(ej.porLado) t += ' /lado';
+  return t;
+}
+function getFaseImpacto(numeroSemana){
+  const fases = RUTINA.protocoloImpacto.fases;
+  for(const f of fases){
+    if(numeroSemana >= f.semanaInicio && (f.semanaFin===null || numeroSemana <= f.semanaFin)) return f;
+  }
+  return fases[fases.length-1];
+}
+function faseRepsText(f){
+  if(f.reps!==undefined) return ''+f.reps;
+  if(f.repsMin!==undefined) return f.repsMin+'-'+f.repsMax;
+  return '';
+}
+
+/* referencia: última vez que se hizo el ejercicio (excluyendo una sesión concreta) */
+function getReferenciaPeso(ejercicioId, excludeSesionUuid){
+  const historial = state.sesiones
+    .filter(s => s.id !== excludeSesionUuid)
+    .slice()
+    .sort((a,b)=> b.fecha.localeCompare(a.fecha));
+  for(const s of historial){
+    const ej = s.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+    if(ej){
+      const pesos = ej.series.filter(x=>x.hecha && x.peso!==null && x.peso!==undefined).map(x=>x.peso);
+      if(pesos.length) return Math.max(...pesos);
+    }
+  }
+  return null;
+}
+
+/* ======================= UI GENERAL ======================= */
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(()=> t.classList.add('hidden'), 2200);
+}
+function setSemanaBadge(){
+  document.getElementById('semana-badge').textContent = 'Semana ' + getSemanaNumero(todayISO());
+}
+function setActiveNav(section){
+  document.querySelectorAll('.nav-item').forEach(a=>{
+    a.classList.toggle('active', a.dataset.nav===section);
+  });
+}
+function ytEmbed(url){
+  try{
+    const u = new URL(url);
+    let id = '';
+    if(u.hostname.indexOf('youtu.be')>=0) id = u.pathname.slice(1);
+    else if(u.searchParams.get('v')) id = u.searchParams.get('v');
+    else if(u.pathname.indexOf('/embed/')>=0) id = u.pathname.split('/embed/')[1];
+    return id ? ('https://www.youtube.com/embed/'+id) : url;
+  }catch(e){ return url; }
+}
+function abrirModalVideo(url){
+  document.getElementById('video-iframe').src = ytEmbed(url);
+  document.getElementById('modal-video').classList.remove('hidden');
+}
+function cerrarModalVideo(){
+  document.getElementById('modal-video').classList.add('hidden');
+  document.getElementById('video-iframe').src = '';
+}
+function cerrarModalSuave(){
+  document.getElementById('modal-suave').classList.add('hidden');
+}
+
+/* ======================= VISTA: INICIO ======================= */
+function renderInicio(){
+  setActiveNav('inicio');
+  document.getElementById('topbar-title').textContent = 'Rutina Ósea';
+  const hoyISO = todayISO();
+  const diaKey = diaSemanaKey(hoyISO);
+  const diaInfo = RUTINA.semana.find(d=>d.dia===diaKey);
+  const semanaNum = getSemanaNumero(hoyISO);
+
+  let html = '';
+  html += '<div class="card">';
+  html += '<div class="text-dim">Hoy es '+DIAS_LABEL[diaKey]+' · '+fmtFechaCorta(hoyISO)+'</div>';
+
+  if(diaInfo.tipo === 'descanso'){
+    html += '<h2 class="badge-descanso">Hoy toca descanso 🌙</h2>';
+    html += '<p class="text-dim">Ningún entrenamiento programado. Aprovecha para dormir y comer bien.</p>';
+  } else if(diaInfo.tipo === 'fuerza'){
+    const sesion = getSesionDef(diaInfo.sesionId);
+    html += '<h2>'+sesion.nombre+'</h2>';
+    html += '<p class="text-dim">'+sesion.descripcion+'</p>';
+    html += '<p class="text-dim">'+sesion.duracionMin[0]+'-'+sesion.duracionMin[1]+' min</p>';
+    html += '<a href="#/sesion/'+sesion.id+'" class="btn btn-primary btn-large">Empezar</a>';
+  } else if(diaInfo.tipo === 'suave'){
+    const bloque = RUTINA.bloquesSuaves.find(b=>b.id===diaInfo.bloqueId);
+    html += '<h2>'+bloque.nombre+'</h2>';
+    html += '<p class="text-dim">'+bloque.descripcion+'</p>';
+    bloque.opciones.forEach((op, i)=>{
+      html += '<div class="opcion-suave'+(op.recomendada?' recomendada':'')+'">';
+      html += '<div class="nombre">'+op.nombre+(op.recomendada?' <span class="recom-tag">RECOMENDADA</span>':'')+'</div>';
+      html += '<div class="text-dim">'+op.duracionMin[0]+'-'+op.duracionMin[1]+' min'+(op.fcObjetivo?' · FC '+op.fcObjetivo[0]+'-'+op.fcObjetivo[1]+' ppm':'')+'</div>';
+      html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
+      html += '<button class="btn btn-sm" style="margin-top:8px;" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">Registrar</button>';
+      html += '</div>';
+    });
+  }
+  html += '</div>';
+
+  html += '<h3>Otra sesión</h3>';
+  html += '<div class="row">';
+  ['A','B','C'].forEach(id=>{
+    html += '<a href="#/sesion/'+id+'" class="btn btn-secondary">Fuerza '+id+'</a>';
+  });
+  html += '</div>';
+
+  html += '<h3 style="margin-top:16px;">Otro bloque suave</h3>';
+  html += '<div class="row">';
+  RUTINA.bloquesSuaves.forEach(b=>{
+    html += '<button class="btn btn-secondary" onclick="abrirRegistroSuave(\''+b.id+'\', null)">'+b.nombre+'</button>';
+  });
+  html += '</div>';
+
+  document.getElementById('app').innerHTML = html;
+  setSemanaBadge();
+}
+
+function abrirRegistroSuave(bloqueId, opcionIndex){
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId);
+  let opciones = '';
+  bloque.opciones.forEach((op,i)=>{
+    const sel = (opcionIndex!==null && i===opcionIndex) || (opcionIndex===null && op.recomendada);
+    opciones += '<option value="'+i+'" '+(sel?'selected':'')+'>'+op.nombre+'</option>';
+  });
+  const defaultOp = bloque.opciones[opcionIndex!==null?opcionIndex:bloque.opciones.findIndex(o=>o.recomendada)] || bloque.opciones[0];
+  const defaultDur = defaultOp.duracionMin ? defaultOp.duracionMin[0] : 30;
+
+  const html =
+    '<button class="modal-close" onclick="cerrarModalSuave()">×</button>'+
+    '<h3>Registrar: '+bloque.nombre+'</h3>'+
+    '<label>Fecha</label>'+
+    '<input type="date" id="suave-fecha" value="'+todayISO()+'">'+
+    '<label>Opción</label>'+
+    '<select id="suave-opcion">'+opciones+'</select>'+
+    '<label>Duración (min)</label>'+
+    '<input type="number" class="wide" id="suave-duracion" value="'+defaultDur+'">'+
+    '<button class="btn btn-primary btn-large" style="margin-top:16px;" onclick="guardarDiaSuave(\''+bloqueId+'\')">Guardar</button>';
+
+  document.getElementById('modal-suave-content').innerHTML = html;
+  document.getElementById('modal-suave').classList.remove('hidden');
+}
+function guardarDiaSuave(bloqueId){
+  const fecha = document.getElementById('suave-fecha').value || todayISO();
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId);
+  const opIdx = Number(document.getElementById('suave-opcion').value);
+  const duracion = Number(document.getElementById('suave-duracion').value) || null;
+  const opcionNombre = bloque.opciones[opIdx].nombre;
+
+  const existente = state.diasSuaves.find(d=>d.fecha===fecha && d.bloqueId===bloqueId);
+  if(existente){
+    existente.opcion = opcionNombre;
+    existente.duracion = duracion;
+  } else {
+    state.diasSuaves.push({ fecha, bloqueId, opcion: opcionNombre, duracion });
+  }
+  saveState();
+  cerrarModalSuave();
+  toast('Día suave guardado');
+  if(location.hash === '#/' || location.hash === '' ) renderInicio();
+}
+
+/* ======================= VISTA: SESION DE FUERZA ======================= */
+let sesionActualDraft = null; // referencia al objeto de sesión en state.sesiones que se está editando
+
+function findOrCreateDraft(sesionId){
+  const hoy = todayISO();
+  let draft = state.sesiones.find(s=> s.fecha===hoy && s.sesionId===sesionId && !s.completada);
+  if(!draft){
+    draft = { id: uuid(), fecha: hoy, sesionId: sesionId, completada: false, ejercicios: [] };
+    state.sesiones.push(draft);
+    saveState();
+  }
+  return draft;
+}
+function getEjercicioEntry(draft, ejercicioId, seriesCount){
+  let entry = draft.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+  if(!entry){
+    entry = { ejercicioId, series: [] };
+    draft.ejercicios.push(entry);
+  }
+  while(entry.series.length < seriesCount){
+    entry.series.push({ peso: null, reps: null, hecha: false });
+  }
+  return entry;
+}
+
+function renderSesion(sesionId){
+  const sesionDef = getSesionDef(sesionId);
+  if(!sesionDef){ location.hash = '#/'; return; }
+  setActiveNav('inicio');
+  document.getElementById('topbar-title').textContent = sesionDef.nombre;
+  const draft = findOrCreateDraft(sesionId);
+  sesionActualDraft = draft;
+  const semanaNum = getSemanaNumero(draft.fecha);
+
+  let totalUnidades = 0, hechasUnidades = 0;
+  let html = '';
+  html += '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/\'">←</button><h2 style="margin:0;">'+sesionDef.nombre+'</h2></div>';
+  html += '<div class="progress-outer"><div class="progress-fill" id="progress-fill"></div></div>';
+  html += '<div id="ejercicios-wrap">';
+
+  sesionDef.ejercicios.forEach(ej=>{
+    if(ej.tipo === 'impacto'){
+      html += renderBloqueImpacto(ej, draft, semanaNum);
+      const fase = getFaseImpacto(semanaNum);
+      totalUnidades += fase.series;
+      const entry = getEjercicioEntry(draft, ej.id, fase.series);
+      hechasUnidades += entry.series.filter(s=>s.hecha).length;
+      return;
+    }
+    const seriesCount = ej.series || 1;
+    const entry = getEjercicioEntry(draft, ej.id, seriesCount);
+    totalUnidades += seriesCount;
+    hechasUnidades += entry.series.filter(s=>s.hecha).length;
+    html += renderEjercicioCard(ej, draft, entry);
+  });
+
+  html += '</div>';
+  html += '<button class="btn btn-primary btn-large" style="margin-top:10px;" onclick="terminarSesion(\''+sesionId+'\')">Terminar sesión</button>';
+
+  document.getElementById('app').innerHTML = html;
+  saveState();
+  actualizarProgreso();
+}
+
+function renderEjercicioCard(ej, draft, entry){
+  const ref = getReferenciaPeso(ej.id, draft.id);
+  const incremento = getIncremento(ej.id);
+  let html = '<div class="ejercicio-card" data-ejercicio="'+ej.id+'">';
+  html += '<div class="ejercicio-header"><h3>'+ej.nombre+'</h3>';
+  if(ej.video){
+    html += '<button class="btn-video" onclick="abrirModalVideo(\''+ej.video+'\')">▶ Vídeo</button>';
+  }
+  html += '</div>';
+
+  let metaParts = [];
+  const seriesCount = ej.series || 1;
+  if(ej.tipo!=='calentamiento'){
+    let target = repsTargetText(ej);
+    if(ej.distanciaM) target = ej.distanciaM[0]+'-'+ej.distanciaM[1]+' m';
+    else if(ej.duracionSeg) target = ej.duracionSeg[0]+'-'+ej.duracionSeg[1]+' seg';
+    metaParts.push(seriesCount+' x '+target);
+  } else if(ej.duracionMin){
+    metaParts.push(ej.duracionMin[0]+'-'+ej.duracionMin[1]+' min');
+  }
+  if(metaParts.length) html += '<div class="ejercicio-meta">'+metaParts.join(' · ')+'</div>';
+  if(ej.notas) html += '<div class="ejercicio-notas">'+ej.notas+'</div>';
+  if(ej.sitiosOseos){
+    ej.sitiosOseos.forEach(s=>{
+      html += '<span class="tag">'+(SITIO_LABEL[s]||s)+'</span>';
+    });
+  }
+
+  html += '<div class="series-list">';
+  for(let i=0;i<seriesCount;i++){
+    const s = entry.series[i];
+    const showPeso = ej.registraCarga;
+    const showReps = (ej.reps!==undefined || ej.repsMin!==undefined) && !ej.duracionSeg;
+    const pesoVal = (s.peso!==null && s.peso!==undefined) ? s.peso : (ref!==null && showPeso ? ref : '');
+    if(s.peso===null && ref!==null && showPeso){ s.peso = ref; }
+
+    html += '<div class="serie-row">';
+    html += '<div class="serie-label">S'+(i+1)+'</div>';
+    if(showPeso){
+      html += '<div class="peso-group">';
+      html += '<button type="button" onclick="ajustarPeso(\''+ej.id+'\','+i+',-'+incremento+')">−</button>';
+      html += '<input type="number" step="0.5" class="peso-input" id="peso-'+ej.id+'-'+i+'" value="'+(pesoVal===''?'':fmtNum(pesoVal))+'" oninput="onPesoInput(\''+ej.id+'\','+i+')">';
+      html += '<button type="button" onclick="ajustarPeso(\''+ej.id+'\','+i+',' +incremento+')">+</button>';
+      html += '<span class="field-unit">kg</span>';
+      html += '</div>';
+      html += '<span class="indicador" id="ind-'+ej.id+'-'+i+'"></span>';
+    }
+    if(showReps){
+      html += '<input type="number" class="reps-input" id="reps-'+ej.id+'-'+i+'" placeholder="'+repsTargetText(ej).split(' ')[0]+'" value="'+(s.reps!==null&&s.reps!==undefined?s.reps:'')+'" oninput="onRepsInput(\''+ej.id+'\','+i+')">';
+    }
+    html += '<input type="checkbox" id="hecha-'+ej.id+'-'+i+'" '+(s.hecha?'checked':'')+' onchange="onHechaChange(\''+ej.id+'\','+i+')">';
+    html += '</div>';
+  }
+  html += '</div></div>';
+  return html;
+}
+
+function renderBloqueImpacto(ej, draft, semanaNum){
+  const fase = getFaseImpacto(semanaNum);
+  const entry = getEjercicioEntry(draft, ej.id, fase.series);
+  const yaConfirmadoHoy = state.impacto.sinMolestias.some(x=>x.fecha===draft.fecha);
+
+  let html = '<div class="impacto-box" data-ejercicio="'+ej.id+'">';
+  html += '<div class="ejercicio-header"><h3>Bloque de impacto</h3></div>';
+  html += '<div class="impacto-fase">Fase '+fase.fase+': '+fase.nombre+'</div>';
+  html += '<div class="ejercicio-meta">'+fase.series+' x '+faseRepsText(fase)+'</div>';
+  if(fase.descripcion) html += '<div class="ejercicio-notas">'+fase.descripcion+'</div>';
+  ej.sitiosOseos && ej.sitiosOseos.forEach(s=>{ html += '<span class="tag">'+(SITIO_LABEL[s]||s)+'</span>'; });
+  html += '<div class="impacto-regla">'+RUTINA.protocoloImpacto.reglaProgresion+'</div>';
+
+  html += '<div class="series-list">';
+  for(let i=0;i<fase.series;i++){
+    const s = entry.series[i];
+    html += '<div class="serie-row">';
+    html += '<div class="serie-label">S'+(i+1)+'</div>';
+    html += '<div class="text-dim" style="flex:1;">'+faseRepsText(fase)+' reps</div>';
+    html += '<input type="checkbox" id="hecha-'+ej.id+'-'+i+'" '+(s.hecha?'checked':'')+' onchange="onHechaChange(\''+ej.id+'\','+i+')">';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '<button class="btn '+(yaConfirmadoHoy?'btn-secondary':'btn-primary')+' btn-block" style="margin-top:10px;" '+(yaConfirmadoHoy?'disabled':'')+' onclick="confirmarSinMolestias()">'+(yaConfirmadoHoy?'✓ Confirmado sin molestias':'Marcar sin molestias en 48h (sesión anterior)')+'</button>';
+  html += '</div>';
+  return html;
+}
+function confirmarSinMolestias(){
+  const hoy = todayISO();
+  if(!state.impacto.sinMolestias.some(x=>x.fecha===hoy)){
+    state.impacto.sinMolestias.push({ fecha: hoy });
+    saveState();
+    toast('Registrado: sin molestias');
+    renderSesion(sesionActualDraft.sesionId);
+  }
+}
+
+function ajustarPeso(ejercicioId, idx, delta){
+  const input = document.getElementById('peso-'+ejercicioId+'-'+idx);
+  let val = parseFloat((input.value||'0').replace(',','.')) || 0;
+  val = Math.max(0, Math.round((val+delta)*100)/100);
+  input.value = fmtNum(val);
+  onPesoInput(ejercicioId, idx);
+}
+function onPesoInput(ejercicioId, idx){
+  const input = document.getElementById('peso-'+ejercicioId+'-'+idx);
+  const val = input.value==='' ? null : parseFloat(input.value.replace(',','.'));
+  const entry = sesionActualDraft.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+  entry.series[idx].peso = isNaN(val) ? null : val;
+  const ref = getReferenciaPeso(ejercicioId, sesionActualDraft.id);
+  const indEl = document.getElementById('ind-'+ejercicioId+'-'+idx);
+  if(indEl){
+    if(ref===null || val===null || isNaN(val)){ indEl.textContent=''; indEl.className='indicador'; }
+    else if(val>ref){ indEl.textContent='▲'; indEl.className='indicador ind-up'; }
+    else if(val<ref){ indEl.textContent='▼'; indEl.className='indicador ind-down'; }
+    else { indEl.textContent='='; indEl.className='indicador ind-eq'; }
+  }
+  saveState();
+}
+function onRepsInput(ejercicioId, idx){
+  const input = document.getElementById('reps-'+ejercicioId+'-'+idx);
+  const val = input.value==='' ? null : parseInt(input.value,10);
+  const entry = sesionActualDraft.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+  entry.series[idx].reps = isNaN(val) ? null : val;
+  saveState();
+}
+function onHechaChange(ejercicioId, idx){
+  const checked = document.getElementById('hecha-'+ejercicioId+'-'+idx).checked;
+  const entry = sesionActualDraft.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+  entry.series[idx].hecha = checked;
+  saveState();
+  actualizarProgreso();
+}
+function actualizarProgreso(){
+  if(!sesionActualDraft) return;
+  let total=0, hechas=0;
+  sesionActualDraft.ejercicios.forEach(e=>{
+    total += e.series.length;
+    hechas += e.series.filter(s=>s.hecha).length;
+  });
+  const pct = total>0 ? Math.round(hechas/total*100) : 0;
+  const fill = document.getElementById('progress-fill');
+  if(fill) fill.style.width = pct+'%';
+}
+function terminarSesion(sesionId){
+  sesionActualDraft.completada = true;
+  saveState();
+  toast('Sesión guardada');
+  location.hash = '#/';
+}
+
+/* trigger inicial de indicadores tras render */
+function inicializarIndicadores(){
+  document.querySelectorAll('.peso-input').forEach(inp=>{
+    const parts = inp.id.split('-'); // peso-<ejercicioId>-<idx>  (ejercicioId puede tener guiones bajos, no guiones)
+    const idx = parts[parts.length-1];
+    const ejercicioId = parts.slice(1,parts.length-1).join('-');
+    onPesoInput(ejercicioId, Number(idx));
+  });
+}
+
+/* ======================= VISTA: HISTORIAL ======================= */
+function todasLasSesionesOrdenadas(){
+  return state.sesiones.slice().sort((a,b)=> b.fecha.localeCompare(a.fecha));
+}
+function renderHistorial(){
+  setActiveNav('historial');
+  document.getElementById('topbar-title').textContent = 'Historial';
+  const sesiones = todasLasSesionesOrdenadas();
+
+  let html = '<h2>Sesiones</h2>';
+  if(sesiones.length===0){
+    html += '<p class="text-dim">Todavía no hay sesiones registradas.</p>';
+  } else {
+    sesiones.forEach(s=>{
+      const def = getSesionDef(s.sesionId);
+      html += '<a href="#/historial/'+s.id+'" class="hist-item">';
+      html += '<span>'+(def?def.nombre:s.sesionId)+'<br><span class="text-dim">'+fmtFechaCorta(s.fecha)+'</span></span>';
+      html += '<span class="estado '+(s.completada?'completada':'')+'">'+(s.completada?'completada':'en curso')+'</span>';
+      html += '</a>';
+    });
+  }
+
+  html += '<h2 style="margin-top:24px;">Progresión de peso</h2>';
+  const ejerciciosConCarga = [];
+  const vistos = new Set();
+  RUTINA.sesiones.forEach(sd=>{
+    sd.ejercicios.forEach(ej=>{
+      if(ej.registraCarga && !vistos.has(ej.id)){ vistos.add(ej.id); ejerciciosConCarga.push(ej); }
+    });
+  });
+  html += '<select id="grafica-select" onchange="renderGrafica(this.value)">';
+  ejerciciosConCarga.forEach(ej=>{
+    html += '<option value="'+ej.id+'">'+ej.nombre+'</option>';
+  });
+  html += '</select>';
+  html += '<div id="grafica-wrap" style="margin-top:12px;"></div>';
+
+  document.getElementById('app').innerHTML = html;
+  if(ejerciciosConCarga.length){
+    renderGrafica(ejerciciosConCarga[0].id);
+  }
+}
+
+function renderGrafica(ejercicioId){
+  const puntos = [];
+  state.sesiones.filter(s=>s.completada).slice().sort((a,b)=>a.fecha.localeCompare(b.fecha)).forEach(s=>{
+    const ej = s.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+    if(ej){
+      const pesos = ej.series.filter(x=>x.hecha && x.peso!==null && x.peso!==undefined).map(x=>x.peso);
+      if(pesos.length) puntos.push({ fecha: s.fecha, peso: Math.max(...pesos) });
+    }
+  });
+  const wrap = document.getElementById('grafica-wrap');
+  if(puntos.length < 2){
+    wrap.innerHTML = '<p class="text-dim">Necesitas al menos 2 sesiones registradas de este ejercicio para ver la gráfica.</p>';
+    return;
+  }
+  const W=320,H=200,PAD=32;
+  const pesos = puntos.map(p=>p.peso);
+  const minP = Math.min(...pesos), maxP = Math.max(...pesos);
+  const rangoP = (maxP-minP) || 1;
+  const stepX = (W-PAD*2) / (puntos.length-1);
+  const coords = puntos.map((p,i)=>{
+    const x = PAD + i*stepX;
+    const y = H-PAD - ((p.peso-minP)/rangoP) * (H-PAD*2);
+    return {x,y,p};
+  });
+  let path = coords.map((c,i)=> (i===0?'M':'L')+c.x.toFixed(1)+','+c.y.toFixed(1)).join(' ');
+  let svg = '<svg class="grafica" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet">';
+  svg += '<path d="'+path+'" fill="none" stroke="#f0a500" stroke-width="2.5"/>';
+  coords.forEach(c=>{
+    svg += '<circle cx="'+c.x.toFixed(1)+'" cy="'+c.y.toFixed(1)+'" r="4" fill="#f0a500"/>';
+    svg += '<text x="'+c.x.toFixed(1)+'" y="'+(c.y-10).toFixed(1)+'" font-size="10" fill="#f5f5f5" text-anchor="middle">'+fmtNum(c.p.peso)+'</text>';
+    svg += '<text x="'+c.x.toFixed(1)+'" y="'+(H-8)+'" font-size="9" fill="#a4a4a8" text-anchor="middle">'+fmtFechaCorta(c.p.fecha)+'</text>';
+  });
+  svg += '</svg>';
+  wrap.innerHTML = svg;
+}
+
+function renderHistorialDetalle(sesionUuid){
+  setActiveNav('historial');
+  const s = state.sesiones.find(x=>x.id===sesionUuid);
+  if(!s){ location.hash='#/historial'; return; }
+  const def = getSesionDef(s.sesionId);
+  document.getElementById('topbar-title').textContent = 'Detalle';
+
+  let html = '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/historial\'">←</button><h2 style="margin:0;">'+(def?def.nombre:s.sesionId)+'</h2></div>';
+  html += '<p class="text-dim">'+s.fecha+' · '+(s.completada?'completada':'en curso')+'</p>';
+
+  s.ejercicios.forEach(entry=>{
+    const ejDef = def ? def.ejercicios.find(e=>e.id===entry.ejercicioId) : null;
+    html += '<div class="ejercicio-card"><h3>'+(ejDef?ejDef.nombre:entry.ejercicioId)+'</h3>';
+    entry.series.forEach((serie,i)=>{
+      let parts = ['S'+(i+1)];
+      if(serie.peso!==null && serie.peso!==undefined) parts.push(fmtNum(serie.peso)+' kg');
+      if(serie.reps!==null && serie.reps!==undefined) parts.push(serie.reps+' reps');
+      parts.push(serie.hecha ? '✓' : '—');
+      html += '<div class="text-dim">'+parts.join(' · ')+'</div>';
+    });
+    html += '</div>';
+  });
+
+  document.getElementById('app').innerHTML = html;
+}
+
+/* ======================= VISTA: AJUSTES ======================= */
+function renderAjustes(){
+  setActiveNav('ajustes');
+  document.getElementById('topbar-title').textContent = 'Ajustes';
+
+  let html = '<div class="card">';
+  html += '<h3>Fecha de inicio</h3>';
+  html += '<input type="date" id="fecha-inicio-input" value="'+state.fechaInicio+'">';
+  html += '<button class="btn btn-secondary btn-block" style="margin-top:10px;" onclick="cambiarFechaInicio()">Guardar fecha</button>';
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += '<h3>Resumen para Claude</h3>';
+  html += '<p class="text-dim">Genera un resumen de las últimas 4 semanas y lo copia al portapapeles.</p>';
+  html += '<button class="btn btn-primary btn-block" onclick="copiarParaClaude()">Copiar para Claude</button>';
+  html += '<pre class="resumen hidden" id="resumen-preview"></pre>';
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += '<h3>Copia de seguridad</h3>';
+  html += '<button class="btn btn-secondary btn-block" onclick="exportarDatos()">Exportar (.json)</button>';
+  html += '<input type="file" id="import-file" accept="application/json" class="hidden" onchange="importarDatos(this.files[0])">';
+  html += '<button class="btn btn-secondary btn-block" onclick="document.getElementById(\'import-file\').click()">Importar</button>';
+  html += '</div>';
+
+  document.getElementById('app').innerHTML = html;
+}
+function cambiarFechaInicio(){
+  const val = document.getElementById('fecha-inicio-input').value;
+  if(val){
+    state.fechaInicio = val;
+    saveState();
+    toast('Fecha de inicio actualizada');
+    setSemanaBadge();
+  }
+}
+function exportarDatos(){
+  const blob = new Blob([JSON.stringify(state,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'rutina-backup-'+todayISO()+'.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+function importarDatos(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e){
+    try{
+      const parsed = JSON.parse(e.target.result);
+      if(!parsed.fechaInicio || !Array.isArray(parsed.sesiones)){
+        alert('El archivo no tiene el formato esperado.');
+        return;
+      }
+      if(confirm('Esto reemplazará todos los datos actuales. ¿Continuar?')){
+        state = parsed;
+        if(!state.impacto) state.impacto = { sinMolestias: [] };
+        if(!state.diasSuaves) state.diasSuaves = [];
+        saveState();
+        toast('Datos importados');
+        renderAjustes();
+      }
+    }catch(err){
+      alert('No se pudo leer el archivo: '+err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+function formatDelta(actual, anterior){
+  if(anterior===null || anterior===undefined) return '';
+  const diff = Math.round((actual-anterior)*100)/100;
+  if(diff===0) return ' (=)';
+  return ' ('+(diff>0?'+':'')+fmtNum(diff)+')';
+}
+function copiarParaClaude(){
+  const semanaActual = getSemanaNumero(todayISO());
+  const desde = Math.max(1, semanaActual-3);
+  let bloques = [];
+
+  for(let n=desde; n<=semanaActual; n++){
+    const rango = getRangoSemana(n);
+    let lineas = [];
+    lineas.push('SEMANA '+n+' ('+rango.inicio+' a '+rango.fin+')');
+
+    let fuerzaCompletadas = 0;
+    ['A','B','C'].forEach(sid=>{
+      const sesionesSemana = state.sesiones.filter(s=> s.sesionId===sid && s.fecha>=rango.inicio && s.fecha<=rango.fin);
+      const sesion = sesionesSemana.slice().sort((a,b)=>b.fecha.localeCompare(a.fecha))[0];
+      const def = getSesionDef(sid);
+      if(sesion && sesion.completada){
+        fuerzaCompletadas++;
+        const d = parseISO(sesion.fecha);
+        const partesEj = [];
+        sesion.ejercicios.forEach(entry=>{
+          const ejDef = def.ejercicios.find(e=>e.id===entry.ejercicioId);
+          if(!ejDef || !ejDef.registraCarga) return;
+          const pesosHechos = entry.series.filter(s=>s.hecha && s.peso!==null && s.peso!==undefined).map(s=>s.peso);
+          if(!pesosHechos.length) return;
+          const maxPeso = Math.max(...pesosHechos);
+          const anterior = getReferenciaPesoAntesDe(ejDef.id, sesion.fecha, sesion.id);
+          const seriesN = ejDef.series || entry.series.length;
+          const target = ejDef.distanciaM ? (ejDef.distanciaM[0]+'-'+ejDef.distanciaM[1]+'m') : repsTargetText(ejDef);
+          partesEj.push(ejDef.nombre+' '+seriesN+'x'+target+' @'+fmtNum(maxPeso)+'kg'+formatDelta(maxPeso, anterior));
+        });
+        lineas.push('Sesión '+sid+' ('+DIAS_ABR[diaSemanaKey(sesion.fecha)]+' '+d.getDate()+'): '+(partesEj.length?partesEj.join(' | '):'sin cargas registradas'));
+      } else {
+        lineas.push('Sesión '+sid+': [no realizada]');
+      }
+    });
+
+    // impacto: de la sesion C de esa semana
+    const sesionC = state.sesiones.filter(s=>s.sesionId==='C' && s.fecha>=rango.inicio && s.fecha<=rango.fin && s.completada)
+      .sort((a,b)=>b.fecha.localeCompare(a.fecha))[0];
+    if(sesionC){
+      const fase = getFaseImpacto(n);
+      const sinMolestias = state.impacto.sinMolestias.some(x=> x.fecha>=rango.inicio && x.fecha<=rango.fin);
+      lineas.push('Impacto: fase '+fase.fase+', '+(sinMolestias?'sin molestias':'sin confirmar'));
+    }
+
+    const suavesSemana = state.diasSuaves.filter(d=>d.fecha>=rango.inicio && d.fecha<=rango.fin).length;
+    lineas.push('Adherencia: '+fuerzaCompletadas+'/3 fuerza, '+Math.min(suavesSemana,3)+'/3 suaves');
+
+    bloques.push(lineas.join('\n'));
+  }
+
+  const texto = bloques.join('\n\n');
+  const preview = document.getElementById('resumen-preview');
+  preview.textContent = texto;
+  preview.classList.remove('hidden');
+
+  copiarAlPortapapeles(texto);
+}
+function getReferenciaPesoAntesDe(ejercicioId, fechaLimite, excludeSesionUuid){
+  const historial = state.sesiones
+    .filter(s => s.id !== excludeSesionUuid && s.fecha < fechaLimite)
+    .slice().sort((a,b)=> b.fecha.localeCompare(a.fecha));
+  for(const s of historial){
+    const ej = s.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+    if(ej){
+      const pesos = ej.series.filter(x=>x.hecha && x.peso!==null && x.peso!==undefined).map(x=>x.peso);
+      if(pesos.length) return Math.max(...pesos);
+    }
+  }
+  return null;
+}
+function copiarAlPortapapeles(texto){
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(texto).then(()=> toast('Copiado al portapapeles')).catch(()=> copiarFallback(texto));
+  } else {
+    copiarFallback(texto);
+  }
+}
+function copiarFallback(texto){
+  const ta = document.createElement('textarea');
+  ta.value = texto;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  try{
+    document.execCommand('copy');
+    toast('Copiado al portapapeles');
+  }catch(e){
+    toast('No se pudo copiar automáticamente, cópialo manualmente');
+  }
+  document.body.removeChild(ta);
+}
+
+/* ======================= VISTA: REFERENCIA ======================= */
+function renderReferencia(){
+  setActiveNav('referencia');
+  document.getElementById('topbar-title').textContent = 'Referencia';
+
+  let html = '<h2>Evitar</h2>';
+  RUTINA.evitar.forEach(e=>{
+    html += '<div class="card">';
+    html += '<h3>'+e.que+'</h3>';
+    if(e.ejemplos && e.ejemplos.length) html += '<p class="text-dim">Ej: '+e.ejemplos.join(', ')+'</p>';
+    html += '<p>'+e.motivo+'</p>';
+    html += '</div>';
+  });
+
+  html += '<h2 style="margin-top:20px;">Alertas</h2>';
+  html += '<table><thead><tr><th>Señal</th><th>Acción</th></tr></thead><tbody>';
+  RUTINA.alertas.slice().sort((a,b)=>{
+    const orden = {alta:0,media:1,baja:2};
+    return orden[a.urgencia]-orden[b.urgencia];
+  }).forEach(a=>{
+    html += '<tr class="urgencia-'+a.urgencia+'"><td>'+a.señal+'</td><td>'+a.accion+'</td></tr>';
+  });
+  html += '</tbody></table>';
+
+  html += '<h2 style="margin-top:20px;">Pendiente médico</h2>';
+  RUTINA.pendienteMedico.forEach(p=>{
+    html += '<div class="card">';
+    html += '<h3>'+p.tema+'</h3>';
+    html += '<p class="text-dim">'+p.quien+(p.prioridad?' · prioridad '+p.prioridad:'')+'</p>';
+    html += '</div>';
+  });
+
+  document.getElementById('app').innerHTML = html;
+}
+
+/* ======================= ROUTER ======================= */
+function router(){
+  const hash = location.hash.replace(/^#/,'') || '/';
+  const parts = hash.split('/').filter(Boolean);
+  document.getElementById('modal-video').classList.add('hidden');
+
+  if(parts.length===0){ renderInicio(); return; }
+  if(parts[0]==='sesion' && parts[1]){ renderSesion(parts[1]); setTimeout(inicializarIndicadores,0); return; }
+  if(parts[0]==='historial' && parts[1]){ renderHistorialDetalle(parts[1]); return; }
+  if(parts[0]==='historial'){ renderHistorial(); return; }
+  if(parts[0]==='ajustes'){ renderAjustes(); return; }
+  if(parts[0]==='referencia'){ renderReferencia(); return; }
+  renderInicio();
+}
+window.addEventListener('hashchange', router);
+window.addEventListener('DOMContentLoaded', function(){
+  router();
+  if('serviceWorker' in navigator && location.protocol !== 'file:'){
+    navigator.serviceWorker.register('sw.js').catch(function(){});
+  }
+});
+</script>
+</body>
+</html>
