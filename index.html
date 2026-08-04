@@ -199,6 +199,21 @@ input[type=checkbox]{
 .ficha-tecnica li{margin-bottom:3px;}
 .ficha-porque{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);color:var(--accent);font-size:0.85rem;}
 
+/* estiramientos */
+.estiramiento-card{
+  border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);
+  padding:14px;margin-bottom:14px;
+}
+.estiramiento-card.estatico{border-color:var(--accent-dim);background:#20180a;}
+.estiramiento-meta{color:var(--text-dim);font-size:0.85rem;margin-bottom:6px;}
+.estiramiento-nota{color:var(--text-dim);font-size:0.85rem;margin-bottom:10px;}
+.estiramiento-evitar{background:var(--surface2);border-radius:8px;padding:8px 10px;font-size:0.82rem;color:var(--red);margin-bottom:10px;}
+.estiramiento-item{padding:8px 0;border-top:1px solid var(--border);}
+.estiramiento-item:first-of-type{border-top:none;}
+.estiramiento-item .zona{color:var(--accent);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+.estiramiento-item .nombre{font-weight:600;margin:2px 0;}
+.estiramiento-item .dosis{color:var(--text-dim);font-size:0.85rem;}
+
 /* impact block */
 .impacto-box{border:1px solid var(--accent-dim);background:#20180a;border-radius:12px;padding:14px;margin-bottom:12px;}
 .impacto-fase{color:var(--accent);font-weight:700;font-size:1.05rem;}
@@ -575,7 +590,38 @@ const RUTINA =
     { "tema": "PCR, VSG, factor reumatoide, anti-CCP (madre con AR)", "quien": "analítica", "estado": "pendiente", "prioridad": "media" },
     { "tema": "Averiguar si hay antecedente de fractura de cadera en padres (variable FRAX)", "quien": "familia", "estado": "pendiente", "prioridad": "media" },
     { "tema": "Ferritina 22 con talasemia — vigilar", "quien": "Dra. Tábara", "estado": "pendiente", "prioridad": "baja" }
-  ]
+  ],
+  "estiramientos": {
+    "dinamico": {
+      "cuando": "antes",
+      "duracionMin": [5, 8],
+      "nota": "El estático antes de entrenar puede reducir ligeramente fuerza y potencia. El dinámico prepara sin ese efecto. Nada se mantiene fijo, todo es movimiento continuo.",
+      "ejercicios": [
+        { "zona": "cadera", "nombre": "Círculos de cadera", "dosis": "10 por lado" },
+        { "zona": "cadera_isquios", "nombre": "Balanceo de pierna adelante-atrás", "dosis": "10 por lado" },
+        { "zona": "tobillo", "nombre": "Círculos de tobillo + elevación de talones", "dosis": "10 cada uno" },
+        { "zona": "hombro", "nombre": "Rotaciones de brazo, círculos amplios", "dosis": "10 cada dirección" },
+        { "zona": "columna_toracica", "nombre": "Rotación de tronco suave, brazos cruzados al pecho", "dosis": "10 por lado" },
+        { "zona": "general", "nombre": "Sentadilla sin carga", "dosis": "2-3 series" }
+      ]
+    },
+    "estatico": {
+      "cuando": "despues",
+      "duracionMin": [5, 10],
+      "duracionPorPosturaSeg": [20, 30],
+      "nota": "Sin rebotar, hasta notar tensión suave, nunca dolor.",
+      "evitar": "Isquiotibiales de pie con rodillas rectas mantenido. Cualquier flexión profunda de columna sostenida.",
+      "ejercicios": [
+        { "zona": "cuadriceps", "nombre": "De pie, sujeta el tobillo llevando el talón hacia el glúteo", "notas": "Apóyate en algo si hace falta equilibrio" },
+        { "zona": "isquiotibiales", "nombre": "Tumbada boca arriba, pierna elevada sujeta con toalla o goma", "notas": "NO de pie inclinada hacia delante" },
+        { "zona": "gluteo", "nombre": "Tumbada boca arriba, tobillo sobre rodilla contraria, lleva la pierna de abajo hacia el pecho", "notas": "" },
+        { "zona": "flexores_cadera", "nombre": "Zancada baja, cadera hacia delante, sin arquear la lumbar", "notas": "El que más se acorta por estar sentada 8h" },
+        { "zona": "pecho_hombro", "nombre": "Brazo estirado contra marco de puerta, giro leve del cuerpo", "notas": "" },
+        { "zona": "espalda_alta", "nombre": "Brazos cruzados al pecho, tira suavemente hacia el hombro contrario", "notas": "" },
+        { "zona": "gemelo", "nombre": "De pie frente a la pared, pierna atrás con el talón en el suelo", "notas": "" }
+      ]
+    }
+  }
 };
 
 /* ======================= ESTADO / ALMACENAMIENTO ======================= */
@@ -726,6 +772,53 @@ function cerrarModalVideo(){
 }
 function cerrarModalSuave(){
   document.getElementById('modal-suave').classList.add('hidden');
+}
+function zonaLabel(zona){ return (zona||'').replace(/_/g,' '); }
+function estiramientoDinamicoHtml(){
+  const e = RUTINA.estiramientos.dinamico;
+  let html = '<div class="estiramiento-card dinamico">';
+  html += '<h3>🔄 Antes de empezar: movilidad dinámica</h3>';
+  html += '<div class="estiramiento-meta">'+e.duracionMin[0]+'-'+e.duracionMin[1]+' min</div>';
+  html += '<div class="estiramiento-nota">'+e.nota+'</div>';
+  e.ejercicios.forEach(x=>{
+    html += '<div class="estiramiento-item">';
+    html += '<div class="zona">'+zonaLabel(x.zona)+'</div>';
+    html += '<div class="nombre">'+x.nombre+'</div>';
+    if(x.dosis) html += '<div class="dosis">'+x.dosis+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+function estiramientoEstaticoHtml(){
+  const e = RUTINA.estiramientos.estatico;
+  let html = '<div class="estiramiento-card estatico">';
+  html += '<h3>🧘 Al terminar: estiramiento estático</h3>';
+  html += '<div class="estiramiento-meta">'+e.duracionMin[0]+'-'+e.duracionMin[1]+' min · '+e.duracionPorPosturaSeg[0]+'-'+e.duracionPorPosturaSeg[1]+' seg por postura</div>';
+  html += '<div class="estiramiento-nota">'+e.nota+'</div>';
+  if(e.evitar) html += '<div class="estiramiento-evitar">⚠️ Evitar: '+e.evitar+'</div>';
+  e.ejercicios.forEach(x=>{
+    html += '<div class="estiramiento-item">';
+    html += '<div class="zona">'+zonaLabel(x.zona)+'</div>';
+    html += '<div class="nombre">'+x.nombre+'</div>';
+    if(x.notas) html += '<div class="dosis">'+x.notas+'</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+function renderEstiramientoFinal(sesionId){
+  const sesionDef = getSesionDef(sesionId);
+  setActiveNav('inicio');
+  document.getElementById('topbar-title').textContent = 'Sesión terminada';
+  let html = '';
+  html += '<div class="card card-highlight">';
+  html += '<h2>✅ '+(sesionDef?sesionDef.nombre:'Sesión')+' completada</h2>';
+  html += '<p class="text-dim">Buen trabajo. Cierra con el estiramiento estático antes de irte.</p>';
+  html += '</div>';
+  html += estiramientoEstaticoHtml();
+  html += '<a href="#/" class="btn btn-primary btn-large">Ir a inicio</a>';
+  document.getElementById('app').innerHTML = html;
 }
 function toggleFicha(ejercicioId){
   const el = document.getElementById('ficha-'+ejercicioId);
@@ -888,6 +981,7 @@ function renderSesion(sesionId){
   let totalUnidades = 0, hechasUnidades = 0;
   let html = '';
   html += '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/\'">←</button><h2 style="margin:0;">'+sesionDef.nombre+'</h2></div>';
+  html += estiramientoDinamicoHtml();
   html += '<div class="progress-outer"><div class="progress-fill" id="progress-fill"></div></div>';
   html += '<div id="ejercicios-wrap">';
 
@@ -1065,7 +1159,7 @@ function terminarSesion(sesionId){
   sesionActualDraft.completada = true;
   saveState();
   toast('Sesión guardada');
-  location.hash = '#/';
+  location.hash = '#/estiramiento/'+sesionId;
 }
 
 /* trigger inicial de indicadores tras render */
@@ -1398,6 +1492,7 @@ function router(){
 
   if(parts.length===0){ renderInicio(); return; }
   if(parts[0]==='sesion' && parts[1]){ renderSesion(parts[1]); setTimeout(inicializarIndicadores,0); return; }
+  if(parts[0]==='estiramiento' && parts[1]){ renderEstiramientoFinal(parts[1]); return; }
   if(parts[0]==='historial' && parts[1]){ renderHistorialDetalle(parts[1]); return; }
   if(parts[0]==='historial'){ renderHistorial(); return; }
   if(parts[0]==='ajustes'){ renderAjustes(); return; }
