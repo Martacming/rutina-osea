@@ -286,6 +286,20 @@
           "video": ""
         },
         {
+          "id": "b_contractor",
+          "nombre": "Contractor pectoral (pec deck)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Aislamiento de pectoral, después del press (compuesto primero, aislamiento después). Asiento a la altura del PECHO, no de los hombros",
+          "avisos": [
+            "NO llevar los codos demasiado atrás al abrir: carga la cápsula anterior del hombro, que es tu punto débil. Para al notar el estiramiento, sin buscar rango máximo"
+          ],
+          "video": ""
+        },
+        {
           "id": "b_jalon",
           "nombre": "Jalón al pecho / dominadas asistidas",
           "tipo": "principal",
