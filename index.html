@@ -146,6 +146,21 @@ button{font-family:inherit;}
 .ejercicio-header h3{flex:1;}
 .ejercicio-meta{color:var(--accent);font-weight:600;font-size:0.95rem;margin-bottom:4px;}
 .ejercicio-notas{color:var(--text-dim);font-size:0.88rem;margin-bottom:10px;}
+.dato-rapido{
+  display:inline-block;font-size:0.72rem;font-weight:600;color:var(--accent);
+  background:var(--surface2);border:1px solid var(--accent-dim);
+  border-radius:20px;padding:2px 8px;margin-left:6px;vertical-align:middle;white-space:nowrap;
+}
+.avisos-box{
+  background:#3a2c13;border:1px solid var(--amber);border-radius:10px;
+  padding:10px 12px;margin:2px 0 10px;
+}
+.aviso-item{
+  display:flex;gap:8px;align-items:flex-start;color:var(--amber);
+  font-size:0.85rem;font-weight:600;line-height:1.35;margin-bottom:6px;
+}
+.aviso-item:last-child{margin-bottom:0;}
+.aviso-item .aviso-ico{flex-shrink:0;}
 .serie-row{
   display:flex;align-items:center;gap:8px;
   padding:8px 0;
@@ -213,6 +228,12 @@ input[type=checkbox]{
 .estiramiento-item .zona{color:var(--accent);font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
 .estiramiento-item .nombre{font-weight:600;margin:2px 0;}
 .estiramiento-item .dosis{color:var(--text-dim);font-size:0.85rem;}
+.estiramiento-check{
+  display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;
+  border-top:1px solid var(--border);font-size:0.95rem;font-weight:600;color:var(--text);
+  cursor:pointer;
+}
+.estiramiento-check input[type=checkbox]{margin-left:0;}
 
 /* impact block */
 .impacto-box{border:1px solid var(--accent-dim);background:#20180a;border-radius:12px;padding:14px;margin-bottom:12px;}
@@ -363,13 +384,14 @@ const RUTINA =
           "truco": "Practica sin peso de espaldas a una pared, a dos palmos: lleva el culo hasta rozarla sin doblar rodillas.",
           "porqueHueso": "El mejor estímulo para L1-L4 con técnica correcta. Revisar con el monitor antes de progresar en peso."
         } },
-        { "id": "a_zancadas", "nombre": "Zancadas caminando o step-up a cajón", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "porPierna": true, "registraCarga": true, "notas": "Carga unilateral de cadera — trabajo específico para tu sitio prioritario. Empieza sin peso", "sitiosOseos": ["cadera", "cuello_femoral"], "video": "", "fichaTecnica": {
+        { "id": "a_zancadas", "nombre": "Step-up a cajón (o zancadas caminando)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "porPierna": true, "registraCarga": true, "notas": "Carga unilateral de cadera — trabajo específico para tu sitio prioritario. CAJÓN RÍGIDO a la altura de la rodilla (~45 cm). Sube apoyando toda la planta, sin impulsarte con la pierna de atrás. Baja controlando.", "sitiosOseos": ["cadera", "cuello_femoral"], "video": "", "alturaCajonCm": 45, "progresion": "Progresar AÑADIENDO PESO, nunca subiendo la altura del cajón", "avisos": ["NO usar cajón blando o inestable: reduce la fuerza que puedes producir y añade riesgo de caída (crítico con cadera T-score -2,4)", "NO subir la altura como progresión: más altura = más compensación y más riesgo, sin más estímulo óseo", "El equilibrio se entrena aparte, sin carga: yoga y barre del domingo"], "fichaTecnica": {
           "prioridad": "amarilla",
-          "queEs": "Paso largo bajando la rodilla trasera, o subir un escalón con una pierna.",
-          "ejecucion": ["Paso largo hacia delante", "Baja hasta que la rodilla trasera casi toque el suelo", "Rodilla delantera no sobrepasa mucho la punta del pie", "Empuja con la pierna delantera para volver"],
-          "debesNotar": "Cuádriceps y glúteo de la pierna que trabaja.",
-          "errores": ["Rodilla delantera colapsando hacia dentro", "Perder equilibrio lateral → reduce el paso"],
-          "porqueHueso": "Trabajo unilateral de cadera en varios planos."
+          "queEs": "Subir a un cajón rígido apoyando toda la planta de un pie, sin impulsarte con la pierna de atrás.",
+          "colocacion": "Cajón rígido y estable a la altura de la rodilla (~45 cm), de frente a él.",
+          "ejecucion": ["Apoya toda la planta del pie sobre el cajón", "Sube empujando con la pierna de arriba, sin impulso de la de atrás", "Termina de pie y estable sobre el cajón", "Baja controlando el descenso"],
+          "debesNotar": "Cuádriceps y glúteo de la pierna que sube.",
+          "errores": ["Impulsarte con la pierna de atrás", "Cajón demasiado alto → más compensación y riesgo, sin más estímulo óseo", "Perder equilibrio lateral → reduce la carga"],
+          "porqueHueso": "Carga unilateral de cadera y cuello femoral, tu sitio prioritario."
         } },
         { "id": "a_prensa", "nombre": "Prensa de piernas (Biostrength)", "tipo": "accesorio", "series": 3, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Accesorio, aquí sí vale la máquina", "video": "", "fichaTecnica": {
           "prioridad": "verde",
@@ -385,7 +407,30 @@ const RUTINA =
           "ejecucion": ["Movimiento controlado, sin tirones", "Aprieta al final del recorrido"],
           "debesNotar": "Parte trasera del muslo."
         } },
-        { "id": "a_farmer", "nombre": "Paseo del granjero (farmer's carry)", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "Carga axial + core + agarre. Muy infravalorado", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "", "fichaTecnica": {
+        { "id": "a_gemelos", "nombre": "Elevación de talones DE PIE", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "DE PIE, no sentada: así hay carga axial y estímulo sobre la tibia. Sube despacio, pausa arriba, baja controlando", "sitiosOseos": ["tibia"], "video": "", "fichaTecnica": {
+          "prioridad": "verde",
+          "queEs": "Elevación de talones de pie para trabajar el gemelo y estimular la tibia.",
+          "colocacion": "De pie y erguida, puntas de los pies en un escalón o en el suelo.",
+          "ejecucion": ["Sube despacio hasta la máxima altura del talón", "Pausa arriba", "Baja controlando"],
+          "debesNotar": "Gemelo y sóleo.",
+          "porqueHueso": "De pie aporta carga axial y estímulo directo sobre la tibia."
+        } },
+        { "id": "a_abductor", "nombre": "Abductor (máquina)", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Glúteo medio: principal estabilizador lateral de la cadera. Cuando está débil, la rodilla colapsa hacia dentro en sentadilla y step-up. Relevante para prevención de caídas", "video": "", "fichaTecnica": {
+          "prioridad": "verde",
+          "queEs": "Máquina guiada: separas las piernas contra resistencia trabajando el glúteo medio.",
+          "colocacion": "Espalda apoyada en el respaldo.",
+          "ejecucion": ["Abre las piernas de forma controlada", "Vuelve sin dejar que la carga tire de golpe"],
+          "debesNotar": "Laterales de la cadera (glúteo medio).",
+          "porqueHueso": "Un glúteo medio fuerte estabiliza la cadera y evita que la rodilla colapse hacia dentro. Relevante para prevención de caídas."
+        } },
+        { "id": "a_aductor", "nombre": "Aductor (máquina)", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Equilibra el trabajo de cadera. PENDIENTE: pedir al personal de Viding que recalibren esta máquina (conformidad >300%, la carga registrada no se corresponde con la real)", "video": "", "fichaTecnica": {
+          "prioridad": "verde",
+          "queEs": "Máquina guiada: juntas las piernas contra resistencia trabajando los aductores.",
+          "colocacion": "Espalda apoyada en el respaldo.",
+          "ejecucion": ["Cierra las piernas de forma controlada", "Vuelve controlando la apertura"],
+          "debesNotar": "Cara interna del muslo."
+        } },
+        { "id": "a_farmer", "nombre": "Paseo del granjero (farmer's carry)", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "Carga axial + core + agarre. AHORA ES TU PRINCIPAL FUENTE DE CARGA AXIAL junto al peso muerto y la sentadilla, al pasar el press militar a sentada. Prioriza subir peso aquí.", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "", "progresion": "Subir peso de forma agresiva: el agarre se adapta rápido. Variante suitcase (una sola mano) para anti-flexión lateral", "variante": "Suitcase carry: peso en una sola mano, alternando. Cubre el plano anti-flexión lateral", "fichaTecnica": {
           "prioridad": "amarilla",
           "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
           "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
@@ -399,17 +444,17 @@ const RUTINA =
     {
       "id": "B", "nombre": "Fuerza B — Tren superior, énfasis en hombro", "dia": "jueves",
       "intensidad": "media-alta", "duracionMin": [45, 55],
-      "descripcion": "El press de hombro es tu punto más débil documentado. De pie, además, aporta carga axial.",
+      "descripcion": "El press de hombro es tu punto más débil documentado: prioriza progresar aquí. Ahora es sentada en máquina; la carga axial que daba de pie se compensa en el farmer's carry.",
       "ejercicios": [
         { "id": "b_calentamiento", "nombre": "Movilidad de hombro", "tipo": "calentamiento", "series": 1, "duracionMin": [5, 8], "registraCarga": false, "notas": "Rotaciones, band pull-apart si hay gomas", "video": "" },
-        { "id": "b_press_militar", "nombre": "Press militar DE PIE", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "progresion": "mancuernas → barra", "notas": "DE PIE, no sentada. Aquí está la clave: carga axial + tu punto débil", "sitiosOseos": ["columna_lumbar", "humero"], "video": "", "fichaTecnica": {
-          "prioridad": "roja",
-          "queEs": "Empujar el peso por encima de la cabeza de pie.",
-          "colocacion": "Pies a la anchura de la cadera, peso a la altura de los hombros, codos ligeramente delante.",
-          "ejecucion": ["Aprieta glúteo y abdomen antes de empezar", "Empuja en línea recta hacia arriba", "Cabeza pasa ligeramente delante al final", "Baja con control"],
-          "debesNotar": "Hombros y tríceps. Abdomen estabilizando.",
-          "errores": ["Arquear la lumbar para ayudar a empujar → baja el peso", "Empujar hacia delante en vez de arriba"],
-          "porqueHueso": "De pie, carga axial directa sobre columna y húmero. Tu ejercicio más débil documentado."
+        { "id": "b_press_militar", "nombre": "Press de hombro sentada (máquina)", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "notas": "Decisión propia: sentada en máquina por comodidad. NOTA: al estar sentada se pierde la carga axial sobre columna que daba la versión de pie — compensado subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí", "sitiosOseos": [], "video": "", "fichaTecnica": {
+          "prioridad": "amarilla",
+          "queEs": "Empujar el peso por encima de la cabeza, sentada en máquina guiada.",
+          "colocacion": "Espalda apoyada en el respaldo, agarre a la altura de los hombros.",
+          "ejecucion": ["Empuja en línea recta hacia arriba sin bloquear de golpe", "Baja con control hasta la altura de los hombros"],
+          "debesNotar": "Hombros y tríceps.",
+          "errores": ["Despegar la espalda del respaldo → reduce el rango o el peso"],
+          "porqueHueso": "Sentada se pierde la carga axial sobre columna de la versión de pie; se compensa subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí."
         } },
         { "id": "b_remo", "nombre": "Remo (Biostrength o barra)", "tipo": "principal", "series": 4, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Si es con barra, remo Pendlay de pie: mejor para columna", "sitiosOseos": ["columna_toracica"], "video": "", "fichaTecnica": {
           "prioridad": "amarilla",
@@ -425,6 +470,14 @@ const RUTINA =
           "ejecucion": ["Prueba agarre neutro si el hombro molesta"],
           "debesNotar": "Pecho y tríceps."
         } },
+        { "id": "b_contractor", "nombre": "Contractor pectoral (pec deck)", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Aislamiento de pectoral, después del press (compuesto primero, aislamiento después). Asiento a la altura del PECHO, no de los hombros", "avisos": ["NO llevar los codos demasiado atrás al abrir: carga la cápsula anterior del hombro, que es tu punto débil. Para al notar el estiramiento, sin buscar rango máximo"], "video": "", "fichaTecnica": {
+          "prioridad": "amarilla",
+          "queEs": "Máquina de aislamiento de pectoral: juntas los brazos por delante contra resistencia.",
+          "colocacion": "Asiento a la altura del pecho (no de los hombros), espalda apoyada.",
+          "ejecucion": ["Junta los brazos por delante de forma controlada", "Abre solo hasta notar el estiramiento, sin buscar rango máximo"],
+          "debesNotar": "Pectoral. No debe molestar la parte delantera del hombro.",
+          "errores": ["Llevar los codos demasiado atrás al abrir → carga la cápsula anterior del hombro, tu punto débil"]
+        } },
         { "id": "b_jalon", "nombre": "Jalón al pecho / dominadas asistidas", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "", "video": "", "fichaTecnica": {
           "prioridad": "verde",
           "queEs": "Tirar de una barra hacia el pecho desde arriba.",
@@ -438,10 +491,25 @@ const RUTINA =
           "debesNotar": "Parte media del hombro.",
           "errores": ["Usar impulso del cuerpo → baja el peso"]
         } },
-        { "id": "b_biceps_triceps", "nombre": "Curl de bíceps + extensión de tríceps", "tipo": "accesorio", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "El aislamiento que faltaba en tu rutina anterior", "video": "", "fichaTecnica": {
+        { "id": "b_biceps", "nombre": "Curl de bíceps", "tipo": "accesorio", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Codos pegados al cuerpo, sube flexionando el codo, baja controlando", "video": "", "fichaTecnica": {
           "prioridad": "verde",
-          "queEs": "Curl de bíceps y extensión de tríceps, aislamiento de brazo.",
-          "ejecucion": ["Codos fijos en ambos ejercicios", "Movimiento controlado en ambas direcciones"]
+          "queEs": "Aislamiento del bíceps: flexión de codo con mancuerna, barra o polea.",
+          "ejecucion": ["Codos pegados al cuerpo y fijos", "Sube flexionando solo el codo", "Baja controlando, sin balancear el cuerpo"],
+          "debesNotar": "Parte delantera del brazo."
+        } },
+        { "id": "b_triceps", "nombre": "Extensión de tríceps", "tipo": "accesorio", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Codo fijo (al techo o pegado al cuerpo según variante), extiende el brazo, vuelve controlando. Normal mover más peso que en bíceps", "video": "", "fichaTecnica": {
+          "prioridad": "verde",
+          "queEs": "Aislamiento del tríceps: extensión de codo con polea, mancuerna o barra.",
+          "ejecucion": ["Codo fijo, al techo o pegado al cuerpo según variante", "Extiende el brazo completo", "Vuelve controlando"],
+          "debesNotar": "Parte trasera del brazo. Es normal mover más peso que en bíceps."
+        } },
+        { "id": "b_rotacion_externa", "nombre": "Rotación externa de hombro (goma)", "tipo": "accesorio", "series": 2, "reps": 15, "porLado": true, "registraCarga": false, "notas": "Manguito rotador. Codo pegado al costado, antebrazo gira hacia fuera. Los press y jalones trabajan los músculos grandes; estos estabilizadores pequeños son los que fallan primero. Debería ayudarte a progresar en el press", "video": "", "fichaTecnica": {
+          "prioridad": "verde",
+          "queEs": "Trabajo del manguito rotador con goma: el antebrazo gira hacia fuera.",
+          "colocacion": "Codo pegado al costado y flexionado 90°, goma anclada a un lado.",
+          "ejecucion": ["Gira el antebrazo hacia fuera manteniendo el codo pegado al cuerpo", "Vuelve controlando"],
+          "debesNotar": "Parte posterior del hombro, sin dolor.",
+          "porqueHueso": "Estabilizadores pequeños del hombro; suelen fallar antes que los grandes y limitar el press."
         } },
         { "id": "b_flexiones", "nombre": "Flexiones con manos elevadas", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 12, "registraCarga": false, "notas": "Banco o multipower. CARGA AXIAL SOBRE LA MUÑECA — no es opcional. La fractura de radio distal suele ser la primera por fragilidad", "sitiosOseos": ["muñeca", "radio_distal"], "video": "", "fichaTecnica": {
           "prioridad": "amarilla",
@@ -483,7 +551,7 @@ const RUTINA =
           "debesNotar": "Glúteo, muy concentrado.",
           "errores": ["Arquear la lumbar en vez de subir con el glúteo → sube menos rango"]
         } },
-        { "id": "c_press_hombro", "nombre": "Press de hombro (variante distinta al jueves)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Arnold press, push press o landmine", "sitiosOseos": ["humero"], "video": "", "fichaTecnica": {
+        { "id": "c_press_hombro", "nombre": "Press de hombro (variante distinta al jueves)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Arnold press, push press o landmine. Si lo haces sentada, no aporta carga axial", "sitiosOseos": [], "video": "", "fichaTecnica": {
           "prioridad": "verde",
           "queEs": "Variante del press militar: Arnold press o landmine.",
           "nota": "Pide al monitor la variante disponible en Viding."
@@ -508,7 +576,7 @@ const RUTINA =
           "debesNotar": "Lumbar y glúteo controlados, sin dolor.",
           "errores": ["Subir de más buscando hiperextensión → el objetivo es fuerza, no rango extra"]
         } },
-        { "id": "c_farmer", "nombre": "Paseo del granjero", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "", "fichaTecnica": {
+        { "id": "c_farmer", "nombre": "Paseo del granjero", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "Fuente principal de carga axial. Prioriza subir peso. Alterna con variante suitcase (una mano)", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "", "fichaTecnica": {
           "prioridad": "amarilla",
           "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
           "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
@@ -629,7 +697,7 @@ const STORAGE_KEY = 'rutinaOseaData';
 const DIAS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
 const DIAS_ABR = {domingo:'dom',lunes:'lun',martes:'mar',miercoles:'mié',jueves:'jue',viernes:'vie',sabado:'sáb'};
 const DIAS_LABEL = {domingo:'domingo',lunes:'lunes',martes:'martes',miercoles:'miércoles',jueves:'jueves',viernes:'viernes',sabado:'sábado'};
-const EJERCICIOS_INFERIOR = new Set(['a_sentadilla','a_peso_muerto_rumano','a_zancadas','a_prensa','a_curl_femoral','c_peso_muerto','c_hip_thrust']);
+const EJERCICIOS_INFERIOR = new Set(['a_sentadilla','a_peso_muerto_rumano','a_zancadas','a_prensa','a_curl_femoral','a_gemelos','a_abductor','a_aductor','c_peso_muerto','c_hip_thrust']);
 const SITIO_LABEL = {
   columna_lumbar:'columna lumbar', cadera:'cadera', cuello_femoral:'cuello femoral',
   muñeca:'muñeca', radio_distal:'radio distal', humero:'húmero', columna_toracica:'columna torácica', tibia:'tibia'
@@ -774,7 +842,7 @@ function cerrarModalSuave(){
   document.getElementById('modal-suave').classList.add('hidden');
 }
 function zonaLabel(zona){ return (zona||'').replace(/_/g,' '); }
-function estiramientoDinamicoHtml(){
+function estiramientoDinamicoHtml(checked){
   const e = RUTINA.estiramientos.dinamico;
   let html = '<div class="estiramiento-card dinamico">';
   html += '<h3>🔄 Antes de empezar: movilidad dinámica</h3>';
@@ -787,10 +855,11 @@ function estiramientoDinamicoHtml(){
     if(x.dosis) html += '<div class="dosis">'+x.dosis+'</div>';
     html += '</div>';
   });
+  html += '<label class="estiramiento-check"><input type="checkbox" id="estir-dinamico-check" '+(checked?'checked':'')+' onchange="onEstiramientoCheck(\'dinamico\', this)"> Movilidad hecha</label>';
   html += '</div>';
   return html;
 }
-function estiramientoEstaticoHtml(){
+function estiramientoEstaticoHtml(checked){
   const e = RUTINA.estiramientos.estatico;
   let html = '<div class="estiramiento-card estatico">';
   html += '<h3>🧘 Al terminar: estiramiento estático</h3>';
@@ -804,21 +873,45 @@ function estiramientoEstaticoHtml(){
     if(x.notas) html += '<div class="dosis">'+x.notas+'</div>';
     html += '</div>';
   });
+  html += '<label class="estiramiento-check"><input type="checkbox" id="estir-estatico-check" '+(checked?'checked':'')+' onchange="onEstiramientoCheck(\'estatico\', this)"> Estiramiento hecho</label>';
   html += '</div>';
   return html;
+}
+function getDraftActual(sesionId){
+  if(sesionActualDraft && sesionActualDraft.sesionId===sesionId && !sesionActualDraft.completada) return sesionActualDraft;
+  const hoy = todayISO();
+  return state.sesiones.find(s=> s.fecha===hoy && s.sesionId===sesionId && !s.completada) || null;
+}
+function onEstiramientoCheck(tipo, el){
+  if(!sesionActualDraft) return;
+  if(!sesionActualDraft.estiramientos) sesionActualDraft.estiramientos = { dinamico:false, estatico:false };
+  sesionActualDraft.estiramientos[tipo] = el.checked;
+  saveState();
 }
 function renderEstiramientoFinal(sesionId){
   const sesionDef = getSesionDef(sesionId);
   setActiveNav('inicio');
-  document.getElementById('topbar-title').textContent = 'Sesión terminada';
+  document.getElementById('topbar-title').textContent = 'Estiramiento final';
+  const draft = getDraftActual(sesionId);
+  if(draft) sesionActualDraft = draft;
+  const estaticoHecho = draft && draft.estiramientos && draft.estiramientos.estatico;
   let html = '';
   html += '<div class="card card-highlight">';
-  html += '<h2>✅ '+(sesionDef?sesionDef.nombre:'Sesión')+' completada</h2>';
-  html += '<p class="text-dim">Buen trabajo. Cierra con el estiramiento estático antes de irte.</p>';
+  html += '<h2>💪 '+(sesionDef?sesionDef.nombre:'Sesión')+'</h2>';
+  html += '<p class="text-dim">Buen trabajo. Antes de guardar, cierra con el estiramiento estático.</p>';
   html += '</div>';
-  html += estiramientoEstaticoHtml();
-  html += '<a href="#/" class="btn btn-primary btn-large">Ir a inicio</a>';
+  html += estiramientoEstaticoHtml(estaticoHecho);
+  html += '<button class="btn btn-primary btn-large" onclick="guardarSesionFinal(\''+sesionId+'\')">Guardar sesión</button>';
   document.getElementById('app').innerHTML = html;
+}
+function guardarSesionFinal(sesionId){
+  const draft = getDraftActual(sesionId);
+  if(draft){
+    draft.completada = true;
+    saveState();
+  }
+  toast('Sesión guardada');
+  location.hash = '#/';
 }
 function toggleFicha(ejercicioId){
   const el = document.getElementById('ficha-'+ejercicioId);
@@ -951,9 +1044,11 @@ function findOrCreateDraft(sesionId){
   const hoy = todayISO();
   let draft = state.sesiones.find(s=> s.fecha===hoy && s.sesionId===sesionId && !s.completada);
   if(!draft){
-    draft = { id: uuid(), fecha: hoy, sesionId: sesionId, completada: false, ejercicios: [] };
+    draft = { id: uuid(), fecha: hoy, sesionId: sesionId, completada: false, ejercicios: [], estiramientos: { dinamico:false, estatico:false } };
     state.sesiones.push(draft);
     saveState();
+  } else if(!draft.estiramientos){
+    draft.estiramientos = { dinamico:false, estatico:false };
   }
   return draft;
 }
@@ -981,7 +1076,7 @@ function renderSesion(sesionId){
   let totalUnidades = 0, hechasUnidades = 0;
   let html = '';
   html += '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/\'">←</button><h2 style="margin:0;">'+sesionDef.nombre+'</h2></div>';
-  html += estiramientoDinamicoHtml();
+  html += estiramientoDinamicoHtml(draft.estiramientos && draft.estiramientos.dinamico);
   html += '<div class="progress-outer"><div class="progress-fill" id="progress-fill"></div></div>';
   html += '<div id="ejercicios-wrap">';
 
@@ -1013,7 +1108,7 @@ function renderEjercicioCard(ej, draft, entry){
   const ref = getReferenciaPeso(ej.id, draft.id);
   const incremento = getIncremento(ej.id);
   let html = '<div class="ejercicio-card" data-ejercicio="'+ej.id+'">';
-  html += '<div class="ejercicio-header"><h3>'+ej.nombre+'</h3>';
+  html += '<div class="ejercicio-header"><h3>'+ej.nombre+(ej.alturaCajonCm?' <span class="dato-rapido">📦 Cajón '+ej.alturaCajonCm+' cm</span>':'')+'</h3>';
   if(ej.video){
     html += '<button class="btn-video" onclick="abrirModalVideo(\''+ej.video+'\')">▶ Vídeo</button>';
   }
@@ -1031,6 +1126,11 @@ function renderEjercicioCard(ej, draft, entry){
   }
   if(metaParts.length) html += '<div class="ejercicio-meta">'+metaParts.join(' · ')+'</div>';
   if(ej.notas) html += '<div class="ejercicio-notas">'+ej.notas+'</div>';
+  if(ej.avisos && ej.avisos.length){
+    html += '<div class="avisos-box">';
+    ej.avisos.forEach(a=>{ html += '<div class="aviso-item"><span class="aviso-ico">⚠️</span><span>'+a+'</span></div>'; });
+    html += '</div>';
+  }
   if(ej.sitiosOseos){
     ej.sitiosOseos.forEach(s=>{
       html += '<span class="tag">'+(SITIO_LABEL[s]||s)+'</span>';
@@ -1169,9 +1269,7 @@ function actualizarProgreso(){
   if(fill) fill.style.width = pct+'%';
 }
 function terminarSesion(sesionId){
-  sesionActualDraft.completada = true;
   saveState();
-  toast('Sesión guardada');
   location.hash = '#/estiramiento/'+sesionId;
 }
 
@@ -1286,6 +1384,13 @@ function renderHistorialDetalle(sesionUuid){
     });
     html += '</div>';
   });
+
+  if(s.estiramientos){
+    html += '<div class="ejercicio-card"><h3>Estiramientos</h3>';
+    html += '<div class="text-dim">Movilidad dinámica (antes): '+(s.estiramientos.dinamico?'✓ hecha':'—')+'</div>';
+    html += '<div class="text-dim">Estiramiento estático (después): '+(s.estiramientos.estatico?'✓ hecho':'—')+'</div>';
+    html += '</div>';
+  }
 
   html += '<button class="btn btn-danger btn-block" style="margin-top:16px;" onclick="eliminarSesion(\''+s.id+'\')">Eliminar esta sesión</button>';
 
