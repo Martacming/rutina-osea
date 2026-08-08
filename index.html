@@ -1498,17 +1498,6 @@ function formatDelta(actual, anterior){
   return ' ('+(diff>0?'+':'')+fmtNum(diff)+')';
 }
 function copiarParaClaude(){
-  // --- DIAGNÓSTICO TEMPORAL: volcado de lo guardado en localStorage ---
-  try{
-    console.log('[rutina] localStorage['+STORAGE_KEY+'] =', localStorage.getItem(STORAGE_KEY));
-    console.table((state.sesiones||[]).map(function(s){
-      return { id:s.id, fecha:s.fecha, sesionId:s.sesionId, completada:s.completada,
-        seriesHechas:(s.ejercicios||[]).reduce(function(n,e){ return n+(e.series||[]).filter(function(x){return x.hecha;}).length; },0),
-        realizada: sesionRealizada(s) };
-    }));
-  }catch(e){ console.warn('[rutina] no se pudo volcar localStorage', e); }
-  // --- fin diagnóstico ---
-
   const semanaActual = getSemanaNumero(todayISO());
   const desde = Math.max(1, semanaActual-3);
   let bloques = [];
