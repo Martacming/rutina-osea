@@ -878,9 +878,20 @@ function estiramientoEstaticoHtml(checked){
   return html;
 }
 function getDraftActual(sesionId){
-  if(sesionActualDraft && sesionActualDraft.sesionId===sesionId && !sesionActualDraft.completada) return sesionActualDraft;
+  // Sesión en curso de cierre: prioriza la que se está editando y, si no,
+  // la más reciente de hoy para esa sesión (aunque ya esté marcada completada,
+  // porque terminarSesion la completa antes de mostrar el estiramiento final).
+  if(sesionActualDraft && sesionActualDraft.sesionId===sesionId) return sesionActualDraft;
   const hoy = todayISO();
-  return state.sesiones.find(s=> s.fecha===hoy && s.sesionId===sesionId && !s.completada) || null;
+  return state.sesiones.filter(s=> s.fecha===hoy && s.sesionId===sesionId)
+    .sort((a,b)=> b.fecha.localeCompare(a.fecha))[0] || null;
+}
+/* Una sesión cuenta como realizada si está marcada completada o si tiene
+   al menos una serie marcada como hecha (datos reales registrados). */
+function sesionRealizada(s){
+  return !!s && (s.completada === true || (s.ejercicios||[]).some(function(e){
+    return (e.series||[]).some(function(x){ return x.hecha; });
+  }));
 }
 function onEstiramientoCheck(tipo, el){
   if(!sesionActualDraft) return;
@@ -898,10 +909,10 @@ function renderEstiramientoFinal(sesionId){
   let html = '';
   html += '<div class="card card-highlight">';
   html += '<h2>💪 '+(sesionDef?sesionDef.nombre:'Sesión')+'</h2>';
-  html += '<p class="text-dim">Buen trabajo. Antes de guardar, cierra con el estiramiento estático.</p>';
+  html += '<p class="text-dim">Sesión guardada ✓. Cierra con el estiramiento estático y marca que lo has hecho.</p>';
   html += '</div>';
   html += estiramientoEstaticoHtml(estaticoHecho);
-  html += '<button class="btn btn-primary btn-large" onclick="guardarSesionFinal(\''+sesionId+'\')">Guardar sesión</button>';
+  html += '<button class="btn btn-primary btn-large" onclick="guardarSesionFinal(\''+sesionId+'\')">Ir a inicio</button>';
   document.getElementById('app').innerHTML = html;
 }
 function guardarSesionFinal(sesionId){
@@ -1269,6 +1280,10 @@ function actualizarProgreso(){
   if(fill) fill.style.width = pct+'%';
 }
 function terminarSesion(sesionId){
+  // Marca la sesión como completada YA, para que cuente aunque el usuario
+  // salga sin pasar por el botón final de la pantalla de estiramiento.
+  const s = getDraftActual(sesionId);
+  if(s){ s.completada = true; sesionActualDraft = s; }
   saveState();
   location.hash = '#/estiramiento/'+sesionId;
 }
@@ -1328,7 +1343,7 @@ function renderHistorial(){
 
 function renderGrafica(ejercicioId){
   const puntos = [];
-  state.sesiones.filter(s=>s.completada).slice().sort((a,b)=>a.fecha.localeCompare(b.fecha)).forEach(s=>{
+  state.sesiones.filter(sesionRealizada).slice().sort((a,b)=>a.fecha.localeCompare(b.fecha)).forEach(s=>{
     const ej = s.ejercicios.find(e=>e.ejercicioId===ejercicioId);
     if(ej){
       const pesos = ej.series.filter(x=>x.hecha && x.peso!==null && x.peso!==undefined).map(x=>x.peso);
@@ -1483,6 +1498,17 @@ function formatDelta(actual, anterior){
   return ' ('+(diff>0?'+':'')+fmtNum(diff)+')';
 }
 function copiarParaClaude(){
+  // --- DIAGNÓSTICO TEMPORAL: volcado de lo guardado en localStorage ---
+  try{
+    console.log('[rutina] localStorage['+STORAGE_KEY+'] =', localStorage.getItem(STORAGE_KEY));
+    console.table((state.sesiones||[]).map(function(s){
+      return { id:s.id, fecha:s.fecha, sesionId:s.sesionId, completada:s.completada,
+        seriesHechas:(s.ejercicios||[]).reduce(function(n,e){ return n+(e.series||[]).filter(function(x){return x.hecha;}).length; },0),
+        realizada: sesionRealizada(s) };
+    }));
+  }catch(e){ console.warn('[rutina] no se pudo volcar localStorage', e); }
+  // --- fin diagnóstico ---
+
   const semanaActual = getSemanaNumero(todayISO());
   const desde = Math.max(1, semanaActual-3);
   let bloques = [];
@@ -1495,9 +1521,12 @@ function copiarParaClaude(){
     let fuerzaCompletadas = 0;
     ['A','B','C'].forEach(sid=>{
       const sesionesSemana = state.sesiones.filter(s=> s.sesionId===sid && s.fecha>=rango.inicio && s.fecha<=rango.fin);
-      const sesion = sesionesSemana.slice().sort((a,b)=>b.fecha.localeCompare(a.fecha))[0];
+      // Prioriza una sesión realizada; si no hay, la más reciente (p.ej. duplicados en curso).
+      const porFecha = function(a,b){ return b.fecha.localeCompare(a.fecha); };
+      const sesion = sesionesSemana.filter(sesionRealizada).sort(porFecha)[0]
+                  || sesionesSemana.slice().sort(porFecha)[0];
       const def = getSesionDef(sid);
-      if(sesion && sesion.completada){
+      if(sesion && sesionRealizada(sesion)){
         fuerzaCompletadas++;
         const d = parseISO(sesion.fecha);
         const partesEj = [];
@@ -1519,7 +1548,7 @@ function copiarParaClaude(){
     });
 
     // impacto: de la sesion C de esa semana
-    const sesionC = state.sesiones.filter(s=>s.sesionId==='C' && s.fecha>=rango.inicio && s.fecha<=rango.fin && s.completada)
+    const sesionC = state.sesiones.filter(s=>s.sesionId==='C' && s.fecha>=rango.inicio && s.fecha<=rango.fin && sesionRealizada(s))
       .sort((a,b)=>b.fecha.localeCompare(a.fecha))[0];
     if(sesionC){
       const fase = getFaseImpacto(n);
