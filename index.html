@@ -146,6 +146,16 @@ button{font-family:inherit;}
 .ejercicio-header h3{flex:1;}
 .ejercicio-meta{color:var(--accent);font-weight:600;font-size:0.95rem;margin-bottom:4px;}
 .ejercicio-notas{color:var(--text-dim);font-size:0.88rem;margin-bottom:10px;}
+.ultima-vez{
+  font-size:0.85rem;color:var(--text-dim);background:var(--surface2);
+  border-radius:8px;padding:6px 10px;margin:2px 0 8px;
+}
+.ultima-vez.primera{font-style:italic;}
+.ultima-vez-sube{
+  display:flex;align-items:center;gap:6px;
+  background:#3a2c13;border:1px solid var(--amber);color:var(--amber);
+  font-size:0.85rem;font-weight:700;border-radius:8px;padding:6px 10px;margin:0 0 10px;
+}
 .dato-rapido{
   display:inline-block;font-size:0.72rem;font-weight:600;color:var(--accent);
   background:var(--surface2);border:1px solid var(--accent-dim);
@@ -804,6 +814,63 @@ function getReferenciaPeso(ejercicioId, excludeSesionUuid){
   return null;
 }
 
+/* registro real (series hechas) de la última sesión en que se hizo el ejercicio */
+function getUltimaVez(ejercicioId, excludeSesionUuid){
+  const historial = state.sesiones
+    .filter(s => s.id !== excludeSesionUuid)
+    .slice()
+    .sort((a,b)=> b.fecha.localeCompare(a.fecha));
+  for(const s of historial){
+    const entry = s.ejercicios.find(e=>e.ejercicioId===ejercicioId);
+    if(entry){
+      const hechas = entry.series.filter(x=>x.hecha);
+      if(hechas.length) return { fecha: s.fecha, series: hechas };
+    }
+  }
+  return null;
+}
+
+/* HTML del bloque "Última vez" bajo el nombre del ejercicio */
+function ultimaVezHtml(ej, draft){
+  const showPeso = ej.registraCarga;
+  const showReps = (ej.reps!==undefined || ej.repsMin!==undefined) && !ej.duracionSeg;
+  if(!showPeso && !showReps) return ''; // calentamiento / plancha por tiempo: sin peso ni reps
+
+  const uv = getUltimaVez(ej.id, draft.id);
+  if(!uv) return '<div class="ultima-vez primera">Primera vez</div>';
+
+  const series = uv.series;
+  const reps = series.map(s=> (s.reps!==null && s.reps!==undefined) ? s.reps : '—');
+  let texto;
+  if(showPeso){
+    const pesos = series.map(s=>s.peso).filter(p=>p!==null && p!==undefined);
+    const distintos = Array.from(new Set(pesos.map(fmtNum)));
+    if(pesos.length && distintos.length===1){
+      texto = 'Última vez: '+fmtNum(pesos[0])+' kg × '+reps.join(', ');
+    } else if(pesos.length){
+      // pesos distintos entre series: se muestra peso×reps por serie
+      texto = 'Última vez: '+series.map(s=>{
+        const p = (s.peso!==null && s.peso!==undefined) ? fmtNum(s.peso)+' kg' : '—';
+        const r = (s.reps!==null && s.reps!==undefined) ? s.reps : '—';
+        return p+'×'+r;
+      }).join(', ');
+    } else {
+      texto = 'Última vez: '+reps.join(', ')+' reps';
+    }
+  } else {
+    texto = 'Última vez: '+reps.join(', ')+' reps';
+  }
+
+  let html = '<div class="ultima-vez">'+texto+'</div>';
+  if(ej.repsMax!==undefined){
+    const maxRep = series.reduce((m,s)=> (s.reps!==null && s.reps!==undefined && s.reps>m) ? s.reps : m, 0);
+    if(maxRep > ej.repsMax){
+      html += '<div class="ultima-vez-sube">↑ Superaste el rango — sube peso</div>';
+    }
+  }
+  return html;
+}
+
 /* ======================= UI GENERAL ======================= */
 function toast(msg){
   const t = document.getElementById('toast');
@@ -1136,6 +1203,7 @@ function renderEjercicioCard(ej, draft, entry){
     metaParts.push(ej.duracionMin[0]+'-'+ej.duracionMin[1]+' min');
   }
   if(metaParts.length) html += '<div class="ejercicio-meta">'+metaParts.join(' · ')+'</div>';
+  html += ultimaVezHtml(ej, draft);
   if(ej.notas) html += '<div class="ejercicio-notas">'+ej.notas+'</div>';
   if(ej.avisos && ej.avisos.length){
     html += '<div class="avisos-box">';
