@@ -305,6 +305,15 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 .opcion-suave.recomendada{border-color:var(--accent);}
 .opcion-suave .nombre{font-weight:700;}
 .opcion-suave .recom-tag{color:var(--accent);font-size:0.75rem;font-weight:700;}
+.bloque-iso{margin-top:14px;}
+.bloque-iso-toggle{width:100%;justify-content:space-between;font-size:0.9rem;color:var(--text);}
+.iso-tag{
+  display:inline-block;font-size:0.7rem;font-weight:700;color:var(--text-dim);
+  border:1px solid var(--border);border-radius:20px;padding:1px 8px;margin-left:6px;vertical-align:middle;
+}
+.iso-ejercicio{border-top:1px solid var(--border);padding:10px 0;}
+.iso-ejercicio:first-of-type{border-top:none;}
+.iso-ejercicio .nombre{font-weight:700;}
 </style>
 </head>
 <body>
@@ -605,7 +614,23 @@ const RUTINA =
       "opciones": [
         { "nombre": "Escalera (stair climber)", "duracionMin": [25, 35], "recomendada": true, "notas": "LA MEJOR OPCIÓN. Carga el cuello femoral de forma directa, justo donde tienes el déficit. Ritmo conversacional" },
         { "nombre": "Cinta andando con inclinación 6-10%", "duracionMin": [30, 40], "recomendada": false, "notas": "Carga axial + cadera y glúteo sin correr. Ritmo cómodo" }
-      ]
+      ],
+      "bloqueIsometrico": {
+        "nombre": "Bloque isométrico", "opcional": true,
+        "descripcion": "Añadido opcional al cardio de carga ósea. Trabajo estático de core y estabilizadores de cadera: refuerza la musculatura que protege la articulación sin fatigar de cara a la sesión de fuerza del jueves.",
+        "ejercicios": [
+          { "nombre": "Sentadilla isométrica en pared", "series": 3, "duracionSeg": [20, 40], "notas": "Espalda pegada a la pared, rodillas a 90°. Aprieta cuádriceps y glúteo. Respira con normalidad.", "sitiosOseos": ["cadera"] },
+          { "nombre": "Plancha frontal en antebrazos", "series": 3, "duracionSeg": [20, 40], "notas": "Línea recta de cabeza a talones, abdomen y glúteo activos. Sin hundir la lumbar ni subir la cadera." },
+          { "nombre": "Plancha lateral", "series": 2, "duracionSeg": [15, 30], "porLado": true, "notas": "Trabaja el glúteo medio, estabilizador clave de la cadera. Cadera arriba, cuerpo en línea." },
+          { "nombre": "Puente de glúteo con pausa arriba", "series": 3, "duracionSeg": [15, 30], "notas": "Empuja con los talones, sube la cadera, aprieta glúteo y mantén. La lumbar no trabaja: el que aguanta es el glúteo.", "sitiosOseos": ["cadera"] }
+        ],
+        "avisos": [
+          "Es opcional: si el miércoles ya has hecho escalera o cinta y estás cansada, sáltatelo sin problema.",
+          "El isométrico NO da pico de impacto óseo: es refuerzo muscular y de estabilidad, no sustituye a la carga de fuerza ni al bloque de impacto.",
+          "Respira durante los aguantes, nada de bloquear el aire (Valsalva): dispara la tensión arterial.",
+          "Para si notas molestia en la ingle o la cadera. Es tu sitio prioritario (T-score -2,2) y no interesa irritarlo antes de la sesión del jueves."
+        ]
+      }
     },
     {
       "id": "descanso_real", "dia": "viernes", "nombre": "Descanso real", "nivel": 3,
@@ -1050,6 +1075,9 @@ function renderInicio(){
       html += '<button class="btn btn-sm" style="margin-top:8px;" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">Registrar</button>';
       html += '</div>';
     });
+    if(bloque.bloqueIsometrico){
+      html += bloqueIsometricoHtml(bloque.bloqueIsometrico);
+    }
   }
   html += '</div>';
 
@@ -1113,6 +1141,41 @@ function guardarDiaSuave(bloqueId){
   cerrarModalSuave();
   toast('Día suave guardado');
   if(location.hash === '#/' || location.hash === '' ) renderInicio();
+}
+
+function bloqueIsometricoHtml(bloque){
+  let h = '';
+  h += '<div class="bloque-iso">';
+  h += '<button type="button" class="btn-ficha bloque-iso-toggle" onclick="toggleBloqueIso()">';
+  h += '<span>'+bloque.nombre+(bloque.opcional?' <span class="iso-tag">OPCIONAL</span>':'')+'</span>';
+  h += '<span id="arrow-bloque-iso">▾</span>';
+  h += '</button>';
+  h += '<div class="ficha-tecnica hidden" id="bloque-iso-body">';
+  if(bloque.descripcion) h += '<p class="text-dim" style="margin-top:0;">'+bloque.descripcion+'</p>';
+  (bloque.ejercicios||[]).forEach(ej=>{
+    h += '<div class="iso-ejercicio">';
+    h += '<div class="nombre">'+ej.nombre+'</div>';
+    let meta = (ej.series||1)+' x '+(ej.duracionSeg?ej.duracionSeg[0]+'-'+ej.duracionSeg[1]+' seg':'')+(ej.porLado?' · por lado':'');
+    h += '<div class="text-dim">'+meta+'</div>';
+    if(ej.notas) h += '<div class="text-dim" style="margin-top:4px;">'+ej.notas+'</div>';
+    if(ej.sitiosOseos){ ej.sitiosOseos.forEach(s=>{ h += '<span class="tag">'+(SITIO_LABEL[s]||s)+'</span>'; }); }
+    h += '</div>';
+  });
+  if(bloque.avisos && bloque.avisos.length){
+    h += '<div class="avisos-box">';
+    bloque.avisos.forEach(a=>{ h += '<div class="aviso-item"><span class="aviso-ico">⚠️</span><span>'+a+'</span></div>'; });
+    h += '</div>';
+  }
+  h += '</div>';
+  h += '</div>';
+  return h;
+}
+function toggleBloqueIso(){
+  const b = document.getElementById('bloque-iso-body');
+  const a = document.getElementById('arrow-bloque-iso');
+  if(!b) return;
+  b.classList.toggle('hidden');
+  if(a) a.textContent = b.classList.contains('hidden') ? '▾' : '▴';
 }
 
 /* ======================= VISTA: SESION DE FUERZA ======================= */
