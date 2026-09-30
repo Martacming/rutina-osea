@@ -175,6 +175,7 @@ button{font-family:inherit;}
   display:flex;align-items:center;gap:8px;
   padding:8px 0;
   border-top:1px solid var(--border);
+  flex-wrap:wrap;
 }
 .serie-row:first-of-type{border-top:none;}
 .serie-label{width:34px;color:var(--text-dim);font-size:0.85rem;flex-shrink:0;}
@@ -203,6 +204,13 @@ input[type=number].reps-input{width:52px;}
 input[type=checkbox]{
   width:28px;height:28px;flex-shrink:0;accent-color:var(--accent);
   margin-left:auto;
+}
+@media (max-width:400px){
+  .serie-row{gap:5px;}
+  .peso-group button,.reps-group button{width:32px;height:32px;font-size:1.05rem;}
+  input[type=number]{width:52px;padding:8px 2px;}
+  input[type=number].reps-input{width:42px;}
+  input[type=checkbox]{width:26px;height:26px;}
 }
 .btn-video{
   background:var(--surface2);border:1px solid var(--border);color:var(--accent);
@@ -312,6 +320,21 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 .grupo-tag.grupo-equilibrio{color:var(--accent-dim);border-color:var(--accent-dim);}
 .sugerencia-semanal{margin:6px 0 12px;padding-left:20px;color:var(--text-dim);font-size:0.88rem;}
 .sugerencia-semanal li{margin-bottom:4px;}
+.opcion-postura{cursor:pointer;border-color:var(--accent-dim);}
+.postura-abrir{float:right;color:var(--accent);font-size:0.8rem;font-weight:700;}
+.postura-lista{margin:8px 0;}
+.postura-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 0;border-top:1px solid var(--border);cursor:pointer;
+}
+.postura-item:first-of-type{border-top:none;}
+.postura-item input[type=checkbox]{width:24px;height:24px;flex-shrink:0;margin-left:0;margin-top:2px;}
+.postura-item-txt{display:flex;flex-direction:column;gap:2px;}
+.postura-item-txt .nombre{font-weight:700;}
+.postura-nota{font-size:0.82rem;}
+.postura-habitos{margin-top:12px;background:var(--surface2);border-radius:8px;padding:10px 12px;}
+.postura-habitos-tit{font-weight:700;font-size:0.82rem;margin-bottom:4px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.03em;}
+.postura-habitos ul{margin:0;padding-left:20px;font-size:0.86rem;color:var(--text-dim);}
 .regla-subida{
   background:var(--surface2);border:1px solid var(--accent);border-radius:10px;
   padding:12px 14px;margin:10px 0 14px;font-size:0.9rem;
@@ -361,7 +384,7 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 const RUTINA =
 {
   "meta": {
-    "version": "1.2",
+    "version": "1.4",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -916,6 +939,21 @@ const RUTINA =
           }
         },
         {
+          "id": "b_pajaros",
+          "nombre": "Pájaros (deltoide posterior)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Parte de atrás del hombro y espalda alta: contrarresta hombros hacia delante y cabeza adelantada. MUY ligero, mucho menos que el de Ricardo. Pecho apoyado en el respaldo, codos con flexión suave, abre llevando los omóplatos hacia atrás y hacia abajo.",
+          "avisos": [
+            "Cuello neutro: no adelantes la cabeza ni extiendas el cuello",
+            "No encojas los hombros hacia las orejas"
+          ],
+          "video": ""
+        },
+        {
           "id": "b_elevaciones",
           "nombre": "Elevaciones laterales",
           "tipo": "accesorio",
@@ -1322,7 +1360,8 @@ const RUTINA =
       "sugerenciaSemanal": [
         "Al menos una vez por semana: steps o cinta con inclinación (son las únicas opciones de la lista que cargan la cadera).",
         "Una vez por semana: yoga, barre o pilates (equilibrio y prevención de caídas).",
-        "El resto queda libre: lo que te apetezca."
+        "El resto queda libre: lo que te apetezca.",
+        "Postura: el bloque de 5 minutos, en cada día de descanso dinámico."
       ],
       "opciones": [
         {
@@ -1415,6 +1454,13 @@ const RUTINA =
             45
           ],
           "notas": "Unos 5 minutos al final de otra actividad. Opcional."
+        },
+        {
+          "id": "postura",
+          "nombre": "Postura: cuello y espalda alta (bloque de 5 min)",
+          "grupo": "postura",
+          "referencia": "bloquePostura",
+          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad."
         },
         {
           "id": "otra",
@@ -1653,6 +1699,65 @@ const RUTINA =
       "prioridad": "baja"
     }
   ],
+  "bloquePostura": {
+    "nombre": "Postura: cuello y espalda alta",
+    "duracionMin": 5,
+    "frecuencia": "Dentro de los días de descanso dinámico, como una opción más. Entre semana, chin tucks sueltos cada vez que te levantes de la mesa: no hace falta registrarlos.",
+    "motivo": "RM cervical 20/09/2026: hiperlordosis cervical. Además, la cabeza adelantada y los hombros hacia delante suelen acompañar al trabajo de mesa. La postura funcional mejora con fuerza y resistencia de la musculatura profunda del cuello y la espalda alta, más hábitos.",
+    "ejercicios": [
+      {
+        "id": "p_chin_tuck",
+        "nombre": "Retracción cervical (chin tuck)",
+        "series": 1,
+        "reps": 10,
+        "duracionSeg": 5,
+        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día."
+      },
+      {
+        "id": "p_flexion_craneocervical",
+        "nombre": "Flexión craneocervical tumbada",
+        "series": 1,
+        "reps": 10,
+        "duracionSeg": [
+          5,
+          10
+        ],
+        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta."
+      },
+      {
+        "id": "p_wall_angels",
+        "nombre": "Wall angels",
+        "series": 2,
+        "reps": 10,
+        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas."
+      },
+      {
+        "id": "p_band_pull_apart",
+        "nombre": "Band pull-apart (goma)",
+        "series": 2,
+        "reps": 15,
+        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros."
+      },
+      {
+        "id": "p_movilidad_dorsal",
+        "nombre": "Movilidad dorsal",
+        "duracionMin": [
+          1,
+          2
+        ],
+        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book)."
+      }
+    ],
+    "avisos": [
+      "NO corrijas arqueando la lumbar: con la artropatía facetaria L3-S1 esa postura irrita. La sensación correcta es alargarte, costillas hacia abajo y pelvis neutra.",
+      "Si algún ejercicio provoca hormigueo en los brazos, mareo o dolor: parar y comentarlo al traumatólogo."
+    ],
+    "habitos": [
+      "Pantalla con el borde superior a la altura de los ojos",
+      "Levantarte cada 45-60 minutos y hacer un par de chin tucks"
+    ],
+    "ubicacion": "descanso_dinamico"
+  },
   "visualizacion": {
     "fichasTecnicas": {
       "plegadoPorDefecto": true,
@@ -1696,6 +1801,45 @@ function opcionMetaText(op){
   if(op.porHombro) t += ' /hombro';
   return t;
 }
+/* ---- Bloque de postura (cuello y espalda alta) ---- */
+function getBloquePostura(){ return RUTINA.bloquePostura || null; }
+function esOpcionPostura(op){ return !!op && (op.referencia==='bloquePostura' || op.grupo==='postura'); }
+function posturaEjMetaText(ej){
+  const parts = [];
+  if(ej.series) parts.push(ej.series + (ej.reps ? (' x '+ej.reps) : ''));
+  else if(ej.reps) parts.push(ej.reps+' reps');
+  if(ej.duracionSeg!==undefined){
+    parts.push((Array.isArray(ej.duracionSeg) ? ej.duracionSeg[0]+'-'+ej.duracionSeg[1] : ej.duracionSeg)+' seg');
+  }
+  if(ej.duracionMin!==undefined){
+    parts.push((Array.isArray(ej.duracionMin) ? ej.duracionMin[0]+'-'+ej.duracionMin[1] : ej.duracionMin)+' min');
+  }
+  return parts.join(' · ');
+}
+function posturaChecklistHtml(){
+  const bp = getBloquePostura();
+  if(!bp) return '<p class="text-dim">No hay bloque de postura definido.</p>';
+  let h = '';
+  if(bp.motivo) h += '<p class="text-dim" style="margin-top:0;">'+bp.motivo+'</p>';
+  if(bp.avisos && bp.avisos.length) h += avisosBoxHtml(bp.avisos); // avisos siempre visibles
+  h += '<div class="postura-lista">';
+  (bp.ejercicios||[]).forEach(ej=>{
+    h += '<label class="postura-item">';
+    h += '<input type="checkbox" class="postura-check" id="postura-check-'+ej.id+'" value="'+ej.id+'">';
+    h += '<span class="postura-item-txt"><span class="nombre">'+ej.nombre+'</span>';
+    const m = posturaEjMetaText(ej);
+    if(m) h += '<span class="text-dim"> · '+m+'</span>';
+    if(ej.notas) h += '<span class="text-dim postura-nota">'+ej.notas+'</span>';
+    h += '</span></label>';
+  });
+  h += '</div>';
+  if(bp.habitos && bp.habitos.length){
+    h += '<div class="postura-habitos"><div class="postura-habitos-tit">Hábitos</div><ul>';
+    bp.habitos.forEach(x=>{ h += '<li>'+x+'</li>'; });
+    h += '</ul></div>';
+  }
+  return h;
+}
 function reglaSubidaHtml(){
   const r = RUTINA.progresionCarga && RUTINA.progresionCarga.reglaSubida;
   if(!r) return '';
@@ -1738,6 +1882,13 @@ function loadState(){
       if(!parsed.impacto) parsed.impacto = { sinMolestias: [] };
       if(!parsed.diasSuaves) parsed.diasSuaves = [];
       if(!parsed.sesiones) parsed.sesiones = [];
+      // Limpia sesiones vacías de días anteriores (abiertas y abandonadas, o
+      // "terminadas" sin registrar nada). Se conservan las de hoy por si hay
+      // una sesión en curso todavía sin datos.
+      const hoy = todayISO();
+      parsed.sesiones = parsed.sesiones.filter(function(s){
+        return sesionTieneDatos(s) || s.fecha === hoy;
+      });
       return parsed;
     }catch(e){ console.error('Estado corrupto, reiniciando', e); }
   }
@@ -1926,6 +2077,17 @@ function sesionRealizada(s){
     return (e.series||[]).some(function(x){ return x.hecha; });
   }));
 }
+/* Una sesión tiene datos reales si el usuario marcó alguna serie o anotó
+   repeticiones. El peso se autocompleta con la referencia al abrir la sesión,
+   así que NO cuenta como dato. Sirve para no mostrar sesiones vacías (abiertas
+   y abandonadas, o "terminadas" sin registrar nada) en el historial. */
+function sesionTieneDatos(s){
+  return !!s && (s.ejercicios||[]).some(function(e){
+    return (e.series||[]).some(function(x){
+      return x.hecha === true || (x.reps!==null && x.reps!==undefined && x.reps!=='');
+    });
+  });
+}
 function toggleFicha(ejercicioId){
   const el = document.getElementById('ficha-'+ejercicioId);
   const arrow = document.getElementById('arrow-'+ejercicioId);
@@ -1983,6 +2145,16 @@ function renderInicio(){
       html += '</ul>';
     }
     bloque.opciones.forEach((op, i)=>{
+      if(esOpcionPostura(op)){
+        // Sin botón propio: la tarjeta entera abre la lista con casillas. Avisos siempre visibles.
+        html += '<div class="opcion-suave opcion-postura" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">';
+        html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+' <span class="postura-abrir">Abrir ›</span></div>';
+        if(op.notas) html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
+        const bp = getBloquePostura();
+        if(bp && bp.avisos && bp.avisos.length) html += avisosBoxHtml(bp.avisos);
+        html += '</div>';
+        return;
+      }
       html += '<div class="opcion-suave">';
       html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+'</div>';
       const metaOp = opcionMetaText(op);
@@ -2030,6 +2202,10 @@ function camposDeOpcion(op){
 function renderCamposSuave(bloqueId){
   const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
   const op = bloque.opciones[Number(document.getElementById('suave-opcion').value)] || bloque.opciones[0];
+  if(esOpcionPostura(op)){
+    document.getElementById('suave-campos').innerHTML = posturaChecklistHtml();
+    return;
+  }
   let h = '';
   camposDeOpcion(op).forEach(c=>{
     const d = campoDef(c);
@@ -2065,6 +2241,22 @@ function guardarDiaSuave(bloqueId){
   const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
   const opIdx = Number(document.getElementById('suave-opcion').value);
   const op = bloque.opciones[opIdx];
+
+  // Postura: guarda una entrada con fecha SOLO si se marca al menos un ejercicio.
+  if(esOpcionPostura(op)){
+    const marcados = Array.prototype.slice.call(document.querySelectorAll('.postura-check'))
+      .filter(c=>c.checked).map(c=>c.value);
+    if(!marcados.length){ toast('Marca al menos un ejercicio de postura'); return; }
+    const existente = state.diasSuaves.find(d=>d.fecha===fecha && d.bloqueId===bloqueId && d.tipo==='postura');
+    if(existente){ existente.postura = marcados; existente.opcion = op.nombre; }
+    else { state.diasSuaves.push({ fecha, bloqueId, tipo:'postura', opcion: op.nombre, postura: marcados }); }
+    saveState();
+    cerrarModalSuave();
+    toast('Postura registrada');
+    if(location.hash === '#/' || location.hash === '' ) renderInicio();
+    return;
+  }
+
   const datos = {};
   camposDeOpcion(op).forEach(c=>{
     const el = document.getElementById('suave-campo-'+c);
@@ -2073,7 +2265,7 @@ function guardarDiaSuave(bloqueId){
   });
   const duracion = (datos.duracionMin!==undefined) ? datos.duracionMin : null;
 
-  const existente = state.diasSuaves.find(d=>d.fecha===fecha && d.bloqueId===bloqueId);
+  const existente = state.diasSuaves.find(d=>d.fecha===fecha && d.bloqueId===bloqueId && d.tipo!=='postura');
   if(existente){
     existente.opcion = op.nombre;
     existente.duracion = duracion;
@@ -2357,7 +2549,7 @@ function todasLasSesionesOrdenadas(){
 function renderHistorial(){
   setActiveNav('historial');
   document.getElementById('topbar-title').textContent = 'Historial';
-  const sesiones = todasLasSesionesOrdenadas();
+  const sesiones = todasLasSesionesOrdenadas().filter(sesionTieneDatos);
 
   let html = '<h2>Sesiones</h2>';
   if(sesiones.length===0){
