@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.2",
+    "version": "1.4",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -375,6 +375,21 @@
           "video": ""
         },
         {
+          "id": "b_pajaros",
+          "nombre": "Pájaros (deltoide posterior)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Parte de atrás del hombro y espalda alta: contrarresta hombros hacia delante y cabeza adelantada. MUY ligero, mucho menos que el de Ricardo. Pecho apoyado en el respaldo, codos con flexión suave, abre llevando los omóplatos hacia atrás y hacia abajo.",
+          "avisos": [
+            "Cuello neutro: no adelantes la cabeza ni extiendas el cuello",
+            "No encojas los hombros hacia las orejas"
+          ],
+          "video": ""
+        },
+        {
           "id": "b_elevaciones",
           "nombre": "Elevaciones laterales",
           "tipo": "accesorio",
@@ -650,7 +665,8 @@
       "sugerenciaSemanal": [
         "Al menos una vez por semana: steps o cinta con inclinación (son las únicas opciones de la lista que cargan la cadera).",
         "Una vez por semana: yoga, barre o pilates (equilibrio y prevención de caídas).",
-        "El resto queda libre: lo que te apetezca."
+        "El resto queda libre: lo que te apetezca.",
+        "Postura: el bloque de 5 minutos, en cada día de descanso dinámico."
       ],
       "opciones": [
         {
@@ -743,6 +759,13 @@
             45
           ],
           "notas": "Unos 5 minutos al final de otra actividad. Opcional."
+        },
+        {
+          "id": "postura",
+          "nombre": "Postura: cuello y espalda alta (bloque de 5 min)",
+          "grupo": "postura",
+          "referencia": "bloquePostura",
+          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad."
         },
         {
           "id": "otra",
@@ -981,6 +1004,65 @@
       "prioridad": "baja"
     }
   ],
+  "bloquePostura": {
+    "nombre": "Postura: cuello y espalda alta",
+    "duracionMin": 5,
+    "frecuencia": "Dentro de los días de descanso dinámico, como una opción más. Entre semana, chin tucks sueltos cada vez que te levantes de la mesa: no hace falta registrarlos.",
+    "motivo": "RM cervical 20/09/2026: hiperlordosis cervical. Además, la cabeza adelantada y los hombros hacia delante suelen acompañar al trabajo de mesa. La postura funcional mejora con fuerza y resistencia de la musculatura profunda del cuello y la espalda alta, más hábitos.",
+    "ejercicios": [
+      {
+        "id": "p_chin_tuck",
+        "nombre": "Retracción cervical (chin tuck)",
+        "series": 1,
+        "reps": 10,
+        "duracionSeg": 5,
+        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día."
+      },
+      {
+        "id": "p_flexion_craneocervical",
+        "nombre": "Flexión craneocervical tumbada",
+        "series": 1,
+        "reps": 10,
+        "duracionSeg": [
+          5,
+          10
+        ],
+        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta."
+      },
+      {
+        "id": "p_wall_angels",
+        "nombre": "Wall angels",
+        "series": 2,
+        "reps": 10,
+        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas."
+      },
+      {
+        "id": "p_band_pull_apart",
+        "nombre": "Band pull-apart (goma)",
+        "series": 2,
+        "reps": 15,
+        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros."
+      },
+      {
+        "id": "p_movilidad_dorsal",
+        "nombre": "Movilidad dorsal",
+        "duracionMin": [
+          1,
+          2
+        ],
+        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book)."
+      }
+    ],
+    "avisos": [
+      "NO corrijas arqueando la lumbar: con la artropatía facetaria L3-S1 esa postura irrita. La sensación correcta es alargarte, costillas hacia abajo y pelvis neutra.",
+      "Si algún ejercicio provoca hormigueo en los brazos, mareo o dolor: parar y comentarlo al traumatólogo."
+    ],
+    "habitos": [
+      "Pantalla con el borde superior a la altura de los ojos",
+      "Levantarte cada 45-60 minutos y hacer un par de chin tucks"
+    ],
+    "ubicacion": "descanso_dinamico"
+  },
   "visualizacion": {
     "fichasTecnicas": {
       "plegadoPorDefecto": true,
