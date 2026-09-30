@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.0",
+    "version": "1.2",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -27,6 +27,22 @@
       "kcalBase": 1750,
       "proteinaMin": 94,
       "proteinaMax": 118
+    },
+    "fechaActualizacion": "2026-09-30",
+    "resonancias": {
+      "fecha": "2026-09-20",
+      "centro": "Affidea San Francisco de Asís",
+      "lumbar": {
+        "hallazgos": "Deshidratación discal L3-S1 con abombamientos leves. Moderadas alteraciones degenerativas espondiloarticulares con hipertrofia articular L3-S1 y líquido sinovial.",
+        "descartado": "SIN hernia discal. SIN estenosis de conducto. SIN compromiso de forámenes ni de raíces. Cono medular normal.",
+        "implicacion": "La artropatía facetaria se irrita con la HIPEREXTENSIÓN lumbar. No prohíbe nada, pero hace que la técnica importe más en hip thrust, press de hombro y extensión de espalda."
+      },
+      "cervical": {
+        "hallazgos": "Leves abombamientos discales C4-C6. Hiperlordosis cervical.",
+        "descartado": "SIN hernia. SIN estenosis. SIN compromiso mielorradicular. Médula y raíces normales.",
+        "implicacion": "La hiperlordosis cervical es postural: relacionada con 8h sentada y altura de pantalla."
+      },
+      "conclusion": "Sin hallazgos que contraindiquen ningún ejercicio. Se levanta la restricción de peso muerto y rumano, y la de trabajo unilateral."
     }
   },
   "semana": [
@@ -41,8 +57,8 @@
     },
     {
       "dia": "miercoles",
-      "tipo": "suave",
-      "bloqueId": "carga_osea"
+      "tipo": "dinamico",
+      "bloqueId": "descanso_dinamico"
     },
     {
       "dia": "jueves",
@@ -51,8 +67,9 @@
     },
     {
       "dia": "viernes",
-      "tipo": "suave",
-      "bloqueId": "descanso_real"
+      "tipo": "descanso",
+      "bloqueId": null,
+      "registra": false
     },
     {
       "dia": "sabado",
@@ -61,8 +78,8 @@
     },
     {
       "dia": "domingo",
-      "tipo": "suave",
-      "bloqueId": "equilibrio"
+      "tipo": "dinamico",
+      "bloqueId": "descanso_dinamico"
     }
   ],
   "sesiones": [
@@ -78,16 +95,12 @@
       "descripcion": "La sesión más importante de la semana para tu columna lumbar.",
       "ejercicios": [
         {
-          "id": "a_calentamiento",
-          "nombre": "Movilidad cadera + tobillo",
-          "tipo": "calentamiento",
+          "id": "a_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
           "series": 1,
-          "duracionMin": [
-            5,
-            8
-          ],
           "registraCarga": false,
-          "notas": "Sentadilla sin carga, círculos de cadera",
+          "notas": "Al empezar la sesión.",
           "video": ""
         },
         {
@@ -115,12 +128,18 @@
           "repsMax": 8,
           "registraCarga": true,
           "progresion": "mancuernas → barra",
-          "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar",
+          "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar. REINCORPORACIÓN tras 2 meses sin carga: empezar en 5 kg y subir 2,5 kg/semana solo si no hay molestia lumbar en las 48h siguientes.",
           "sitiosOseos": [
             "columna_lumbar",
             "cadera"
           ],
-          "video": ""
+          "video": "",
+          "reincorporacion": {
+            "estado": "progresiva desde 2026-09-30",
+            "pesoInicial": 5,
+            "incrementoSemanal": 2.5,
+            "condicion": "Subir solo si NO hay molestia lumbar en las 48h posteriores. Si aparece, volver al peso anterior."
+          }
         },
         {
           "id": "a_zancadas",
@@ -131,7 +150,7 @@
           "repsMax": 10,
           "porPierna": true,
           "registraCarga": true,
-          "notas": "Carga unilateral de cadera — trabajo específico para tu sitio prioritario. CAJÓN RÍGIDO a la altura de la rodilla (~45 cm). Sube apoyando toda la planta, sin impulsarte con la pierna de atrás. Baja controlando.",
+          "notas": "Carga unilateral de cadera (restricción bilateral LEVANTADA tras RM 20/09) — trabajo específico para tu sitio prioritario. CAJÓN RÍGIDO a la altura de la rodilla (~45 cm). Sube apoyando toda la planta, sin impulsarte con la pierna de atrás. Baja controlando.",
           "sitiosOseos": [
             "cadera",
             "cuello_femoral"
@@ -168,6 +187,17 @@
           "video": ""
         },
         {
+          "id": "a_leg_extension",
+          "nombre": "Extensión de cuádriceps (leg extension)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Cuádriceps aislado. Complementa el curl femoral (antagonista). Sentada, sin carga sobre la columna: apto si hay molestia lumbar. Extiende sin bloquear la rodilla de golpe, baja controlando",
+          "video": ""
+        },
+        {
           "id": "a_gemelos",
           "nombre": "Elevación de talones DE PIE",
           "tipo": "accesorio",
@@ -183,14 +213,22 @@
         },
         {
           "id": "a_abductor",
-          "nombre": "Abductor (máquina)",
+          "nombre": "Abductor — de pie O sentado (uno de los dos)",
           "tipo": "accesorio",
           "series": 3,
           "repsMin": 12,
           "repsMax": 15,
           "registraCarga": true,
-          "notas": "Glúteo medio: principal estabilizador lateral de la cadera. Cuando está débil, la rodilla colapsa hacia dentro en sentadilla y step-up. Relevante para prevención de caídas",
-          "video": ""
+          "notas": "Glúteo medio: estabilizador lateral de la cadera. Cuando está débil, la rodilla colapsa hacia dentro en sentadilla y step-up. Relevante para prevención de caídas. PREFERIBLE LA VERSIÓN DE PIE: añade carga axial y trabajo de estabilización en la pierna de apoyo, que la versión sentada no da. Si está ocupada, la sentada vale igual.",
+          "video": "",
+          "variantes": [
+            "Standing abductor (de pie) — preferible",
+            "Abductor sentado (máquina) — alternativa"
+          ],
+          "avisos": [
+            "Haz UNA de las dos versiones, no ambas",
+            "De pie: agárrate a los soportes sin inclinar el tronco hacia el lado contrario"
+          ]
         },
         {
           "id": "a_aductor",
@@ -201,6 +239,21 @@
           "repsMax": 15,
           "registraCarga": true,
           "notas": "Equilibra el trabajo de cadera. PENDIENTE: pedir al personal de Viding que recalibren esta máquina (conformidad >300%, la carga registrada no se corresponde con la real)",
+          "video": ""
+        },
+        {
+          "id": "a_rear_kick",
+          "nombre": "Rear kick (patada de glúteo, de pie)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "porPierna": true,
+          "registraCarga": true,
+          "notas": "Extensión de cadera de pie, una pierna cada vez. Complementa el hip thrust desde otro ángulo. Movimiento controlado, sin impulso",
+          "avisos": [
+            "NO arquear la lumbar al llevar la pierna atrás: mismo aviso facetario que el hip thrust. El movimiento sale de la cadera, no de la espalda"
+          ],
           "video": ""
         },
         {
@@ -221,6 +274,18 @@
           "video": "",
           "progresion": "Subir peso de forma agresiva: el agarre se adapta rápido. Variante suitcase (una sola mano) para anti-flexión lateral",
           "variante": "Suitcase carry: peso en una sola mano, alternando. Cubre el plano anti-flexión lateral"
+        },
+        {
+          "id": "a_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
         }
       ]
     },
@@ -233,19 +298,15 @@
         45,
         55
       ],
-      "descripcion": "El press de hombro es tu punto más débil documentado: prioriza progresar aquí. Ahora es sentada en máquina; la carga axial que daba de pie se compensa en el farmer's carry.",
+      "descripcion": "El press de hombro es tu punto más débil documentado. De pie, además, aporta carga axial.",
       "ejercicios": [
         {
-          "id": "b_calentamiento",
-          "nombre": "Movilidad de hombro",
-          "tipo": "calentamiento",
+          "id": "b_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
           "series": 1,
-          "duracionMin": [
-            5,
-            8
-          ],
           "registraCarga": false,
-          "notas": "Rotaciones, band pull-apart si hay gomas",
+          "notas": "Al empezar la sesión.",
           "video": ""
         },
         {
@@ -258,7 +319,10 @@
           "registraCarga": true,
           "notas": "Decisión propia: sentada en máquina por comodidad. NOTA: al estar sentada se pierde la carga axial sobre columna que daba la versión de pie — compensado subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí",
           "sitiosOseos": [],
-          "video": ""
+          "video": "",
+          "avisos": [
+            "No arquear la lumbar para ayudarte a empujar: con artropatía facetaria L3-S1, esa compensación irrita las facetas"
+          ]
         },
         {
           "id": "b_remo",
@@ -318,14 +382,15 @@
           "repsMin": 12,
           "repsMax": 15,
           "registraCarga": true,
-          "notas": "Deltoides medio, complementario al press",
-          "video": ""
+          "notas": "Deltoides medio. Brazos casi rectos, sube hasta la altura del hombro, sin impulso. VARIANTE RECOMENDADA: de espaldas a la pared, pies 10-15 cm separados de ella. Elimina el balanceo y te avisa si compensas con el tronco",
+          "video": "",
+          "variante": "Wall-supported: espalda apoyada en la pared, pies 10-15 cm separados. Probablemente tengas que bajar el peso respecto a la versión libre: antes parte del trabajo lo hacía el impulso. Es más honesto, aunque el número sea menor"
         },
         {
           "id": "b_biceps",
           "nombre": "Curl de bíceps",
           "tipo": "accesorio",
-          "series": 2,
+          "series": 3,
           "repsMin": 10,
           "repsMax": 12,
           "registraCarga": true,
@@ -336,7 +401,7 @@
           "id": "b_triceps",
           "nombre": "Extensión de tríceps",
           "tipo": "accesorio",
-          "series": 2,
+          "series": 3,
           "repsMin": 10,
           "repsMax": 12,
           "registraCarga": true,
@@ -355,23 +420,8 @@
           "video": ""
         },
         {
-          "id": "b_flexiones",
-          "nombre": "Flexiones con manos elevadas",
-          "tipo": "principal",
-          "series": 3,
-          "repsMin": 8,
-          "repsMax": 12,
-          "registraCarga": false,
-          "notas": "Banco o multipower. CARGA AXIAL SOBRE LA MUÑECA — no es opcional. La fractura de radio distal suele ser la primera por fragilidad",
-          "sitiosOseos": [
-            "muñeca",
-            "radio_distal"
-          ],
-          "video": ""
-        },
-        {
           "id": "b_plancha_alta",
-          "nombre": "Plancha alta (apoyada en MANOS)",
+          "nombre": "Plancha alta (apoyada en MANOS, en el suelo)",
           "tipo": "core",
           "series": 3,
           "duracionSeg": [
@@ -379,10 +429,26 @@
             45
           ],
           "registraCarga": false,
-          "notas": "En manos, NO en antebrazos. Core anti-flexión + compresión en radio distal",
+          "notas": "En manos, NO en antebrazos, cuerpo en línea recta, abdomen y glúteo apretados. Core anti-flexión + compresión en radio distal. El dead bug va aparte, en la sesión C",
           "sitiosOseos": [
             "muñeca",
             "radio_distal"
+          ],
+          "video": "",
+          "variantes": [
+            "Plancha alta en manos — también suma carga en muñeca",
+            "Dead bug — si molesta la muñeca o quieres variar"
+          ]
+        },
+        {
+          "id": "b_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
           ],
           "video": ""
         }
@@ -399,6 +465,15 @@
       ],
       "descripcion": "Carga más alta y menos repeticiones. El bloque de impacto va al principio, con el cuerpo fresco.",
       "ejercicios": [
+        {
+          "id": "c_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
         {
           "id": "c_impacto",
           "nombre": "Bloque de impacto",
@@ -420,12 +495,17 @@
           "repsMin": 5,
           "repsMax": 6,
           "registraCarga": true,
-          "notas": "Carga más alta que el martes, menos reps",
+          "notas": "Carga más alta que el martes, menos reps. REINCORPORACIÓN progresiva: priorizar primero el rumano de la sesión A. Subir 2,5 kg/semana.",
           "sitiosOseos": [
             "columna_lumbar",
             "cadera"
           ],
-          "video": ""
+          "video": "",
+          "reincorporacion": {
+            "estado": "progresiva desde 2026-09-30",
+            "incrementoSemanal": 2.5,
+            "condicion": "El rumano va primero. Subir solo sin molestia lumbar en 48h."
+          }
         },
         {
           "id": "c_hip_thrust",
@@ -436,7 +516,10 @@
           "repsMax": 10,
           "registraCarga": true,
           "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente",
-          "video": ""
+          "video": "",
+          "avisos": [
+            "No arquear la lumbar al final del recorrido: con artropatía facetaria L3-S1, la hiperextensión es lo que irrita las facetas. Subir hasta línea recta hombros-rodillas, no más"
+          ]
         },
         {
           "id": "c_press_hombro",
@@ -462,6 +545,19 @@
           "video": ""
         },
         {
+          "id": "c_wall_sit",
+          "nombre": "Sentadilla isométrica en pared (wall sit)",
+          "tipo": "core",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "registraCarga": false,
+          "notas": "Espalda contra la pared, rodillas a 90°. Cuádriceps y tendón rotuliano con carga axial, sin material. También lo tienes como opción en el bloque isométrico del miércoles",
+          "video": ""
+        },
+        {
           "id": "c_pallof",
           "nombre": "Pallof press",
           "tipo": "core",
@@ -470,6 +566,31 @@
           "porLado": true,
           "registraCarga": true,
           "notas": "Anti-rotación, protege columna",
+          "video": ""
+        },
+        {
+          "id": "c_dead_bug",
+          "nombre": "Dead bug",
+          "tipo": "core",
+          "series": 3,
+          "reps": 8,
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Tumbada boca arriba, lumbar pegada al suelo todo el rato. Baja brazo y pierna contrarios sin que la espalda se despegue. Si se despega, reduce el rango. Core anti-extensión, sin flexión de columna",
+          "video": ""
+        },
+        {
+          "id": "c_plancha_lateral",
+          "nombre": "Plancha lateral",
+          "tipo": "core",
+          "series": 2,
+          "duracionSeg": [
+            20,
+            30
+          ],
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Apoyada en el antebrazo, cuerpo en línea recta. Core anti-flexión lateral: el plano que faltaba (la plancha alta cubre el frontal y el Pallof la rotación). Si molesta la lumbar, apoya las rodillas",
           "video": ""
         },
         {
@@ -484,7 +605,10 @@
           "sitiosOseos": [
             "columna_toracica"
           ],
-          "video": ""
+          "video": "",
+          "avisos": [
+            "NO hiperextender: subir solo hasta la línea recta con las piernas. La artropatía facetaria L3-S1 se irrita en extensión"
+          ]
         },
         {
           "id": "c_farmer",
@@ -502,97 +626,132 @@
             "muñeca"
           ],
           "video": ""
+        },
+        {
+          "id": "c_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
         }
       ]
     }
   ],
   "bloquesSuaves": [
     {
-      "id": "carga_osea",
-      "dia": "miercoles",
-      "nombre": "Carga ósea suave",
-      "nivel": 1,
-      "descripcion": "Cae entre dos sesiones de fuerza: interesa algo que aporte carga ósea sin fatigar.",
+      "id": "descanso_dinamico",
+      "nombre": "Descanso dinámico",
+      "descripcion": "Actividad suave a elegir. Se marca lo que hagas; si no vas, no se registra nada.",
+      "sugerenciaSemanal": [
+        "Al menos una vez por semana: steps o cinta con inclinación (son las únicas opciones de la lista que cargan la cadera).",
+        "Una vez por semana: yoga, barre o pilates (equilibrio y prevención de caídas).",
+        "El resto queda libre: lo que te apetezca."
+      ],
       "opciones": [
         {
-          "nombre": "Escalera (stair climber)",
-          "duracionMin": [
-            25,
-            35
+          "id": "steps",
+          "nombre": "Máquina de steps",
+          "grupo": "carga_osea",
+          "campos": [
+            "duracionMin"
           ],
-          "recomendada": true,
-          "notas": "LA MEJOR OPCIÓN. Carga el cuello femoral de forma directa, justo donde tienes el déficit. Ritmo conversacional"
+          "notas": "La mejor opción para la cadera. Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional."
         },
         {
-          "nombre": "Cinta andando con inclinación 6-10%",
-          "duracionMin": [
-            30,
-            40
+          "id": "cinta_inclinada",
+          "nombre": "Cinta con inclinación",
+          "grupo": "carga_osea",
+          "campos": [
+            "duracionMin",
+            "inclinacionPct"
           ],
-          "recomendada": false,
-          "notas": "Carga axial + cadera y glúteo sin correr. Ritmo cómodo"
-        }
-      ]
-    },
-    {
-      "id": "descanso_real",
-      "dia": "viernes",
-      "nombre": "Descanso real",
-      "nivel": 3,
-      "descripcion": "Precede a la sesión más dura de la semana. Recuperación y cardio, cero hueso.",
-      "opciones": [
-        {
-          "nombre": "Natación",
-          "duracionMin": [
-            40,
-            45
-          ],
-          "notas": "Excelente para descargar articulaciones"
+          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10%."
         },
         {
-          "nombre": "Spinning suave",
-          "duracionMin": [
-            40,
-            45
-          ],
-          "fcObjetivo": [
-            120,
-            135
-          ],
-          "notas": "120-135 ppm. Si pasa de ahí, deja de ser día de descanso. No entrar en bloques de pie ni subidas duras"
+          "id": "remo_maquina",
+          "nombre": "Remo (máquina)",
+          "grupo": "neutro",
+          "campos": [
+            "duracionMin"
+          ]
         },
         {
+          "id": "eliptica",
           "nombre": "Elíptica",
-          "duracionMin": [
-            40,
-            45
-          ],
-          "notas": "Los pies nunca despegan: sin pico de carga ósea"
-        }
-      ]
-    },
-    {
-      "id": "equilibrio",
-      "dia": "domingo",
-      "nombre": "Equilibrio y movilidad",
-      "nivel": 2,
-      "descripcion": "Prevención de caídas: en osteopenia de cadera, la fractura llega porque alguien se cae.",
-      "opciones": [
-        {
-          "nombre": "Hatha yoga",
-          "duracionMin": [
-            45,
-            60
-          ],
-          "notas": "Equilibrio, propiocepción, movilidad"
+          "grupo": "neutro",
+          "campos": [
+            "duracionMin"
+          ]
         },
         {
-          "nombre": "Barre",
-          "duracionMin": [
-            45,
-            60
+          "id": "bici_sentada",
+          "nombre": "Bici sentada",
+          "grupo": "neutro",
+          "campos": [
+            "duracionMin"
           ],
-          "notas": "De pie, con trabajo de tobillo y cadera. Suma algo de carga"
+          "notas": "Si es spinning, en día suave mantente en 120-135 ppm."
+        },
+        {
+          "id": "yoga",
+          "nombre": "Yoga / hatha yoga",
+          "grupo": "equilibrio",
+          "campos": [
+            "duracionMin"
+          ]
+        },
+        {
+          "id": "pilates",
+          "nombre": "Pilates",
+          "grupo": "equilibrio",
+          "campos": [
+            "duracionMin"
+          ],
+          "avisos": [
+            "Avisa al instructor de la osteopenia y de la deshidratación discal lumbar: pide alternativas a los ejercicios de flexión de columna (roll-ups, teasers, el cien)."
+          ]
+        },
+        {
+          "id": "barre",
+          "nombre": "Barre",
+          "grupo": "equilibrio",
+          "campos": [
+            "duracionMin"
+          ]
+        },
+        {
+          "id": "movilidad_hombro",
+          "nombre": "Movilidad de hombro (rotaciones)",
+          "grupo": "movilidad",
+          "series": 3,
+          "reps": 10,
+          "porHombro": true,
+          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para."
+        },
+        {
+          "id": "isometricos",
+          "nombre": "Isométricos: gemelo + sentadilla en pared",
+          "grupo": "tendon",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "notas": "Unos 5 minutos al final de otra actividad. Opcional."
+        },
+        {
+          "id": "otra",
+          "nombre": "Otra actividad",
+          "grupo": "libre",
+          "campos": [
+            "textoLibre",
+            "duracionMin"
+          ]
         }
       ]
     }
@@ -692,6 +851,16 @@
         8
       ],
       "descripcion": "Semana de descarga: mismo entrenamiento al 60-70% del peso habitual"
+    },
+    "reglaSubida": {
+      "regla": "Si completas TODAS las series en el rango ALTO de repeticiones con técnica limpia, la siguiente sesión SUBES el peso. Sin excepciones y sin esperar a sentirte preparada.",
+      "incrementos": {
+        "trenSuperior": 2.5,
+        "trenInferior": 5,
+        "accesoriosLigeros": 1
+      },
+      "noBajar": "No bajar peso sin motivo concreto (técnica que falla o molestia). Bajadas sin razón borran semanas de trabajo.",
+      "diagnostico2026_09": "Registro sep 2026: sentadilla estancada en 20 kg durante 4 sesiones, prensa en 50 desde agosto, y varios retrocesos sin motivo (curl 7,5→3 kg, farmer 24→16 kg, jalón 30→25). Sin sobrecarga progresiva no hay adaptación muscular ni ósea. Este es el principal freno identificado."
     }
   },
   "evitar": [
@@ -716,7 +885,7 @@
       "ejemplos": [
         "bloquear la respiración a tope en la rep más pesada"
       ],
-      "motivo": "PENDIENTE VALIDACIÓN: quiste ovárico 42x31mm. Exhalar en el esfuerzo, core activo sin bloquear del todo"
+      "motivo": "PENDIENTE VALIDACIÓN con Dra. Tábara: quiste ovárico 42x31mm. Exhalar en el esfuerzo, core activo sin bloquear del todo."
     },
     {
       "que": "Entrenar fuerte tras comida completa",
@@ -727,6 +896,15 @@
       "que": "Suplementar hierro sin indicación médica",
       "ejemplos": [],
       "motivo": "Talasemia minor: el exceso de hierro es riesgo real"
+    },
+    {
+      "que": "Hiperextensión lumbar bajo carga",
+      "ejemplos": [
+        "arquear la espalda al final del hip thrust",
+        "arquear al empujar en press de hombro",
+        "hiperextender en el banco romano"
+      ],
+      "motivo": "RM 20/09/2026: artropatía facetaria con hipertrofia articular y líquido sinovial L3-S1. Las facetas se irritan en extensión. No prohíbe los ejercicios, obliga a cuidar el final del recorrido."
     }
   ],
   "alertas": [
@@ -803,96 +981,14 @@
       "prioridad": "baja"
     }
   ],
-  "estiramientos": {
-    "dinamico": {
-      "cuando": "antes",
-      "duracionMin": [
-        5,
-        8
-      ],
-      "nota": "El estático antes de entrenar puede reducir ligeramente fuerza y potencia. El dinámico prepara sin ese efecto. Nada se mantiene fijo, todo es movimiento continuo.",
-      "ejercicios": [
-        {
-          "zona": "cadera",
-          "nombre": "Círculos de cadera",
-          "dosis": "10 por lado"
-        },
-        {
-          "zona": "cadera_isquios",
-          "nombre": "Balanceo de pierna adelante-atrás",
-          "dosis": "10 por lado"
-        },
-        {
-          "zona": "tobillo",
-          "nombre": "Círculos de tobillo + elevación de talones",
-          "dosis": "10 cada uno"
-        },
-        {
-          "zona": "hombro",
-          "nombre": "Rotaciones de brazo, círculos amplios",
-          "dosis": "10 cada dirección"
-        },
-        {
-          "zona": "columna_toracica",
-          "nombre": "Rotación de tronco suave, brazos cruzados al pecho",
-          "dosis": "10 por lado"
-        },
-        {
-          "zona": "general",
-          "nombre": "Sentadilla sin carga",
-          "dosis": "2-3 series"
-        }
-      ]
+  "visualizacion": {
+    "fichasTecnicas": {
+      "plegadoPorDefecto": true,
+      "motivo": "Técnica revisada con el instructor de Viding (sep 2026). Se mantienen accesibles bajo 'Cómo se hace' por si hacen falta, pero no ocupan espacio en pantalla."
     },
-    "estatico": {
-      "cuando": "despues",
-      "duracionMin": [
-        5,
-        10
-      ],
-      "duracionPorPosturaSeg": [
-        20,
-        30
-      ],
-      "nota": "Sin rebotar, hasta notar tensión suave, nunca dolor.",
-      "evitar": "Isquiotibiales de pie con rodillas rectas mantenido. Cualquier flexión profunda de columna sostenida.",
-      "ejercicios": [
-        {
-          "zona": "cuadriceps",
-          "nombre": "De pie, sujeta el tobillo llevando el talón hacia el glúteo",
-          "notas": "Apóyate en algo si hace falta equilibrio"
-        },
-        {
-          "zona": "isquiotibiales",
-          "nombre": "Tumbada boca arriba, pierna elevada sujeta con toalla o goma",
-          "notas": "NO de pie inclinada hacia delante"
-        },
-        {
-          "zona": "gluteo",
-          "nombre": "Tumbada boca arriba, tobillo sobre rodilla contraria, lleva la pierna de abajo hacia el pecho",
-          "notas": ""
-        },
-        {
-          "zona": "flexores_cadera",
-          "nombre": "Zancada baja, cadera hacia delante, sin arquear la lumbar",
-          "notas": "El que más se acorta por estar sentada 8h"
-        },
-        {
-          "zona": "pecho_hombro",
-          "nombre": "Brazo estirado contra marco de puerta, giro leve del cuerpo",
-          "notas": ""
-        },
-        {
-          "zona": "espalda_alta",
-          "nombre": "Brazos cruzados al pecho, tira suavemente hacia el hombro contrario",
-          "notas": ""
-        },
-        {
-          "zona": "gemelo",
-          "nombre": "De pie frente a la pared, pierna atrás con el talón en el suelo",
-          "notas": ""
-        }
-      ]
+    "avisosMedicos": {
+      "plegadoPorDefecto": false,
+      "motivo": "Los avisos del campo 'avisos' NO son de técnica: derivan de hallazgos médicos (artropatía facetaria L3-S1, osteopenia cadera T-2.4, quiste ovárico). Permanecen siempre visibles."
     }
   }
 }

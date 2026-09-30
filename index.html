@@ -302,9 +302,24 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
   background:var(--surface2);border-radius:10px;padding:10px 12px;margin-bottom:8px;
   border:1px solid var(--border);
 }
-.opcion-suave.recomendada{border-color:var(--accent);}
 .opcion-suave .nombre{font-weight:700;}
-.opcion-suave .recom-tag{color:var(--accent);font-size:0.75rem;font-weight:700;}
+.grupo-tag{
+  display:inline-block;font-size:0.68rem;font-weight:700;color:var(--text-dim);
+  border:1px solid var(--border);border-radius:20px;padding:1px 8px;margin-left:6px;vertical-align:middle;
+  text-transform:uppercase;letter-spacing:.03em;
+}
+.grupo-tag.grupo-carga_osea{color:var(--accent);border-color:var(--accent);}
+.grupo-tag.grupo-equilibrio{color:var(--accent-dim);border-color:var(--accent-dim);}
+.sugerencia-semanal{margin:6px 0 12px;padding-left:20px;color:var(--text-dim);font-size:0.88rem;}
+.sugerencia-semanal li{margin-bottom:4px;}
+.regla-subida{
+  background:var(--surface2);border:1px solid var(--accent);border-radius:10px;
+  padding:12px 14px;margin:10px 0 14px;font-size:0.9rem;
+}
+.regla-subida-titulo{font-weight:700;color:var(--accent);margin-bottom:4px;}
+.regla-subida p{margin:4px 0;}
+.regla-subida-inc{font-weight:600;margin-top:6px;}
+.regla-subida-nobajar{color:var(--text-dim);font-size:0.84rem;}
 </style>
 </head>
 <body>
@@ -346,358 +361,1306 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 const RUTINA =
 {
   "meta": {
-    "version": "1.0",
+    "version": "1.2",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
     "densitometria": {
       "fecha": "2026-07-14",
-      "columna_L1L4": { "tScore": -1.3, "zScore": -0.6 },
-      "cuelloFemoral": { "tScore": -2.2, "zScore": -1.5 },
-      "caderaTotal": { "tScore": -2.4, "zScore": -2.0 },
-      "frax10a": { "osteoporoticaSevera": 2.1, "cadera": 0.5 }
+      "columna_L1L4": {
+        "tScore": -1.3,
+        "zScore": -0.6
+      },
+      "cuelloFemoral": {
+        "tScore": -2.2,
+        "zScore": -1.5
+      },
+      "caderaTotal": {
+        "tScore": -2.4,
+        "zScore": -2.0
+      },
+      "frax10a": {
+        "osteoporoticaSevera": 2.1,
+        "cadera": 0.5
+      }
     },
-    "nutricion": { "kcalBase": 1750, "proteinaMin": 94, "proteinaMax": 118 }
+    "nutricion": {
+      "kcalBase": 1750,
+      "proteinaMin": 94,
+      "proteinaMax": 118
+    },
+    "fechaActualizacion": "2026-09-30",
+    "resonancias": {
+      "fecha": "2026-09-20",
+      "centro": "Affidea San Francisco de Asís",
+      "lumbar": {
+        "hallazgos": "Deshidratación discal L3-S1 con abombamientos leves. Moderadas alteraciones degenerativas espondiloarticulares con hipertrofia articular L3-S1 y líquido sinovial.",
+        "descartado": "SIN hernia discal. SIN estenosis de conducto. SIN compromiso de forámenes ni de raíces. Cono medular normal.",
+        "implicacion": "La artropatía facetaria se irrita con la HIPEREXTENSIÓN lumbar. No prohíbe nada, pero hace que la técnica importe más en hip thrust, press de hombro y extensión de espalda."
+      },
+      "cervical": {
+        "hallazgos": "Leves abombamientos discales C4-C6. Hiperlordosis cervical.",
+        "descartado": "SIN hernia. SIN estenosis. SIN compromiso mielorradicular. Médula y raíces normales.",
+        "implicacion": "La hiperlordosis cervical es postural: relacionada con 8h sentada y altura de pantalla."
+      },
+      "conclusion": "Sin hallazgos que contraindiquen ningún ejercicio. Se levanta la restricción de peso muerto y rumano, y la de trabajo unilateral."
+    }
   },
   "semana": [
-    { "dia": "lunes",     "tipo": "descanso" },
-    { "dia": "martes",    "tipo": "fuerza",  "sesionId": "A" },
-    { "dia": "miercoles", "tipo": "suave",   "bloqueId": "carga_osea" },
-    { "dia": "jueves",    "tipo": "fuerza",  "sesionId": "B" },
-    { "dia": "viernes",   "tipo": "suave",   "bloqueId": "descanso_real" },
-    { "dia": "sabado",    "tipo": "fuerza",  "sesionId": "C" },
-    { "dia": "domingo",   "tipo": "suave",   "bloqueId": "equilibrio" }
+    {
+      "dia": "lunes",
+      "tipo": "descanso"
+    },
+    {
+      "dia": "martes",
+      "tipo": "fuerza",
+      "sesionId": "A"
+    },
+    {
+      "dia": "miercoles",
+      "tipo": "dinamico",
+      "bloqueId": "descanso_dinamico"
+    },
+    {
+      "dia": "jueves",
+      "tipo": "fuerza",
+      "sesionId": "B"
+    },
+    {
+      "dia": "viernes",
+      "tipo": "descanso",
+      "bloqueId": null,
+      "registra": false
+    },
+    {
+      "dia": "sabado",
+      "tipo": "fuerza",
+      "sesionId": "C"
+    },
+    {
+      "dia": "domingo",
+      "tipo": "dinamico",
+      "bloqueId": "descanso_dinamico"
+    }
   ],
   "sesiones": [
     {
-      "id": "A", "nombre": "Fuerza A — Tren inferior + carga axial", "dia": "martes",
-      "intensidad": "alta", "duracionMin": [50, 60],
+      "id": "A",
+      "nombre": "Fuerza A — Tren inferior + carga axial",
+      "dia": "martes",
+      "intensidad": "alta",
+      "duracionMin": [
+        50,
+        60
+      ],
       "descripcion": "La sesión más importante de la semana para tu columna lumbar.",
       "ejercicios": [
-        { "id": "a_calentamiento", "nombre": "Movilidad cadera + tobillo", "tipo": "calentamiento", "series": 1, "duracionMin": [5, 8], "registraCarga": false, "notas": "Sentadilla sin carga, círculos de cadera", "video": "" },
-        { "id": "a_sentadilla", "nombre": "Sentadilla", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "progresion": "goblet → multipower → barra", "notas": "Espalda neutra. La estrella para columna + cadera", "sitiosOseos": ["columna_lumbar", "cadera"], "video": "", "fichaTecnica": {
-          "prioridad": "roja",
-          "queEs": "Flexionar cadera y rodilla a la vez, bajando el cuerpo como si te sentaras en una silla.",
-          "colocacion": "Pies a la anchura de los hombros, puntas ligeramente hacia fuera.",
-          "ejecucion": ["Inicia sacando cadera hacia atrás y flexionando rodillas a la vez", "Baja manteniendo el pecho erguido", "Rodillas siguen la dirección de los pies", "Sube empujando el suelo con toda la planta del pie"],
-          "debesNotar": "Cuádriceps y glúteo. Peso repartido en toda la planta.",
-          "errores": ["Rodillas hacia dentro al subir → baja el peso", "Talones se levantan → prueba con alza bajo el talón", "Espalda se redondea → para antes en el recorrido"],
-          "porqueHueso": "Carga axial directa sobre columna y cadera."
-        } },
-        { "id": "a_peso_muerto_rumano", "nombre": "Peso muerto rumano", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "progresion": "mancuernas → barra", "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar", "sitiosOseos": ["columna_lumbar", "cadera"], "video": "", "fichaTecnica": {
-          "prioridad": "roja",
-          "queEs": "Bisagra de cadera. Las rodillas apenas se mueven.",
-          "colocacion": "Pies a la anchura de la cadera, peso por delante de los muslos, rodillas con flexión suave y fija.",
-          "ejecucion": ["Empuja el glúteo hacia atrás", "El peso baja pegado a las piernas", "Espalda recta, sin redondear ni arquear", "Baja hasta notar tirón en isquiotibiales", "Sube con el glúteo"],
-          "debesNotar": "Isquiotibiales y glúteo. Nunca la zona lumbar.",
-          "errores": ["Doblar espalda en vez de cadera → PARAR, es el error de mayor riesgo de la rutina", "El peso se separa de las piernas", "Doblar rodillas como sentadilla"],
-          "truco": "Practica sin peso de espaldas a una pared, a dos palmos: lleva el culo hasta rozarla sin doblar rodillas.",
-          "porqueHueso": "El mejor estímulo para L1-L4 con técnica correcta. Revisar con el monitor antes de progresar en peso."
-        } },
-        { "id": "a_zancadas", "nombre": "Step-up a cajón (o zancadas caminando)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "porPierna": true, "registraCarga": true, "notas": "Carga unilateral de cadera — trabajo específico para tu sitio prioritario. CAJÓN RÍGIDO a la altura de la rodilla (~45 cm). Sube apoyando toda la planta, sin impulsarte con la pierna de atrás. Baja controlando.", "sitiosOseos": ["cadera", "cuello_femoral"], "video": "", "alturaCajonCm": 45, "progresion": "Progresar AÑADIENDO PESO, nunca subiendo la altura del cajón", "avisos": ["NO usar cajón blando o inestable: reduce la fuerza que puedes producir y añade riesgo de caída (crítico con cadera T-score -2,4)", "NO subir la altura como progresión: más altura = más compensación y más riesgo, sin más estímulo óseo", "El equilibrio se entrena aparte, sin carga: yoga y barre del domingo"], "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Subir a un cajón rígido apoyando toda la planta de un pie, sin impulsarte con la pierna de atrás.",
-          "colocacion": "Cajón rígido y estable a la altura de la rodilla (~45 cm), de frente a él.",
-          "ejecucion": ["Apoya toda la planta del pie sobre el cajón", "Sube empujando con la pierna de arriba, sin impulso de la de atrás", "Termina de pie y estable sobre el cajón", "Baja controlando el descenso"],
-          "debesNotar": "Cuádriceps y glúteo de la pierna que sube.",
-          "errores": ["Impulsarte con la pierna de atrás", "Cajón demasiado alto → más compensación y riesgo, sin más estímulo óseo", "Perder equilibrio lateral → reduce la carga"],
-          "porqueHueso": "Carga unilateral de cadera y cuello femoral, tu sitio prioritario."
-        } },
-        { "id": "a_prensa", "nombre": "Prensa de piernas (Biostrength)", "tipo": "accesorio", "series": 3, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Accesorio, aquí sí vale la máquina", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Máquina guiada, empujas una plataforma con las piernas.",
-          "colocacion": "Pies a la anchura de los hombros, espalda pegada al respaldo.",
-          "ejecucion": ["Flexiona controlando la bajada", "Empuja sin bloquear del todo la rodilla"],
-          "debesNotar": "Cuádriceps.",
-          "errores": ["Despegar la lumbar del respaldo → reduce el rango"]
-        } },
-        { "id": "a_curl_femoral", "nombre": "Curl femoral (Biostrength)", "tipo": "accesorio", "series": 3, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Accesorio", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Máquina guiada, flexionas la rodilla contra resistencia.",
-          "ejecucion": ["Movimiento controlado, sin tirones", "Aprieta al final del recorrido"],
-          "debesNotar": "Parte trasera del muslo."
-        } },
-        { "id": "a_gemelos", "nombre": "Elevación de talones DE PIE", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "DE PIE, no sentada: así hay carga axial y estímulo sobre la tibia. Sube despacio, pausa arriba, baja controlando", "sitiosOseos": ["tibia"], "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Elevación de talones de pie para trabajar el gemelo y estimular la tibia.",
-          "colocacion": "De pie y erguida, puntas de los pies en un escalón o en el suelo.",
-          "ejecucion": ["Sube despacio hasta la máxima altura del talón", "Pausa arriba", "Baja controlando"],
-          "debesNotar": "Gemelo y sóleo.",
-          "porqueHueso": "De pie aporta carga axial y estímulo directo sobre la tibia."
-        } },
-        { "id": "a_abductor", "nombre": "Abductor (máquina)", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Glúteo medio: principal estabilizador lateral de la cadera. Cuando está débil, la rodilla colapsa hacia dentro en sentadilla y step-up. Relevante para prevención de caídas", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Máquina guiada: separas las piernas contra resistencia trabajando el glúteo medio.",
-          "colocacion": "Espalda apoyada en el respaldo.",
-          "ejecucion": ["Abre las piernas de forma controlada", "Vuelve sin dejar que la carga tire de golpe"],
-          "debesNotar": "Laterales de la cadera (glúteo medio).",
-          "porqueHueso": "Un glúteo medio fuerte estabiliza la cadera y evita que la rodilla colapse hacia dentro. Relevante para prevención de caídas."
-        } },
-        { "id": "a_aductor", "nombre": "Aductor (máquina)", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Equilibra el trabajo de cadera. PENDIENTE: pedir al personal de Viding que recalibren esta máquina (conformidad >300%, la carga registrada no se corresponde con la real)", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Máquina guiada: juntas las piernas contra resistencia trabajando los aductores.",
-          "colocacion": "Espalda apoyada en el respaldo.",
-          "ejecucion": ["Cierra las piernas de forma controlada", "Vuelve controlando la apertura"],
-          "debesNotar": "Cara interna del muslo."
-        } },
-        { "id": "a_farmer", "nombre": "Paseo del granjero (farmer's carry)", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "Carga axial + core + agarre. AHORA ES TU PRINCIPAL FUENTE DE CARGA AXIAL junto al peso muerto y la sentadilla, al pasar el press militar a sentada. Prioriza subir peso aquí.", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "", "progresion": "Subir peso de forma agresiva: el agarre se adapta rápido. Variante suitcase (una sola mano) para anti-flexión lateral", "variante": "Suitcase carry: peso en una sola mano, alternando. Cubre el plano anti-flexión lateral", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
-          "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
-          "ejecucion": ["Camina con pasos normales, core activo, sin inclinarte"],
-          "debesNotar": "Agarre, antebrazos, core.",
-          "errores": ["Encoger hombros hacia las orejas → baja el peso"],
-          "porqueHueso": "Carga axial en columna + tracción en muñeca."
-        } }
+        {
+          "id": "a_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "a_sentadilla",
+          "nombre": "Sentadilla",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 6,
+          "repsMax": 8,
+          "registraCarga": true,
+          "progresion": "goblet → multipower → barra",
+          "notas": "Espalda neutra. La estrella para columna + cadera",
+          "sitiosOseos": [
+            "columna_lumbar",
+            "cadera"
+          ],
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Flexionar cadera y rodilla a la vez, bajando el cuerpo como si te sentaras en una silla.",
+            "colocacion": "Pies a la anchura de los hombros, puntas ligeramente hacia fuera.",
+            "ejecucion": [
+              "Inicia sacando cadera hacia atrás y flexionando rodillas a la vez",
+              "Baja manteniendo el pecho erguido",
+              "Rodillas siguen la dirección de los pies",
+              "Sube empujando el suelo con toda la planta del pie"
+            ],
+            "debesNotar": "Cuádriceps y glúteo. Peso repartido en toda la planta.",
+            "errores": [
+              "Rodillas hacia dentro al subir → baja el peso",
+              "Talones se levantan → prueba con alza bajo el talón",
+              "Espalda se redondea → para antes en el recorrido"
+            ],
+            "porqueHueso": "Carga axial directa sobre columna y cadera."
+          }
+        },
+        {
+          "id": "a_peso_muerto_rumano",
+          "nombre": "Peso muerto rumano",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 6,
+          "repsMax": 8,
+          "registraCarga": true,
+          "progresion": "mancuernas → barra",
+          "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar. REINCORPORACIÓN tras 2 meses sin carga: empezar en 5 kg y subir 2,5 kg/semana solo si no hay molestia lumbar en las 48h siguientes.",
+          "sitiosOseos": [
+            "columna_lumbar",
+            "cadera"
+          ],
+          "video": "",
+          "reincorporacion": {
+            "estado": "progresiva desde 2026-09-30",
+            "pesoInicial": 5,
+            "incrementoSemanal": 2.5,
+            "condicion": "Subir solo si NO hay molestia lumbar en las 48h posteriores. Si aparece, volver al peso anterior."
+          },
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Bisagra de cadera. Las rodillas apenas se mueven.",
+            "colocacion": "Pies a la anchura de la cadera, peso por delante de los muslos, rodillas con flexión suave y fija.",
+            "ejecucion": [
+              "Empuja el glúteo hacia atrás",
+              "El peso baja pegado a las piernas",
+              "Espalda recta, sin redondear ni arquear",
+              "Baja hasta notar tirón en isquiotibiales",
+              "Sube con el glúteo"
+            ],
+            "debesNotar": "Isquiotibiales y glúteo. Nunca la zona lumbar.",
+            "errores": [
+              "Doblar espalda en vez de cadera → PARAR, es el error de mayor riesgo de la rutina",
+              "El peso se separa de las piernas",
+              "Doblar rodillas como sentadilla"
+            ],
+            "truco": "Practica sin peso de espaldas a una pared, a dos palmos: lleva el culo hasta rozarla sin doblar rodillas.",
+            "porqueHueso": "El mejor estímulo para L1-L4 con técnica correcta. Revisar con el monitor antes de progresar en peso."
+          }
+        },
+        {
+          "id": "a_zancadas",
+          "nombre": "Step-up a cajón (o zancadas caminando)",
+          "tipo": "principal",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "porPierna": true,
+          "registraCarga": true,
+          "notas": "Carga unilateral de cadera (restricción bilateral LEVANTADA tras RM 20/09) — trabajo específico para tu sitio prioritario. CAJÓN RÍGIDO a la altura de la rodilla (~45 cm). Sube apoyando toda la planta, sin impulsarte con la pierna de atrás. Baja controlando.",
+          "sitiosOseos": [
+            "cadera",
+            "cuello_femoral"
+          ],
+          "video": "",
+          "alturaCajonCm": 45,
+          "progresion": "Progresar AÑADIENDO PESO, nunca subiendo la altura del cajón",
+          "avisos": [
+            "NO usar cajón blando o inestable: reduce la fuerza que puedes producir y añade riesgo de caída (crítico con cadera T-score -2,4)",
+            "NO subir la altura como progresión: más altura = más compensación y más riesgo, sin más estímulo óseo",
+            "El equilibrio se entrena aparte, sin carga: yoga y barre del domingo"
+          ],
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Subir a un cajón rígido apoyando toda la planta de un pie, sin impulsarte con la pierna de atrás.",
+            "colocacion": "Cajón rígido y estable a la altura de la rodilla (~45 cm), de frente a él.",
+            "ejecucion": [
+              "Apoya toda la planta del pie sobre el cajón",
+              "Sube empujando con la pierna de arriba, sin impulso de la de atrás",
+              "Termina de pie y estable sobre el cajón",
+              "Baja controlando el descenso"
+            ],
+            "debesNotar": "Cuádriceps y glúteo de la pierna que sube.",
+            "errores": [
+              "Impulsarte con la pierna de atrás",
+              "Cajón demasiado alto → más compensación y riesgo, sin más estímulo óseo",
+              "Perder equilibrio lateral → reduce la carga"
+            ],
+            "porqueHueso": "Carga unilateral de cadera y cuello femoral, tu sitio prioritario."
+          }
+        },
+        {
+          "id": "a_prensa",
+          "nombre": "Prensa de piernas (Biostrength)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Accesorio, aquí sí vale la máquina",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada, empujas una plataforma con las piernas.",
+            "colocacion": "Pies a la anchura de los hombros, espalda pegada al respaldo.",
+            "ejecucion": [
+              "Flexiona controlando la bajada",
+              "Empuja sin bloquear del todo la rodilla"
+            ],
+            "debesNotar": "Cuádriceps.",
+            "errores": [
+              "Despegar la lumbar del respaldo → reduce el rango"
+            ]
+          }
+        },
+        {
+          "id": "a_curl_femoral",
+          "nombre": "Curl femoral (Biostrength)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Accesorio",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada, flexionas la rodilla contra resistencia.",
+            "ejecucion": [
+              "Movimiento controlado, sin tirones",
+              "Aprieta al final del recorrido"
+            ],
+            "debesNotar": "Parte trasera del muslo."
+          }
+        },
+        {
+          "id": "a_leg_extension",
+          "nombre": "Extensión de cuádriceps (leg extension)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Cuádriceps aislado. Complementa el curl femoral (antagonista). Sentada, sin carga sobre la columna: apto si hay molestia lumbar. Extiende sin bloquear la rodilla de golpe, baja controlando",
+          "video": ""
+        },
+        {
+          "id": "a_gemelos",
+          "nombre": "Elevación de talones DE PIE",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "DE PIE, no sentada: así hay carga axial y estímulo sobre la tibia. Sube despacio, pausa arriba, baja controlando",
+          "sitiosOseos": [
+            "tibia"
+          ],
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Elevación de talones de pie para trabajar el gemelo y estimular la tibia.",
+            "colocacion": "De pie y erguida, puntas de los pies en un escalón o en el suelo.",
+            "ejecucion": [
+              "Sube despacio hasta la máxima altura del talón",
+              "Pausa arriba",
+              "Baja controlando"
+            ],
+            "debesNotar": "Gemelo y sóleo.",
+            "porqueHueso": "De pie aporta carga axial y estímulo directo sobre la tibia."
+          }
+        },
+        {
+          "id": "a_abductor",
+          "nombre": "Abductor — de pie O sentado (uno de los dos)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Glúteo medio: estabilizador lateral de la cadera. Cuando está débil, la rodilla colapsa hacia dentro en sentadilla y step-up. Relevante para prevención de caídas. PREFERIBLE LA VERSIÓN DE PIE: añade carga axial y trabajo de estabilización en la pierna de apoyo, que la versión sentada no da. Si está ocupada, la sentada vale igual.",
+          "video": "",
+          "variantes": [
+            "Standing abductor (de pie) — preferible",
+            "Abductor sentado (máquina) — alternativa"
+          ],
+          "avisos": [
+            "Haz UNA de las dos versiones, no ambas",
+            "De pie: agárrate a los soportes sin inclinar el tronco hacia el lado contrario"
+          ],
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada: separas las piernas contra resistencia trabajando el glúteo medio.",
+            "colocacion": "Espalda apoyada en el respaldo.",
+            "ejecucion": [
+              "Abre las piernas de forma controlada",
+              "Vuelve sin dejar que la carga tire de golpe"
+            ],
+            "debesNotar": "Laterales de la cadera (glúteo medio).",
+            "porqueHueso": "Un glúteo medio fuerte estabiliza la cadera y evita que la rodilla colapse hacia dentro. Relevante para prevención de caídas."
+          }
+        },
+        {
+          "id": "a_aductor",
+          "nombre": "Aductor (máquina)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Equilibra el trabajo de cadera. PENDIENTE: pedir al personal de Viding que recalibren esta máquina (conformidad >300%, la carga registrada no se corresponde con la real)",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada: juntas las piernas contra resistencia trabajando los aductores.",
+            "colocacion": "Espalda apoyada en el respaldo.",
+            "ejecucion": [
+              "Cierra las piernas de forma controlada",
+              "Vuelve controlando la apertura"
+            ],
+            "debesNotar": "Cara interna del muslo."
+          }
+        },
+        {
+          "id": "a_rear_kick",
+          "nombre": "Rear kick (patada de glúteo, de pie)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "porPierna": true,
+          "registraCarga": true,
+          "notas": "Extensión de cadera de pie, una pierna cada vez. Complementa el hip thrust desde otro ángulo. Movimiento controlado, sin impulso",
+          "avisos": [
+            "NO arquear la lumbar al llevar la pierna atrás: mismo aviso facetario que el hip thrust. El movimiento sale de la cadera, no de la espalda"
+          ],
+          "video": ""
+        },
+        {
+          "id": "a_farmer",
+          "nombre": "Paseo del granjero (farmer's carry)",
+          "tipo": "principal",
+          "series": 3,
+          "distanciaM": [
+            30,
+            40
+          ],
+          "registraCarga": true,
+          "notas": "Carga axial + core + agarre. AHORA ES TU PRINCIPAL FUENTE DE CARGA AXIAL junto al peso muerto y la sentadilla, al pasar el press militar a sentada. Prioriza subir peso aquí.",
+          "sitiosOseos": [
+            "columna_lumbar",
+            "muñeca"
+          ],
+          "video": "",
+          "progresion": "Subir peso de forma agresiva: el agarre se adapta rápido. Variante suitcase (una sola mano) para anti-flexión lateral",
+          "variante": "Suitcase carry: peso en una sola mano, alternando. Cubre el plano anti-flexión lateral",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
+            "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
+            "ejecucion": [
+              "Camina con pasos normales, core activo, sin inclinarte"
+            ],
+            "debesNotar": "Agarre, antebrazos, core.",
+            "errores": [
+              "Encoger hombros hacia las orejas → baja el peso"
+            ],
+            "porqueHueso": "Carga axial en columna + tracción en muñeca."
+          }
+        },
+        {
+          "id": "a_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
       ]
     },
     {
-      "id": "B", "nombre": "Fuerza B — Tren superior, énfasis en hombro", "dia": "jueves",
-      "intensidad": "media-alta", "duracionMin": [45, 55],
-      "descripcion": "El press de hombro es tu punto más débil documentado: prioriza progresar aquí. Ahora es sentada en máquina; la carga axial que daba de pie se compensa en el farmer's carry.",
+      "id": "B",
+      "nombre": "Fuerza B — Tren superior, énfasis en hombro",
+      "dia": "jueves",
+      "intensidad": "media-alta",
+      "duracionMin": [
+        45,
+        55
+      ],
+      "descripcion": "El press de hombro es tu punto más débil documentado. De pie, además, aporta carga axial.",
       "ejercicios": [
-        { "id": "b_calentamiento", "nombre": "Movilidad de hombro", "tipo": "calentamiento", "series": 1, "duracionMin": [5, 8], "registraCarga": false, "notas": "Rotaciones, band pull-apart si hay gomas", "video": "" },
-        { "id": "b_press_militar", "nombre": "Press de hombro sentada (máquina)", "tipo": "principal", "series": 4, "repsMin": 6, "repsMax": 8, "registraCarga": true, "notas": "Decisión propia: sentada en máquina por comodidad. NOTA: al estar sentada se pierde la carga axial sobre columna que daba la versión de pie — compensado subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí", "sitiosOseos": [], "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Empujar el peso por encima de la cabeza, sentada en máquina guiada.",
-          "colocacion": "Espalda apoyada en el respaldo, agarre a la altura de los hombros.",
-          "ejecucion": ["Empuja en línea recta hacia arriba sin bloquear de golpe", "Baja con control hasta la altura de los hombros"],
-          "debesNotar": "Hombros y tríceps.",
-          "errores": ["Despegar la espalda del respaldo → reduce el rango o el peso"],
-          "porqueHueso": "Sentada se pierde la carga axial sobre columna de la versión de pie; se compensa subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí."
-        } },
-        { "id": "b_remo", "nombre": "Remo (Biostrength o barra)", "tipo": "principal", "series": 4, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Si es con barra, remo Pendlay de pie: mejor para columna", "sitiosOseos": ["columna_toracica"], "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Tirar del peso hacia el cuerpo trabajando la espalda.",
-          "colocacion": "De pie con barra: cadera hacia delante, espalda recta (igual que el PM rumano).",
-          "ejecucion": ["Tira hacia el abdomen apretando omóplatos", "Baja con control"],
-          "debesNotar": "Espalda media y alta.",
-          "errores": ["Redondear la espalda al tirar"]
-        } },
-        { "id": "b_press_pecho", "nombre": "Press de pecho (Biostrength)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Prueba el agarre neutro: más amable con el hombro", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Máquina guiada, empujas el peso hacia delante desde el pecho.",
-          "ejecucion": ["Prueba agarre neutro si el hombro molesta"],
-          "debesNotar": "Pecho y tríceps."
-        } },
-        { "id": "b_contractor", "nombre": "Contractor pectoral (pec deck)", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Aislamiento de pectoral, después del press (compuesto primero, aislamiento después). Asiento a la altura del PECHO, no de los hombros", "avisos": ["NO llevar los codos demasiado atrás al abrir: carga la cápsula anterior del hombro, que es tu punto débil. Para al notar el estiramiento, sin buscar rango máximo"], "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Máquina de aislamiento de pectoral: juntas los brazos por delante contra resistencia.",
-          "colocacion": "Asiento a la altura del pecho (no de los hombros), espalda apoyada.",
-          "ejecucion": ["Junta los brazos por delante de forma controlada", "Abre solo hasta notar el estiramiento, sin buscar rango máximo"],
-          "debesNotar": "Pectoral. No debe molestar la parte delantera del hombro.",
-          "errores": ["Llevar los codos demasiado atrás al abrir → carga la cápsula anterior del hombro, tu punto débil"]
-        } },
-        { "id": "b_jalon", "nombre": "Jalón al pecho / dominadas asistidas", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Tirar de una barra hacia el pecho desde arriba.",
-          "ejecucion": ["Codos hacia abajo y ligeramente atrás, sin balancear el cuerpo"],
-          "debesNotar": "Espalda ancha."
-        } },
-        { "id": "b_elevaciones", "nombre": "Elevaciones laterales", "tipo": "accesorio", "series": 3, "repsMin": 12, "repsMax": 15, "registraCarga": true, "notas": "Deltoides medio, complementario al press", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Levantar los brazos hacia los lados con mancuernas.",
-          "ejecucion": ["Brazos casi rectos, sube hasta el hombro, sin impulso"],
-          "debesNotar": "Parte media del hombro.",
-          "errores": ["Usar impulso del cuerpo → baja el peso"]
-        } },
-        { "id": "b_biceps", "nombre": "Curl de bíceps", "tipo": "accesorio", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Codos pegados al cuerpo, sube flexionando el codo, baja controlando", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Aislamiento del bíceps: flexión de codo con mancuerna, barra o polea.",
-          "ejecucion": ["Codos pegados al cuerpo y fijos", "Sube flexionando solo el codo", "Baja controlando, sin balancear el cuerpo"],
-          "debesNotar": "Parte delantera del brazo."
-        } },
-        { "id": "b_triceps", "nombre": "Extensión de tríceps", "tipo": "accesorio", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": true, "notas": "Codo fijo (al techo o pegado al cuerpo según variante), extiende el brazo, vuelve controlando. Normal mover más peso que en bíceps", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Aislamiento del tríceps: extensión de codo con polea, mancuerna o barra.",
-          "ejecucion": ["Codo fijo, al techo o pegado al cuerpo según variante", "Extiende el brazo completo", "Vuelve controlando"],
-          "debesNotar": "Parte trasera del brazo. Es normal mover más peso que en bíceps."
-        } },
-        { "id": "b_rotacion_externa", "nombre": "Rotación externa de hombro (goma)", "tipo": "accesorio", "series": 2, "reps": 15, "porLado": true, "registraCarga": false, "notas": "Manguito rotador. Codo pegado al costado, antebrazo gira hacia fuera. Los press y jalones trabajan los músculos grandes; estos estabilizadores pequeños son los que fallan primero. Debería ayudarte a progresar en el press", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Trabajo del manguito rotador con goma: el antebrazo gira hacia fuera.",
-          "colocacion": "Codo pegado al costado y flexionado 90°, goma anclada a un lado.",
-          "ejecucion": ["Gira el antebrazo hacia fuera manteniendo el codo pegado al cuerpo", "Vuelve controlando"],
-          "debesNotar": "Parte posterior del hombro, sin dolor.",
-          "porqueHueso": "Estabilizadores pequeños del hombro; suelen fallar antes que los grandes y limitar el press."
-        } },
-        { "id": "b_flexiones", "nombre": "Flexiones con manos elevadas", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 12, "registraCarga": false, "notas": "Banco o multipower. CARGA AXIAL SOBRE LA MUÑECA — no es opcional. La fractura de radio distal suele ser la primera por fragilidad", "sitiosOseos": ["muñeca", "radio_distal"], "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Flexión de brazos con manos elevadas en banco o barra.",
-          "colocacion": "Manos en el borde del banco, cuerpo en línea recta.",
-          "ejecucion": ["Baja el pecho hacia el banco flexionando codos", "Sube empujando"],
-          "debesNotar": "Pecho, hombro, tríceps. Compresión en la muñeca.",
-          "errores": ["Cadera hundida o elevada → mantén línea recta"],
-          "porqueHueso": "Único ejercicio que carga el radio distal, donde suele aparecer la primera fractura por fragilidad."
-        } },
-        { "id": "b_plancha_alta", "nombre": "Plancha alta (apoyada en MANOS)", "tipo": "core", "series": 3, "duracionSeg": [30, 45], "registraCarga": false, "notas": "En manos, NO en antebrazos. Core anti-flexión + compresión en radio distal", "sitiosOseos": ["muñeca", "radio_distal"], "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Mantener la posición de flexión apoyada en las manos.",
-          "ejecucion": ["Manos bajo los hombros, cuerpo recto", "Aprieta abdomen y glúteo"],
-          "errores": ["Cadera hacia arriba o hundida → busca la línea recta"]
-        } }
+        {
+          "id": "b_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "b_press_militar",
+          "nombre": "Press de hombro sentada (máquina)",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 6,
+          "repsMax": 8,
+          "registraCarga": true,
+          "notas": "Decisión propia: sentada en máquina por comodidad. NOTA: al estar sentada se pierde la carga axial sobre columna que daba la versión de pie — compensado subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí",
+          "sitiosOseos": [],
+          "video": "",
+          "avisos": [
+            "No arquear la lumbar para ayudarte a empujar: con artropatía facetaria L3-S1, esa compensación irrita las facetas"
+          ],
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Empujar el peso por encima de la cabeza, sentada en máquina guiada.",
+            "colocacion": "Espalda apoyada en el respaldo, agarre a la altura de los hombros.",
+            "ejecucion": [
+              "Empuja en línea recta hacia arriba sin bloquear de golpe",
+              "Baja con control hasta la altura de los hombros"
+            ],
+            "debesNotar": "Hombros y tríceps.",
+            "errores": [
+              "Despegar la espalda del respaldo → reduce el rango o el peso"
+            ],
+            "porqueHueso": "Sentada se pierde la carga axial sobre columna de la versión de pie; se compensa subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí."
+          }
+        },
+        {
+          "id": "b_remo",
+          "nombre": "Remo (Biostrength o barra)",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Si es con barra, remo Pendlay de pie: mejor para columna",
+          "sitiosOseos": [
+            "columna_toracica"
+          ],
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Tirar del peso hacia el cuerpo trabajando la espalda.",
+            "colocacion": "De pie con barra: cadera hacia delante, espalda recta (igual que el PM rumano).",
+            "ejecucion": [
+              "Tira hacia el abdomen apretando omóplatos",
+              "Baja con control"
+            ],
+            "debesNotar": "Espalda media y alta.",
+            "errores": [
+              "Redondear la espalda al tirar"
+            ]
+          }
+        },
+        {
+          "id": "b_press_pecho",
+          "nombre": "Press de pecho (Biostrength)",
+          "tipo": "principal",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Prueba el agarre neutro: más amable con el hombro",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Máquina guiada, empujas el peso hacia delante desde el pecho.",
+            "ejecucion": [
+              "Prueba agarre neutro si el hombro molesta"
+            ],
+            "debesNotar": "Pecho y tríceps."
+          }
+        },
+        {
+          "id": "b_contractor",
+          "nombre": "Contractor pectoral (pec deck)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Aislamiento de pectoral, después del press (compuesto primero, aislamiento después). Asiento a la altura del PECHO, no de los hombros",
+          "avisos": [
+            "NO llevar los codos demasiado atrás al abrir: carga la cápsula anterior del hombro, que es tu punto débil. Para al notar el estiramiento, sin buscar rango máximo"
+          ],
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Máquina de aislamiento de pectoral: juntas los brazos por delante contra resistencia.",
+            "colocacion": "Asiento a la altura del pecho (no de los hombros), espalda apoyada.",
+            "ejecucion": [
+              "Junta los brazos por delante de forma controlada",
+              "Abre solo hasta notar el estiramiento, sin buscar rango máximo"
+            ],
+            "debesNotar": "Pectoral. No debe molestar la parte delantera del hombro.",
+            "errores": [
+              "Llevar los codos demasiado atrás al abrir → carga la cápsula anterior del hombro, tu punto débil"
+            ]
+          }
+        },
+        {
+          "id": "b_jalon",
+          "nombre": "Jalón al pecho / dominadas asistidas",
+          "tipo": "principal",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Tirar de una barra hacia el pecho desde arriba.",
+            "ejecucion": [
+              "Codos hacia abajo y ligeramente atrás, sin balancear el cuerpo"
+            ],
+            "debesNotar": "Espalda ancha."
+          }
+        },
+        {
+          "id": "b_elevaciones",
+          "nombre": "Elevaciones laterales",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 12,
+          "repsMax": 15,
+          "registraCarga": true,
+          "notas": "Deltoides medio. Brazos casi rectos, sube hasta la altura del hombro, sin impulso. VARIANTE RECOMENDADA: de espaldas a la pared, pies 10-15 cm separados de ella. Elimina el balanceo y te avisa si compensas con el tronco",
+          "video": "",
+          "variante": "Wall-supported: espalda apoyada en la pared, pies 10-15 cm separados. Probablemente tengas que bajar el peso respecto a la versión libre: antes parte del trabajo lo hacía el impulso. Es más honesto, aunque el número sea menor",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Levantar los brazos hacia los lados con mancuernas.",
+            "ejecucion": [
+              "Brazos casi rectos, sube hasta el hombro, sin impulso"
+            ],
+            "debesNotar": "Parte media del hombro.",
+            "errores": [
+              "Usar impulso del cuerpo → baja el peso"
+            ]
+          }
+        },
+        {
+          "id": "b_biceps",
+          "nombre": "Curl de bíceps",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Codos pegados al cuerpo, sube flexionando el codo, baja controlando",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Aislamiento del bíceps: flexión de codo con mancuerna, barra o polea.",
+            "ejecucion": [
+              "Codos pegados al cuerpo y fijos",
+              "Sube flexionando solo el codo",
+              "Baja controlando, sin balancear el cuerpo"
+            ],
+            "debesNotar": "Parte delantera del brazo."
+          }
+        },
+        {
+          "id": "b_triceps",
+          "nombre": "Extensión de tríceps",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Codo fijo (al techo o pegado al cuerpo según variante), extiende el brazo, vuelve controlando. Normal mover más peso que en bíceps",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Aislamiento del tríceps: extensión de codo con polea, mancuerna o barra.",
+            "ejecucion": [
+              "Codo fijo, al techo o pegado al cuerpo según variante",
+              "Extiende el brazo completo",
+              "Vuelve controlando"
+            ],
+            "debesNotar": "Parte trasera del brazo. Es normal mover más peso que en bíceps."
+          }
+        },
+        {
+          "id": "b_rotacion_externa",
+          "nombre": "Rotación externa de hombro (goma)",
+          "tipo": "accesorio",
+          "series": 2,
+          "reps": 15,
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Manguito rotador. Codo pegado al costado, antebrazo gira hacia fuera. Los press y jalones trabajan los músculos grandes; estos estabilizadores pequeños son los que fallan primero. Debería ayudarte a progresar en el press",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Trabajo del manguito rotador con goma: el antebrazo gira hacia fuera.",
+            "colocacion": "Codo pegado al costado y flexionado 90°, goma anclada a un lado.",
+            "ejecucion": [
+              "Gira el antebrazo hacia fuera manteniendo el codo pegado al cuerpo",
+              "Vuelve controlando"
+            ],
+            "debesNotar": "Parte posterior del hombro, sin dolor.",
+            "porqueHueso": "Estabilizadores pequeños del hombro; suelen fallar antes que los grandes y limitar el press."
+          }
+        },
+        {
+          "id": "b_plancha_alta",
+          "nombre": "Plancha alta (apoyada en MANOS, en el suelo)",
+          "tipo": "core",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "registraCarga": false,
+          "notas": "En manos, NO en antebrazos, cuerpo en línea recta, abdomen y glúteo apretados. Core anti-flexión + compresión en radio distal. El dead bug va aparte, en la sesión C",
+          "sitiosOseos": [
+            "muñeca",
+            "radio_distal"
+          ],
+          "video": "",
+          "variantes": [
+            "Plancha alta en manos — también suma carga en muñeca",
+            "Dead bug — si molesta la muñeca o quieres variar"
+          ],
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Mantener la posición de flexión apoyada en las manos.",
+            "ejecucion": [
+              "Manos bajo los hombros, cuerpo recto",
+              "Aprieta abdomen y glúteo"
+            ],
+            "errores": [
+              "Cadera hacia arriba o hundida → busca la línea recta"
+            ]
+          }
+        },
+        {
+          "id": "b_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
       ]
     },
     {
-      "id": "C", "nombre": "Fuerza C — Full body + impacto", "dia": "sabado",
-      "intensidad": "alta", "duracionMin": [50, 60],
+      "id": "C",
+      "nombre": "Fuerza C — Full body + impacto",
+      "dia": "sabado",
+      "intensidad": "alta",
+      "duracionMin": [
+        50,
+        60
+      ],
       "descripcion": "Carga más alta y menos repeticiones. El bloque de impacto va al principio, con el cuerpo fresco.",
       "ejercicios": [
-        { "id": "c_impacto", "nombre": "Bloque de impacto", "tipo": "impacto", "referenciaProtocolo": "protocolo_impacto", "registraCarga": false, "notas": "Ver protocolo de impacto — la fase depende de la semana. Al principio de la sesión", "sitiosOseos": ["cuello_femoral", "tibia"], "video": "" },
-        { "id": "c_peso_muerto", "nombre": "Peso muerto convencional o sumo", "tipo": "principal", "series": 4, "repsMin": 5, "repsMax": 6, "registraCarga": true, "notas": "Carga más alta que el martes, menos reps", "sitiosOseos": ["columna_lumbar", "cadera"], "video": "", "fichaTecnica": {
-          "prioridad": "roja",
-          "queEs": "Levantar el peso del suelo hasta quedar de pie con la espalda recta.",
-          "colocacion": "Convencional: pies a la anchura de la cadera. Sumo: pies más separados, puntas hacia fuera.",
-          "ejecucion": ["Cadera hacia atrás y abajo, espalda recta, pecho arriba", "Agarra el peso con brazos rectos por fuera de las piernas", "Empuja el suelo para levantarte, cadera hacia delante al final", "El peso sube pegado al cuerpo", "Baja controlado, no lo dejes caer"],
-          "debesNotar": "Piernas, glúteo y espalda juntos. Nunca dolor lumbar.",
-          "errores": ["Espalda redondeada al iniciar → el error más importante de toda la rutina, si pasa el peso es excesivo", "Tirar con la espalda antes que con las piernas"],
-          "porqueHueso": "El ejercicio con más carga de toda la rutina. Máxima prioridad para revisar con el monitor."
-        } },
-        { "id": "c_hip_thrust", "nombre": "Hip thrust", "tipo": "principal", "series": 4, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente", "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Empujar la cadera hacia arriba con la espalda apoyada en un banco.",
-          "colocacion": "Espalda alta en el borde de un banco, pies en el suelo, peso sobre la cadera.",
-          "ejecucion": ["Empuja la cadera arriba hasta línea recta hombros-rodillas", "Aprieta glúteo arriba", "Baja controlando"],
-          "debesNotar": "Glúteo, muy concentrado.",
-          "errores": ["Arquear la lumbar en vez de subir con el glúteo → sube menos rango"]
-        } },
-        { "id": "c_press_hombro", "nombre": "Press de hombro (variante distinta al jueves)", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "Arnold press, push press o landmine. Si lo haces sentada, no aporta carga axial", "sitiosOseos": [], "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Variante del press militar: Arnold press o landmine.",
-          "nota": "Pide al monitor la variante disponible en Viding."
-        } },
-        { "id": "c_remo_jalon", "nombre": "Remo o jalón", "tipo": "principal", "series": 3, "repsMin": 8, "repsMax": 10, "registraCarga": true, "notas": "", "video": "", "fichaTecnica": {
-          "prioridad": "verde",
-          "queEs": "Mismo patrón que remo o jalón de la sesión B."
-        } },
-        { "id": "c_pallof", "nombre": "Pallof press", "tipo": "core", "series": 3, "reps": 10, "porLado": true, "registraCarga": true, "notas": "Anti-rotación, protege columna", "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Ejercicio anti-rotación con polea o goma a la altura del pecho.",
-          "colocacion": "De pie, de lado a la polea, peso a la altura del pecho.",
-          "ejecucion": ["Empuja hacia delante en línea recta, sin dejar girar el tronco", "Mantén 2 segundos, vuelve"],
-          "debesNotar": "Abdomen resistiendo el giro. No debe doler la espalda.",
-          "porqueHueso": "Protege la columna entrenando resistencia a la rotación, en vez de rotar bajo carga."
-        } },
-        { "id": "c_extension_espalda", "nombre": "Extensión de espalda (banco romano o superman)", "tipo": "principal", "series": 2, "repsMin": 10, "repsMax": 12, "registraCarga": false, "notas": "Extensores dorsales — se asocian inversamente con fracturas vertebrales. Controlado, sin hiperextender", "sitiosOseos": ["columna_toracica"], "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Fortalecer los músculos que mantienen la espalda erguida.",
-          "colocacion": "Banco romano: caderas apoyadas, piernas fijas. Superman: tumbada boca abajo, brazos extendidos.",
-          "ejecucion": ["Banco romano: sube el tronco hasta línea recta con las piernas, sin hiperextender", "Superman: levanta brazos y piernas a la vez, unos centímetros, mantén 1-2 segundos"],
-          "debesNotar": "Lumbar y glúteo controlados, sin dolor.",
-          "errores": ["Subir de más buscando hiperextensión → el objetivo es fuerza, no rango extra"]
-        } },
-        { "id": "c_farmer", "nombre": "Paseo del granjero", "tipo": "principal", "series": 3, "distanciaM": [30, 40], "registraCarga": true, "notas": "Fuente principal de carga axial. Prioriza subir peso. Alterna con variante suitcase (una mano)", "sitiosOseos": ["columna_lumbar", "muñeca"], "video": "", "fichaTecnica": {
-          "prioridad": "amarilla",
-          "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
-          "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
-          "ejecucion": ["Camina con pasos normales, core activo, sin inclinarte"],
-          "debesNotar": "Agarre, antebrazos, core.",
-          "errores": ["Encoger hombros hacia las orejas → baja el peso"],
-          "porqueHueso": "Carga axial en columna + tracción en muñeca."
-        } }
+        {
+          "id": "c_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "c_impacto",
+          "nombre": "Bloque de impacto",
+          "tipo": "impacto",
+          "referenciaProtocolo": "protocolo_impacto",
+          "registraCarga": false,
+          "notas": "Ver protocolo de impacto — la fase depende de la semana. Al principio de la sesión",
+          "sitiosOseos": [
+            "cuello_femoral",
+            "tibia"
+          ],
+          "video": ""
+        },
+        {
+          "id": "c_peso_muerto",
+          "nombre": "Peso muerto convencional o sumo",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 5,
+          "repsMax": 6,
+          "registraCarga": true,
+          "notas": "Carga más alta que el martes, menos reps. REINCORPORACIÓN progresiva: priorizar primero el rumano de la sesión A. Subir 2,5 kg/semana.",
+          "sitiosOseos": [
+            "columna_lumbar",
+            "cadera"
+          ],
+          "video": "",
+          "reincorporacion": {
+            "estado": "progresiva desde 2026-09-30",
+            "incrementoSemanal": 2.5,
+            "condicion": "El rumano va primero. Subir solo sin molestia lumbar en 48h."
+          },
+          "fichaTecnica": {
+            "prioridad": "roja",
+            "queEs": "Levantar el peso del suelo hasta quedar de pie con la espalda recta.",
+            "colocacion": "Convencional: pies a la anchura de la cadera. Sumo: pies más separados, puntas hacia fuera.",
+            "ejecucion": [
+              "Cadera hacia atrás y abajo, espalda recta, pecho arriba",
+              "Agarra el peso con brazos rectos por fuera de las piernas",
+              "Empuja el suelo para levantarte, cadera hacia delante al final",
+              "El peso sube pegado al cuerpo",
+              "Baja controlado, no lo dejes caer"
+            ],
+            "debesNotar": "Piernas, glúteo y espalda juntos. Nunca dolor lumbar.",
+            "errores": [
+              "Espalda redondeada al iniciar → el error más importante de toda la rutina, si pasa el peso es excesivo",
+              "Tirar con la espalda antes que con las piernas"
+            ],
+            "porqueHueso": "El ejercicio con más carga de toda la rutina. Máxima prioridad para revisar con el monitor."
+          }
+        },
+        {
+          "id": "c_hip_thrust",
+          "nombre": "Hip thrust",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente",
+          "video": "",
+          "avisos": [
+            "No arquear la lumbar al final del recorrido: con artropatía facetaria L3-S1, la hiperextensión es lo que irrita las facetas. Subir hasta línea recta hombros-rodillas, no más"
+          ],
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Empujar la cadera hacia arriba con la espalda apoyada en un banco.",
+            "colocacion": "Espalda alta en el borde de un banco, pies en el suelo, peso sobre la cadera.",
+            "ejecucion": [
+              "Empuja la cadera arriba hasta línea recta hombros-rodillas",
+              "Aprieta glúteo arriba",
+              "Baja controlando"
+            ],
+            "debesNotar": "Glúteo, muy concentrado.",
+            "errores": [
+              "Arquear la lumbar en vez de subir con el glúteo → sube menos rango"
+            ]
+          }
+        },
+        {
+          "id": "c_press_hombro",
+          "nombre": "Press de hombro (variante distinta al jueves)",
+          "tipo": "principal",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Arnold press, push press o landmine. Si lo haces sentada, no aporta carga axial",
+          "sitiosOseos": [],
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Variante del press militar: Arnold press o landmine.",
+            "nota": "Pide al monitor la variante disponible en Viding."
+          }
+        },
+        {
+          "id": "c_remo_jalon",
+          "nombre": "Remo o jalón",
+          "tipo": "principal",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "verde",
+            "queEs": "Mismo patrón que remo o jalón de la sesión B."
+          }
+        },
+        {
+          "id": "c_wall_sit",
+          "nombre": "Sentadilla isométrica en pared (wall sit)",
+          "tipo": "core",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "registraCarga": false,
+          "notas": "Espalda contra la pared, rodillas a 90°. Cuádriceps y tendón rotuliano con carga axial, sin material. También lo tienes como opción en el bloque isométrico del miércoles",
+          "video": ""
+        },
+        {
+          "id": "c_pallof",
+          "nombre": "Pallof press",
+          "tipo": "core",
+          "series": 3,
+          "reps": 10,
+          "porLado": true,
+          "registraCarga": true,
+          "notas": "Anti-rotación, protege columna",
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Ejercicio anti-rotación con polea o goma a la altura del pecho.",
+            "colocacion": "De pie, de lado a la polea, peso a la altura del pecho.",
+            "ejecucion": [
+              "Empuja hacia delante en línea recta, sin dejar girar el tronco",
+              "Mantén 2 segundos, vuelve"
+            ],
+            "debesNotar": "Abdomen resistiendo el giro. No debe doler la espalda.",
+            "porqueHueso": "Protege la columna entrenando resistencia a la rotación, en vez de rotar bajo carga."
+          }
+        },
+        {
+          "id": "c_dead_bug",
+          "nombre": "Dead bug",
+          "tipo": "core",
+          "series": 3,
+          "reps": 8,
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Tumbada boca arriba, lumbar pegada al suelo todo el rato. Baja brazo y pierna contrarios sin que la espalda se despegue. Si se despega, reduce el rango. Core anti-extensión, sin flexión de columna",
+          "video": ""
+        },
+        {
+          "id": "c_plancha_lateral",
+          "nombre": "Plancha lateral",
+          "tipo": "core",
+          "series": 2,
+          "duracionSeg": [
+            20,
+            30
+          ],
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Apoyada en el antebrazo, cuerpo en línea recta. Core anti-flexión lateral: el plano que faltaba (la plancha alta cubre el frontal y el Pallof la rotación). Si molesta la lumbar, apoya las rodillas",
+          "video": ""
+        },
+        {
+          "id": "c_extension_espalda",
+          "nombre": "Extensión de espalda (banco romano o superman)",
+          "tipo": "principal",
+          "series": 2,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": false,
+          "notas": "Extensores dorsales — se asocian inversamente con fracturas vertebrales. Controlado, sin hiperextender",
+          "sitiosOseos": [
+            "columna_toracica"
+          ],
+          "video": "",
+          "avisos": [
+            "NO hiperextender: subir solo hasta la línea recta con las piernas. La artropatía facetaria L3-S1 se irrita en extensión"
+          ],
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Fortalecer los músculos que mantienen la espalda erguida.",
+            "colocacion": "Banco romano: caderas apoyadas, piernas fijas. Superman: tumbada boca abajo, brazos extendidos.",
+            "ejecucion": [
+              "Banco romano: sube el tronco hasta línea recta con las piernas, sin hiperextender",
+              "Superman: levanta brazos y piernas a la vez, unos centímetros, mantén 1-2 segundos"
+            ],
+            "debesNotar": "Lumbar y glúteo controlados, sin dolor.",
+            "errores": [
+              "Subir de más buscando hiperextensión → el objetivo es fuerza, no rango extra"
+            ]
+          }
+        },
+        {
+          "id": "c_farmer",
+          "nombre": "Paseo del granjero",
+          "tipo": "principal",
+          "series": 3,
+          "distanciaM": [
+            30,
+            40
+          ],
+          "registraCarga": true,
+          "notas": "Fuente principal de carga axial. Prioriza subir peso. Alterna con variante suitcase (una mano)",
+          "sitiosOseos": [
+            "columna_lumbar",
+            "muñeca"
+          ],
+          "video": "",
+          "fichaTecnica": {
+            "prioridad": "amarilla",
+            "queEs": "Coger peso en cada mano y caminar manteniendo la postura.",
+            "colocacion": "Mancuerna o kettlebell en cada mano, hombros atrás y abajo.",
+            "ejecucion": [
+              "Camina con pasos normales, core activo, sin inclinarte"
+            ],
+            "debesNotar": "Agarre, antebrazos, core.",
+            "errores": [
+              "Encoger hombros hacia las orejas → baja el peso"
+            ],
+            "porqueHueso": "Carga axial en columna + tracción en muñeca."
+          }
+        },
+        {
+          "id": "c_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
       ]
     }
   ],
   "bloquesSuaves": [
     {
-      "id": "carga_osea", "dia": "miercoles", "nombre": "Carga ósea suave", "nivel": 1,
-      "descripcion": "Cae entre dos sesiones de fuerza: interesa algo que aporte carga ósea sin fatigar.",
+      "id": "descanso_dinamico",
+      "nombre": "Descanso dinámico",
+      "descripcion": "Actividad suave a elegir. Se marca lo que hagas; si no vas, no se registra nada.",
+      "sugerenciaSemanal": [
+        "Al menos una vez por semana: steps o cinta con inclinación (son las únicas opciones de la lista que cargan la cadera).",
+        "Una vez por semana: yoga, barre o pilates (equilibrio y prevención de caídas).",
+        "El resto queda libre: lo que te apetezca."
+      ],
       "opciones": [
-        { "nombre": "Escalera (stair climber)", "duracionMin": [25, 35], "recomendada": true, "notas": "LA MEJOR OPCIÓN. Carga el cuello femoral de forma directa, justo donde tienes el déficit. Ritmo conversacional" },
-        { "nombre": "Cinta andando con inclinación 6-10%", "duracionMin": [30, 40], "recomendada": false, "notas": "Carga axial + cadera y glúteo sin correr. Ritmo cómodo" }
-      ]
-    },
-    {
-      "id": "descanso_real", "dia": "viernes", "nombre": "Descanso real", "nivel": 3,
-      "descripcion": "Precede a la sesión más dura de la semana. Recuperación y cardio, cero hueso.",
-      "opciones": [
-        { "nombre": "Natación", "duracionMin": [40, 45], "notas": "Excelente para descargar articulaciones" },
-        { "nombre": "Spinning suave", "duracionMin": [40, 45], "fcObjetivo": [120, 135], "notas": "120-135 ppm. Si pasa de ahí, deja de ser día de descanso. No entrar en bloques de pie ni subidas duras" },
-        { "nombre": "Elíptica", "duracionMin": [40, 45], "notas": "Los pies nunca despegan: sin pico de carga ósea" }
-      ]
-    },
-    {
-      "id": "equilibrio", "dia": "domingo", "nombre": "Equilibrio y movilidad", "nivel": 2,
-      "descripcion": "Prevención de caídas: en osteopenia de cadera, la fractura llega porque alguien se cae.",
-      "opciones": [
-        { "nombre": "Hatha yoga", "duracionMin": [45, 60], "notas": "Equilibrio, propiocepción, movilidad" },
-        { "nombre": "Barre", "duracionMin": [45, 60], "notas": "De pie, con trabajo de tobillo y cadera. Suma algo de carga" }
+        {
+          "id": "steps",
+          "nombre": "Máquina de steps",
+          "grupo": "carga_osea",
+          "campos": [
+            "duracionMin"
+          ],
+          "notas": "La mejor opción para la cadera. Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional."
+        },
+        {
+          "id": "cinta_inclinada",
+          "nombre": "Cinta con inclinación",
+          "grupo": "carga_osea",
+          "campos": [
+            "duracionMin",
+            "inclinacionPct"
+          ],
+          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10%."
+        },
+        {
+          "id": "remo_maquina",
+          "nombre": "Remo (máquina)",
+          "grupo": "neutro",
+          "campos": [
+            "duracionMin"
+          ]
+        },
+        {
+          "id": "eliptica",
+          "nombre": "Elíptica",
+          "grupo": "neutro",
+          "campos": [
+            "duracionMin"
+          ]
+        },
+        {
+          "id": "bici_sentada",
+          "nombre": "Bici sentada",
+          "grupo": "neutro",
+          "campos": [
+            "duracionMin"
+          ],
+          "notas": "Si es spinning, en día suave mantente en 120-135 ppm."
+        },
+        {
+          "id": "yoga",
+          "nombre": "Yoga / hatha yoga",
+          "grupo": "equilibrio",
+          "campos": [
+            "duracionMin"
+          ]
+        },
+        {
+          "id": "pilates",
+          "nombre": "Pilates",
+          "grupo": "equilibrio",
+          "campos": [
+            "duracionMin"
+          ],
+          "avisos": [
+            "Avisa al instructor de la osteopenia y de la deshidratación discal lumbar: pide alternativas a los ejercicios de flexión de columna (roll-ups, teasers, el cien)."
+          ]
+        },
+        {
+          "id": "barre",
+          "nombre": "Barre",
+          "grupo": "equilibrio",
+          "campos": [
+            "duracionMin"
+          ]
+        },
+        {
+          "id": "movilidad_hombro",
+          "nombre": "Movilidad de hombro (rotaciones)",
+          "grupo": "movilidad",
+          "series": 3,
+          "reps": 10,
+          "porHombro": true,
+          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para."
+        },
+        {
+          "id": "isometricos",
+          "nombre": "Isométricos: gemelo + sentadilla en pared",
+          "grupo": "tendon",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "notas": "Unos 5 minutos al final de otra actividad. Opcional."
+        },
+        {
+          "id": "otra",
+          "nombre": "Otra actividad",
+          "grupo": "libre",
+          "campos": [
+            "textoLibre",
+            "duracionMin"
+          ]
+        }
       ]
     }
   ],
   "protocoloImpacto": {
-    "id": "protocolo_impacto", "nombre": "Bloque de impacto",
+    "id": "protocolo_impacto",
+    "nombre": "Bloque de impacto",
     "descripcion": "Progresión más lenta de lo estándar por T-score de cuello femoral −2,2. Es la única parte del plan con riesgo real si se acelera.",
     "reglaProgresion": "Solo avanzas de fase si en las 48h siguientes NO notas molestia en tibial anterior, planta del pie, ingle o cadera.",
     "fases": [
-      { "fase": 1, "semanaInicio": 1, "semanaFin": 4, "nombre": "Heel drops", "series": 3, "reps": 10, "descripcion": "De puntillas y dejar caer los talones al suelo con firmeza. Sin salto. Fase alargada respecto al protocolo general" },
-      { "fase": 2, "semanaInicio": 5, "semanaFin": 8, "nombre": "Saltos pequeños en el sitio", "series": 3, "reps": 10, "descripcion": "Aterrizaje suave con rodilla flexionada" },
-      { "fase": 3, "semanaInicio": 9, "semanaFin": 12, "nombre": "Comba o saltos con altura", "series": 3, "repsMin": 10, "repsMax": 15, "descripcion": "" },
-      { "fase": 4, "semanaInicio": 13, "semanaFin": null, "nombre": "Saltos a cajón bajo / drop landings", "series": 3, "repsMin": 8, "repsMax": 10, "descripcion": "Aterrizaje controlado, escalón de 20-30 cm" }
+      {
+        "fase": 1,
+        "semanaInicio": 1,
+        "semanaFin": 4,
+        "nombre": "Heel drops",
+        "series": 3,
+        "reps": 10,
+        "descripcion": "De puntillas y dejar caer los talones al suelo con firmeza. Sin salto. Fase alargada respecto al protocolo general"
+      },
+      {
+        "fase": 2,
+        "semanaInicio": 5,
+        "semanaFin": 8,
+        "nombre": "Saltos pequeños en el sitio",
+        "series": 3,
+        "reps": 10,
+        "descripcion": "Aterrizaje suave con rodilla flexionada"
+      },
+      {
+        "fase": 3,
+        "semanaInicio": 9,
+        "semanaFin": 12,
+        "nombre": "Comba o saltos con altura",
+        "series": 3,
+        "repsMin": 10,
+        "repsMax": 15,
+        "descripcion": ""
+      },
+      {
+        "fase": 4,
+        "semanaInicio": 13,
+        "semanaFin": null,
+        "nombre": "Saltos a cajón bajo / drop landings",
+        "series": 3,
+        "repsMin": 8,
+        "repsMax": 10,
+        "descripcion": "Aterrizaje controlado, escalón de 20-30 cm"
+      }
     ]
   },
   "progresionCarga": {
     "fases": [
-      { "semanaInicio": 1, "semanaFin": 3, "nombre": "Aprender los patrones", "rpe": [6, 7], "objetivo": "Técnica impecable, carga ligera. NO buscar progresar en peso. Pedir revisión de técnica al monitor" },
-      { "semanaInicio": 4, "semanaFin": 8, "nombre": "Progresión de carga", "rpe": [7, 8], "objetivo": "Subir peso al completar todas las series en el rango alto. +2,5 kg superior / +5 kg inferior" },
-      { "semanaInicio": 9, "semanaFin": 16, "nombre": "Intensidad", "rpe": [8, 8], "objetivo": "Bajar a 5-6 reps con más carga en los tres básicos. Aquí el estímulo óseo es más potente" },
-      { "semanaInicio": 17, "semanaFin": null, "nombre": "Consolidación", "rpe": [7, 8], "objetivo": "Mantener y seguir progresando" }
+      {
+        "semanaInicio": 1,
+        "semanaFin": 3,
+        "nombre": "Aprender los patrones",
+        "rpe": [
+          6,
+          7
+        ],
+        "objetivo": "Técnica impecable, carga ligera. NO buscar progresar en peso. Pedir revisión de técnica al monitor"
+      },
+      {
+        "semanaInicio": 4,
+        "semanaFin": 8,
+        "nombre": "Progresión de carga",
+        "rpe": [
+          7,
+          8
+        ],
+        "objetivo": "Subir peso al completar todas las series en el rango alto. +2,5 kg superior / +5 kg inferior"
+      },
+      {
+        "semanaInicio": 9,
+        "semanaFin": 16,
+        "nombre": "Intensidad",
+        "rpe": [
+          8,
+          8
+        ],
+        "objetivo": "Bajar a 5-6 reps con más carga en los tres básicos. Aquí el estímulo óseo es más potente"
+      },
+      {
+        "semanaInicio": 17,
+        "semanaFin": null,
+        "nombre": "Consolidación",
+        "rpe": [
+          7,
+          8
+        ],
+        "objetivo": "Mantener y seguir progresando"
+      }
     ],
-    "descarga": { "cadaSemanas": [6, 8], "descripcion": "Semana de descarga: mismo entrenamiento al 60-70% del peso habitual" }
+    "descarga": {
+      "cadaSemanas": [
+        6,
+        8
+      ],
+      "descripcion": "Semana de descarga: mismo entrenamiento al 60-70% del peso habitual"
+    },
+    "reglaSubida": {
+      "regla": "Si completas TODAS las series en el rango ALTO de repeticiones con técnica limpia, la siguiente sesión SUBES el peso. Sin excepciones y sin esperar a sentirte preparada.",
+      "incrementos": {
+        "trenSuperior": 2.5,
+        "trenInferior": 5,
+        "accesoriosLigeros": 1
+      },
+      "noBajar": "No bajar peso sin motivo concreto (técnica que falla o molestia). Bajadas sin razón borran semanas de trabajo.",
+      "diagnostico2026_09": "Registro sep 2026: sentadilla estancada en 20 kg durante 4 sesiones, prensa en 50 desde agosto, y varios retrocesos sin motivo (curl 7,5→3 kg, farmer 24→16 kg, jalón 30→25). Sin sobrecarga progresiva no hay adaptación muscular ni ósea. Este es el principal freno identificado."
+    }
   },
   "evitar": [
-    { "que": "Flexión de columna bajo carga", "ejemplos": ["crunch en máquina", "abdominales con peso tras la nuca", "recoger peso con espalda redondeada"], "motivo": "Asociado a más fracturas vertebrales con masa ósea baja" },
-    { "que": "Rotación de tronco bajo carga alta", "ejemplos": ["giros rusos con peso"], "motivo": "Precaución con osteopenia" },
-    { "que": "Maniobra de Valsalva máxima", "ejemplos": ["bloquear la respiración a tope en la rep más pesada"], "motivo": "PENDIENTE VALIDACIÓN: quiste ovárico 42x31mm. Exhalar en el esfuerzo, core activo sin bloquear del todo" },
-    { "que": "Entrenar fuerte tras comida completa", "ejemplos": [], "motivo": "Reflujo laringofaríngeo pendiente de evaluar. Esperar 2h" },
-    { "que": "Suplementar hierro sin indicación médica", "ejemplos": [], "motivo": "Talasemia minor: el exceso de hierro es riesgo real" }
+    {
+      "que": "Flexión de columna bajo carga",
+      "ejemplos": [
+        "crunch en máquina",
+        "abdominales con peso tras la nuca",
+        "recoger peso con espalda redondeada"
+      ],
+      "motivo": "Asociado a más fracturas vertebrales con masa ósea baja"
+    },
+    {
+      "que": "Rotación de tronco bajo carga alta",
+      "ejemplos": [
+        "giros rusos con peso"
+      ],
+      "motivo": "Precaución con osteopenia"
+    },
+    {
+      "que": "Maniobra de Valsalva máxima",
+      "ejemplos": [
+        "bloquear la respiración a tope en la rep más pesada"
+      ],
+      "motivo": "PENDIENTE VALIDACIÓN con Dra. Tábara: quiste ovárico 42x31mm. Exhalar en el esfuerzo, core activo sin bloquear del todo."
+    },
+    {
+      "que": "Entrenar fuerte tras comida completa",
+      "ejemplos": [],
+      "motivo": "Reflujo laringofaríngeo pendiente de evaluar. Esperar 2h"
+    },
+    {
+      "que": "Suplementar hierro sin indicación médica",
+      "ejemplos": [],
+      "motivo": "Talasemia minor: el exceso de hierro es riesgo real"
+    },
+    {
+      "que": "Hiperextensión lumbar bajo carga",
+      "ejemplos": [
+        "arquear la espalda al final del hip thrust",
+        "arquear al empujar en press de hombro",
+        "hiperextender en el banco romano"
+      ],
+      "motivo": "RM 20/09/2026: artropatía facetaria con hipertrofia articular y líquido sinovial L3-S1. Las facetas se irritan en extensión. No prohíbe los ejercicios, obliga a cuidar el final del recorrido."
+    }
   ],
   "alertas": [
-    { "señal": "Dolor lumbar agudo o punzante (no agujetas)", "accion": "Parar la sesión. Si persiste >48h, consulta", "urgencia": "media" },
-    { "señal": "Dolor en ingle o cadera con la carga", "accion": "Parar. Descartar antes de seguir progresando", "urgencia": "media" },
-    { "señal": "Dolor pélvico agudo e intenso, con náusea", "accion": "URGENCIAS — descartar torsión de quiste", "urgencia": "alta" },
-    { "señal": "Mareo, palpitaciones o disnea desproporcionada", "accion": "Parar. Comentar en consulta (contexto talasemia)", "urgencia": "media" },
-    { "señal": "Pérdida de orina con el esfuerzo", "accion": "No urgente, pero llevarlo a la Dra. Tábara", "urgencia": "baja" },
-    { "señal": "Fatiga que no remite entre sesiones", "accion": "Reducir volumen una semana antes de insistir", "urgencia": "baja" }
+    {
+      "señal": "Dolor lumbar agudo o punzante (no agujetas)",
+      "accion": "Parar la sesión. Si persiste >48h, consulta",
+      "urgencia": "media"
+    },
+    {
+      "señal": "Dolor en ingle o cadera con la carga",
+      "accion": "Parar. Descartar antes de seguir progresando",
+      "urgencia": "media"
+    },
+    {
+      "señal": "Dolor pélvico agudo e intenso, con náusea",
+      "accion": "URGENCIAS — descartar torsión de quiste",
+      "urgencia": "alta"
+    },
+    {
+      "señal": "Mareo, palpitaciones o disnea desproporcionada",
+      "accion": "Parar. Comentar en consulta (contexto talasemia)",
+      "urgencia": "media"
+    },
+    {
+      "señal": "Pérdida de orina con el esfuerzo",
+      "accion": "No urgente, pero llevarlo a la Dra. Tábara",
+      "urgencia": "baja"
+    },
+    {
+      "señal": "Fatiga que no remite entre sesiones",
+      "accion": "Reducir volumen una semana antes de insistir",
+      "urgencia": "baja"
+    }
   ],
   "pendienteMedico": [
-    { "tema": "Quiste ovárico y levantamiento pesado", "quien": "Dra. Tábara", "estado": "pendiente" },
-    { "tema": "Decisión sobre terapia hormonal", "quien": "Dra. Tábara", "estado": "pendiente" },
-    { "tema": "Vitamina D (nunca medida)", "quien": "analítica", "estado": "pendiente", "prioridad": "alta" },
-    { "tema": "Serología celiaquía (antitransglutaminasa + IgA total) — SIN retirar gluten antes", "quien": "analítica", "estado": "pendiente", "prioridad": "alta" },
-    { "tema": "PCR, VSG, factor reumatoide, anti-CCP (madre con AR)", "quien": "analítica", "estado": "pendiente", "prioridad": "media" },
-    { "tema": "Averiguar si hay antecedente de fractura de cadera en padres (variable FRAX)", "quien": "familia", "estado": "pendiente", "prioridad": "media" },
-    { "tema": "Ferritina 22 con talasemia — vigilar", "quien": "Dra. Tábara", "estado": "pendiente", "prioridad": "baja" }
-  ],
-  "estiramientos": {
-    "dinamico": {
-      "cuando": "antes",
-      "duracionMin": [5, 8],
-      "nota": "El estático antes de entrenar puede reducir ligeramente fuerza y potencia. El dinámico prepara sin ese efecto. Nada se mantiene fijo, todo es movimiento continuo.",
-      "ejercicios": [
-        { "zona": "cadera", "nombre": "Círculos de cadera", "dosis": "10 por lado" },
-        { "zona": "cadera_isquios", "nombre": "Balanceo de pierna adelante-atrás", "dosis": "10 por lado" },
-        { "zona": "tobillo", "nombre": "Círculos de tobillo + elevación de talones", "dosis": "10 cada uno" },
-        { "zona": "hombro", "nombre": "Rotaciones de brazo, círculos amplios", "dosis": "10 cada dirección" },
-        { "zona": "columna_toracica", "nombre": "Rotación de tronco suave, brazos cruzados al pecho", "dosis": "10 por lado" },
-        { "zona": "general", "nombre": "Sentadilla sin carga", "dosis": "2-3 series" }
-      ]
+    {
+      "tema": "Quiste ovárico y levantamiento pesado",
+      "quien": "Dra. Tábara",
+      "estado": "pendiente"
     },
-    "estatico": {
-      "cuando": "despues",
-      "duracionMin": [5, 10],
-      "duracionPorPosturaSeg": [20, 30],
-      "nota": "Sin rebotar, hasta notar tensión suave, nunca dolor.",
-      "evitar": "Isquiotibiales de pie con rodillas rectas mantenido. Cualquier flexión profunda de columna sostenida.",
-      "ejercicios": [
-        { "zona": "cuadriceps", "nombre": "De pie, sujeta el tobillo llevando el talón hacia el glúteo", "notas": "Apóyate en algo si hace falta equilibrio" },
-        { "zona": "isquiotibiales", "nombre": "Tumbada boca arriba, pierna elevada sujeta con toalla o goma", "notas": "NO de pie inclinada hacia delante" },
-        { "zona": "gluteo", "nombre": "Tumbada boca arriba, tobillo sobre rodilla contraria, lleva la pierna de abajo hacia el pecho", "notas": "" },
-        { "zona": "flexores_cadera", "nombre": "Zancada baja, cadera hacia delante, sin arquear la lumbar", "notas": "El que más se acorta por estar sentada 8h" },
-        { "zona": "pecho_hombro", "nombre": "Brazo estirado contra marco de puerta, giro leve del cuerpo", "notas": "" },
-        { "zona": "espalda_alta", "nombre": "Brazos cruzados al pecho, tira suavemente hacia el hombro contrario", "notas": "" },
-        { "zona": "gemelo", "nombre": "De pie frente a la pared, pierna atrás con el talón en el suelo", "notas": "" }
-      ]
+    {
+      "tema": "Decisión sobre terapia hormonal",
+      "quien": "Dra. Tábara",
+      "estado": "pendiente"
+    },
+    {
+      "tema": "Vitamina D (nunca medida)",
+      "quien": "analítica",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    },
+    {
+      "tema": "Serología celiaquía (antitransglutaminasa + IgA total) — SIN retirar gluten antes",
+      "quien": "analítica",
+      "estado": "pendiente",
+      "prioridad": "alta"
+    },
+    {
+      "tema": "PCR, VSG, factor reumatoide, anti-CCP (madre con AR)",
+      "quien": "analítica",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "tema": "Averiguar si hay antecedente de fractura de cadera en padres (variable FRAX)",
+      "quien": "familia",
+      "estado": "pendiente",
+      "prioridad": "media"
+    },
+    {
+      "tema": "Ferritina 22 con talasemia — vigilar",
+      "quien": "Dra. Tábara",
+      "estado": "pendiente",
+      "prioridad": "baja"
+    }
+  ],
+  "visualizacion": {
+    "fichasTecnicas": {
+      "plegadoPorDefecto": true,
+      "motivo": "Técnica revisada con el instructor de Viding (sep 2026). Se mantienen accesibles bajo 'Cómo se hace' por si hacen falta, pero no ocupan espacio en pantalla."
+    },
+    "avisosMedicos": {
+      "plegadoPorDefecto": false,
+      "motivo": "Los avisos del campo 'avisos' NO son de técnica: derivan de hallazgos médicos (artropatía facetaria L3-S1, osteopenia cadera T-2.4, quiste ovárico). Permanecen siempre visibles."
     }
   }
 };
@@ -712,6 +1675,45 @@ const SITIO_LABEL = {
   columna_lumbar:'columna lumbar', cadera:'cadera', cuello_femoral:'cuello femoral',
   muñeca:'muñeca', radio_distal:'radio distal', humero:'húmero', columna_toracica:'columna torácica', tibia:'tibia'
 };
+const GRUPO_LABEL = {
+  carga_osea:'carga ósea', neutro:'neutro', equilibrio:'equilibrio',
+  movilidad:'movilidad', tendon:'tendón', libre:'libre'
+};
+function grupoTagHtml(g){
+  return g ? ' <span class="grupo-tag grupo-'+g+'">'+(GRUPO_LABEL[g]||g)+'</span>' : '';
+}
+function avisosBoxHtml(avisos){
+  let h = '<div class="avisos-box">';
+  avisos.forEach(a=>{ h += '<div class="aviso-item"><span class="aviso-ico">⚠️</span><span>'+a+'</span></div>'; });
+  return h + '</div>';
+}
+function opcionMetaText(op){
+  // Meta fija solo para opciones basadas en series (isométricos, movilidad).
+  if(!op.series) return '';
+  let t = op.series+' x ';
+  if(op.duracionSeg) t += op.duracionSeg[0]+'-'+op.duracionSeg[1]+' seg';
+  else if(op.reps!==undefined) t += op.reps+' reps';
+  if(op.porHombro) t += ' /hombro';
+  return t;
+}
+function reglaSubidaHtml(){
+  const r = RUTINA.progresionCarga && RUTINA.progresionCarga.reglaSubida;
+  if(!r) return '';
+  let h = '<div class="regla-subida">';
+  h += '<div class="regla-subida-titulo">📈 Regla de subida</div>';
+  h += '<p>'+r.regla+'</p>';
+  if(r.incrementos){
+    const inc = r.incrementos;
+    const partes = [];
+    if(inc.trenSuperior!==undefined) partes.push('Tren superior +'+inc.trenSuperior+' kg');
+    if(inc.trenInferior!==undefined) partes.push('Tren inferior +'+inc.trenInferior+' kg');
+    if(inc.accesoriosLigeros!==undefined) partes.push('Accesorios ligeros +'+inc.accesoriosLigeros+' kg');
+    if(partes.length) h += '<div class="regla-subida-inc">'+partes.join(' · ')+'</div>';
+  }
+  if(r.noBajar) h += '<p class="regla-subida-nobajar">'+r.noBajar+'</p>';
+  h += '</div>';
+  return h;
+}
 
 function pad(n){ return n<10 ? '0'+n : ''+n; }
 function todayISO(){ const d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
@@ -908,42 +1910,6 @@ function cerrarModalVideo(){
 function cerrarModalSuave(){
   document.getElementById('modal-suave').classList.add('hidden');
 }
-function zonaLabel(zona){ return (zona||'').replace(/_/g,' '); }
-function estiramientoDinamicoHtml(checked){
-  const e = RUTINA.estiramientos.dinamico;
-  let html = '<div class="estiramiento-card dinamico">';
-  html += '<h3>🔄 Antes de empezar: movilidad dinámica</h3>';
-  html += '<div class="estiramiento-meta">'+e.duracionMin[0]+'-'+e.duracionMin[1]+' min</div>';
-  html += '<div class="estiramiento-nota">'+e.nota+'</div>';
-  e.ejercicios.forEach(x=>{
-    html += '<div class="estiramiento-item">';
-    html += '<div class="zona">'+zonaLabel(x.zona)+'</div>';
-    html += '<div class="nombre">'+x.nombre+'</div>';
-    if(x.dosis) html += '<div class="dosis">'+x.dosis+'</div>';
-    html += '</div>';
-  });
-  html += '<label class="estiramiento-check"><input type="checkbox" id="estir-dinamico-check" '+(checked?'checked':'')+' onchange="onEstiramientoCheck(\'dinamico\', this)"> Movilidad hecha</label>';
-  html += '</div>';
-  return html;
-}
-function estiramientoEstaticoHtml(checked){
-  const e = RUTINA.estiramientos.estatico;
-  let html = '<div class="estiramiento-card estatico">';
-  html += '<h3>🧘 Al terminar: estiramiento estático</h3>';
-  html += '<div class="estiramiento-meta">'+e.duracionMin[0]+'-'+e.duracionMin[1]+' min · '+e.duracionPorPosturaSeg[0]+'-'+e.duracionPorPosturaSeg[1]+' seg por postura</div>';
-  html += '<div class="estiramiento-nota">'+e.nota+'</div>';
-  if(e.evitar) html += '<div class="estiramiento-evitar">⚠️ Evitar: '+e.evitar+'</div>';
-  e.ejercicios.forEach(x=>{
-    html += '<div class="estiramiento-item">';
-    html += '<div class="zona">'+zonaLabel(x.zona)+'</div>';
-    html += '<div class="nombre">'+x.nombre+'</div>';
-    if(x.notas) html += '<div class="dosis">'+x.notas+'</div>';
-    html += '</div>';
-  });
-  html += '<label class="estiramiento-check"><input type="checkbox" id="estir-estatico-check" '+(checked?'checked':'')+' onchange="onEstiramientoCheck(\'estatico\', this)"> Estiramiento hecho</label>';
-  html += '</div>';
-  return html;
-}
 function getDraftActual(sesionId){
   // Sesión en curso de cierre: prioriza la que se está editando y, si no,
   // la más reciente de hoy para esa sesión (aunque ya esté marcada completada,
@@ -959,37 +1925,6 @@ function sesionRealizada(s){
   return !!s && (s.completada === true || (s.ejercicios||[]).some(function(e){
     return (e.series||[]).some(function(x){ return x.hecha; });
   }));
-}
-function onEstiramientoCheck(tipo, el){
-  if(!sesionActualDraft) return;
-  if(!sesionActualDraft.estiramientos) sesionActualDraft.estiramientos = { dinamico:false, estatico:false };
-  sesionActualDraft.estiramientos[tipo] = el.checked;
-  saveState();
-}
-function renderEstiramientoFinal(sesionId){
-  const sesionDef = getSesionDef(sesionId);
-  setActiveNav('inicio');
-  document.getElementById('topbar-title').textContent = 'Estiramiento final';
-  const draft = getDraftActual(sesionId);
-  if(draft) sesionActualDraft = draft;
-  const estaticoHecho = draft && draft.estiramientos && draft.estiramientos.estatico;
-  let html = '';
-  html += '<div class="card card-highlight">';
-  html += '<h2>💪 '+(sesionDef?sesionDef.nombre:'Sesión')+'</h2>';
-  html += '<p class="text-dim">Sesión guardada ✓. Cierra con el estiramiento estático y marca que lo has hecho.</p>';
-  html += '</div>';
-  html += estiramientoEstaticoHtml(estaticoHecho);
-  html += '<button class="btn btn-primary btn-large" onclick="guardarSesionFinal(\''+sesionId+'\')">Ir a inicio</button>';
-  document.getElementById('app').innerHTML = html;
-}
-function guardarSesionFinal(sesionId){
-  const draft = getDraftActual(sesionId);
-  if(draft){
-    draft.completada = true;
-    saveState();
-  }
-  toast('Sesión guardada');
-  location.hash = '#/';
 }
 function toggleFicha(ejercicioId){
   const el = document.getElementById('ficha-'+ejercicioId);
@@ -1038,15 +1973,22 @@ function renderInicio(){
     html += '<p class="text-dim">'+sesion.descripcion+'</p>';
     html += '<p class="text-dim">'+sesion.duracionMin[0]+'-'+sesion.duracionMin[1]+' min</p>';
     html += '<a href="#/sesion/'+sesion.id+'" class="btn btn-primary btn-large">Empezar</a>';
-  } else if(diaInfo.tipo === 'suave'){
-    const bloque = RUTINA.bloquesSuaves.find(b=>b.id===diaInfo.bloqueId);
+  } else if(diaInfo.tipo === 'dinamico' || diaInfo.tipo === 'suave'){
+    const bloque = RUTINA.bloquesSuaves.find(b=>b.id===diaInfo.bloqueId) || RUTINA.bloquesSuaves[0];
     html += '<h2>'+bloque.nombre+'</h2>';
     html += '<p class="text-dim">'+bloque.descripcion+'</p>';
+    if(bloque.sugerenciaSemanal && bloque.sugerenciaSemanal.length){
+      html += '<ul class="sugerencia-semanal">';
+      bloque.sugerenciaSemanal.forEach(s=>{ html += '<li>'+s+'</li>'; });
+      html += '</ul>';
+    }
     bloque.opciones.forEach((op, i)=>{
-      html += '<div class="opcion-suave'+(op.recomendada?' recomendada':'')+'">';
-      html += '<div class="nombre">'+op.nombre+(op.recomendada?' <span class="recom-tag">RECOMENDADA</span>':'')+'</div>';
-      html += '<div class="text-dim">'+op.duracionMin[0]+'-'+op.duracionMin[1]+' min'+(op.fcObjetivo?' · FC '+op.fcObjetivo[0]+'-'+op.fcObjetivo[1]+' ppm':'')+'</div>';
-      html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
+      html += '<div class="opcion-suave">';
+      html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+'</div>';
+      const metaOp = opcionMetaText(op);
+      if(metaOp) html += '<div class="text-dim">'+metaOp+'</div>';
+      if(op.notas) html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
+      if(op.avisos && op.avisos.length) html += avisosBoxHtml(op.avisos);
       html += '<button class="btn btn-sm" style="margin-top:8px;" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">Registrar</button>';
       html += '</div>';
     });
@@ -1060,7 +2002,7 @@ function renderInicio(){
   });
   html += '</div>';
 
-  html += '<h3 style="margin-top:16px;">Otro bloque suave</h3>';
+  html += '<h3 style="margin-top:16px;">Registrar día dinámico</h3>';
   html += '<div class="row">';
   RUTINA.bloquesSuaves.forEach(b=>{
     html += '<button class="btn btn-secondary" onclick="abrirRegistroSuave(\''+b.id+'\', null)">'+b.nombre+'</button>';
@@ -1071,47 +2013,77 @@ function renderInicio(){
   setSemanaBadge();
 }
 
+function campoDef(nombre){
+  const m = {
+    duracionMin:    { label:'Duración (min)',   type:'number', def:'30' },
+    inclinacionPct: { label:'Inclinación (%)',  type:'number', def:'8'  },
+    textoLibre:     { label:'Actividad',        type:'text',   def:''   }
+  };
+  return m[nombre] || { label:nombre, type:'text', def:'' };
+}
+function camposDeOpcion(op){
+  // Toda opción registra al menos la duración; algunas añaden campos propios.
+  const base = (op.campos && op.campos.length) ? op.campos.slice() : [];
+  if(base.indexOf('duracionMin') === -1) base.unshift('duracionMin');
+  return base;
+}
+function renderCamposSuave(bloqueId){
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
+  const op = bloque.opciones[Number(document.getElementById('suave-opcion').value)] || bloque.opciones[0];
+  let h = '';
+  camposDeOpcion(op).forEach(c=>{
+    const d = campoDef(c);
+    h += '<label>'+d.label+'</label>';
+    h += '<input class="wide" id="suave-campo-'+c+'" type="'+d.type+'" value="'+(d.type==='number'?d.def:'')+'">';
+  });
+  document.getElementById('suave-campos').innerHTML = h;
+}
 function abrirRegistroSuave(bloqueId, opcionIndex){
-  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId);
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
   let opciones = '';
   bloque.opciones.forEach((op,i)=>{
-    const sel = (opcionIndex!==null && i===opcionIndex) || (opcionIndex===null && op.recomendada);
-    opciones += '<option value="'+i+'" '+(sel?'selected':'')+'>'+op.nombre+'</option>';
+    opciones += '<option value="'+i+'">'+op.nombre+'</option>';
   });
-  const defaultOp = bloque.opciones[opcionIndex!==null?opcionIndex:bloque.opciones.findIndex(o=>o.recomendada)] || bloque.opciones[0];
-  const defaultDur = defaultOp.duracionMin ? defaultOp.duracionMin[0] : 30;
-
+  const startIdx = (opcionIndex!==null && opcionIndex>=0) ? opcionIndex : 0;
   const html =
     '<button class="modal-close" onclick="cerrarModalSuave()">×</button>'+
     '<h3>Registrar: '+bloque.nombre+'</h3>'+
     '<label>Fecha</label>'+
     '<input type="date" id="suave-fecha" value="'+todayISO()+'">'+
     '<label>Opción</label>'+
-    '<select id="suave-opcion">'+opciones+'</select>'+
-    '<label>Duración (min)</label>'+
-    '<input type="number" class="wide" id="suave-duracion" value="'+defaultDur+'">'+
+    '<select id="suave-opcion" onchange="renderCamposSuave(\''+bloqueId+'\')">'+opciones+'</select>'+
+    '<div id="suave-campos"></div>'+
     '<button class="btn btn-primary btn-large" style="margin-top:16px;" onclick="guardarDiaSuave(\''+bloqueId+'\')">Guardar</button>';
 
   document.getElementById('modal-suave-content').innerHTML = html;
   document.getElementById('modal-suave').classList.remove('hidden');
+  document.getElementById('suave-opcion').value = startIdx;
+  renderCamposSuave(bloqueId);
 }
 function guardarDiaSuave(bloqueId){
   const fecha = document.getElementById('suave-fecha').value || todayISO();
-  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId);
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
   const opIdx = Number(document.getElementById('suave-opcion').value);
-  const duracion = Number(document.getElementById('suave-duracion').value) || null;
-  const opcionNombre = bloque.opciones[opIdx].nombre;
+  const op = bloque.opciones[opIdx];
+  const datos = {};
+  camposDeOpcion(op).forEach(c=>{
+    const el = document.getElementById('suave-campo-'+c);
+    if(!el) return;
+    datos[c] = (el.type==='number') ? (Number(el.value)||null) : (el.value||null);
+  });
+  const duracion = (datos.duracionMin!==undefined) ? datos.duracionMin : null;
 
   const existente = state.diasSuaves.find(d=>d.fecha===fecha && d.bloqueId===bloqueId);
   if(existente){
-    existente.opcion = opcionNombre;
+    existente.opcion = op.nombre;
     existente.duracion = duracion;
+    existente.datos = datos;
   } else {
-    state.diasSuaves.push({ fecha, bloqueId, opcion: opcionNombre, duracion });
+    state.diasSuaves.push({ fecha, bloqueId, opcion: op.nombre, duracion, datos });
   }
   saveState();
   cerrarModalSuave();
-  toast('Día suave guardado');
+  toast('Día dinámico guardado');
   if(location.hash === '#/' || location.hash === '' ) renderInicio();
 }
 
@@ -1122,11 +2094,11 @@ function findOrCreateDraft(sesionId){
   const hoy = todayISO();
   let draft = state.sesiones.find(s=> s.fecha===hoy && s.sesionId===sesionId && !s.completada);
   if(!draft){
-    draft = { id: uuid(), fecha: hoy, sesionId: sesionId, completada: false, ejercicios: [], estiramientos: { dinamico:false, estatico:false } };
+    // Los estiramientos son ahora ejercicios de la sesión (tipo "estiramiento"),
+    // así que ya no se guardan como campo aparte en el borrador.
+    draft = { id: uuid(), fecha: hoy, sesionId: sesionId, completada: false, ejercicios: [] };
     state.sesiones.push(draft);
     saveState();
-  } else if(!draft.estiramientos){
-    draft.estiramientos = { dinamico:false, estatico:false };
   }
   return draft;
 }
@@ -1154,7 +2126,7 @@ function renderSesion(sesionId){
   let totalUnidades = 0, hechasUnidades = 0;
   let html = '';
   html += '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/\'">←</button><h2 style="margin:0;">'+sesionDef.nombre+'</h2></div>';
-  html += estiramientoDinamicoHtml(draft.estiramientos && draft.estiramientos.dinamico);
+  html += reglaSubidaHtml();
   html += '<div class="progress-outer"><div class="progress-fill" id="progress-fill"></div></div>';
   html += '<div id="ejercicios-wrap">';
 
@@ -1192,6 +2164,15 @@ function renderEjercicioCard(ej, draft, entry){
   }
   html += '</div>';
 
+  if(ej.tipo === 'estiramiento'){
+    if(ej.notas) html += '<div class="ejercicio-notas">'+ej.notas+'</div>';
+    if(ej.avisos && ej.avisos.length) html += avisosBoxHtml(ej.avisos);
+    const s0 = entry.series[0] || {};
+    html += '<label class="estiramiento-check"><input type="checkbox" id="hecha-'+ej.id+'-0" '+(s0.hecha?'checked':'')+' onchange="onHechaChange(\''+ej.id+'\',0)"> Hecho</label>';
+    html += '</div>';
+    return html;
+  }
+
   let metaParts = [];
   const seriesCount = ej.series || 1;
   if(ej.tipo!=='calentamiento'){
@@ -1216,8 +2197,10 @@ function renderEjercicioCard(ej, draft, entry){
     });
   }
   if(ej.fichaTecnica){
-    html += '<div><button type="button" class="btn-ficha" onclick="toggleFicha(\''+ej.id+'\')">Cómo se hace <span id="arrow-'+ej.id+'">▾</span></button></div>';
-    html += '<div class="ficha-tecnica hidden" id="ficha-'+ej.id+'">'+fichaTecnicaHtml(ej.fichaTecnica)+'</div>';
+    const vis = RUTINA.visualizacion && RUTINA.visualizacion.fichasTecnicas;
+    const plegada = !vis || vis.plegadoPorDefecto !== false; // por defecto, plegada
+    html += '<div><button type="button" class="btn-ficha" onclick="toggleFicha(\''+ej.id+'\')">Cómo se hace <span id="arrow-'+ej.id+'">'+(plegada?'▾':'▴')+'</span></button></div>';
+    html += '<div class="ficha-tecnica'+(plegada?' hidden':'')+'" id="ficha-'+ej.id+'">'+fichaTecnicaHtml(ej.fichaTecnica)+'</div>';
   }
 
   html += '<div class="series-list">';
@@ -1348,12 +2331,13 @@ function actualizarProgreso(){
   if(fill) fill.style.width = pct+'%';
 }
 function terminarSesion(sesionId){
-  // Marca la sesión como completada YA, para que cuente aunque el usuario
-  // salga sin pasar por el botón final de la pantalla de estiramiento.
+  // El estiramiento estático es ahora el último ejercicio de la sesión, así que
+  // al terminar se marca la sesión como completada y se vuelve al inicio.
   const s = getDraftActual(sesionId);
   if(s){ s.completada = true; sesionActualDraft = s; }
   saveState();
-  location.hash = '#/estiramiento/'+sesionId;
+  toast('Sesión guardada');
+  location.hash = '#/';
 }
 
 /* trigger inicial de indicadores tras render */
@@ -1705,7 +2689,7 @@ function router(){
 
   if(parts.length===0){ renderInicio(); return; }
   if(parts[0]==='sesion' && parts[1]){ renderSesion(parts[1]); setTimeout(inicializarIndicadores,0); return; }
-  if(parts[0]==='estiramiento' && parts[1]){ renderEstiramientoFinal(parts[1]); return; }
+  if(parts[0]==='estiramiento' && parts[1]){ location.hash = '#/sesion/'+parts[1]; return; }
   if(parts[0]==='historial' && parts[1]){ renderHistorialDetalle(parts[1]); return; }
   if(parts[0]==='historial'){ renderHistorial(); return; }
   if(parts[0]==='ajustes'){ renderAjustes(); return; }
