@@ -231,6 +231,7 @@ input[type=checkbox]{
 .ficha-tecnica ol,.ficha-tecnica ul{margin:0 0 4px 0;padding-left:20px;}
 .ficha-tecnica li{margin-bottom:3px;}
 .ficha-porque{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);color:var(--accent);font-size:0.85rem;}
+.ficha-youtube{display:inline-block;margin-top:10px;color:var(--accent);font-weight:700;font-size:0.85rem;text-decoration:none;}
 
 /* estiramientos */
 .estiramiento-card{
@@ -384,7 +385,7 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 const RUTINA =
 {
   "meta": {
-    "version": "1.4",
+    "version": "1.5",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -1711,7 +1712,37 @@ const RUTINA =
         "series": 1,
         "reps": 10,
         "duracionSeg": 5,
-        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día."
+        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Retracción cervical (chin tuck)",
+          "queEs": "Llevar la cabeza hacia atrás en horizontal, sin inclinarla, para colocarla sobre los hombros. Es el ejercicio que más rinde para la cabeza adelantada.",
+          "colocacion": "De pie con la espalda y el culo cerca de la pared, o sentada erguida, o tumbada boca arriba sin almohada gruesa. Mirada al frente, hombros relajados, costillas hacia abajo.",
+          "ejecucion": [
+            "Lleva la barbilla hacia atrás como si quisieras hacerte doble papada, deslizando la cabeza en horizontal.",
+            "La barbilla no sube ni baja: la mirada sigue al frente.",
+            "Mantén 5 segundos y vuelve despacio.",
+            "10 repeticiones. Puedes repetirlo 2-3 veces al día, incluso sentada en la mesa."
+          ],
+          "debesNotar": "Un estiramiento suave en la base del cráneo y algo de trabajo en la parte delantera del cuello. Nunca dolor, hormigueo ni mareo.",
+          "erroresTipicos": [
+            {
+              "error": "Bajar la barbilla hacia el pecho",
+              "comoDetectarlo": "La mirada se va al suelo: eso es flexión, no retracción. La cabeza tiene que ir hacia atrás, no hacia abajo"
+            },
+            {
+              "error": "Sacar pecho o arquear la zona lumbar para 'ponerte recta'",
+              "comoDetectarlo": "Notas la espalda baja tensa. Con la artropatía facetaria, la postura correcta es alargarte, no arquearte"
+            },
+            {
+              "error": "Empujar con fuerza",
+              "comoDetectarlo": "Notas tensión en la mandíbula o el cuello. Es un movimiento suave"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "chin tuck retracción cervical ejercicio fisioterapia"
+        }
       },
       {
         "id": "p_flexion_craneocervical",
@@ -1722,21 +1753,111 @@ const RUTINA =
           5,
           10
         ],
-        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta."
+        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Flexión craneocervical tumbada",
+          "queEs": "Un 'asentimiento' muy suave que activa los flexores profundos del cuello, los que se debilitan con la cabeza adelantada, sin usar los superficiales.",
+          "colocacion": "Boca arriba, rodillas flexionadas y pies apoyados. Toalla fina doblada bajo la cabeza, de forma que la barbilla no quede ni levantada ni pegada al pecho.",
+          "ejecucion": [
+            "Asiente con la cabeza de forma muy suave, como diciendo 'sí' a cámara lenta. El movimiento es pequeñísimo: la cabeza se desliza sobre la toalla.",
+            "Mantén 5-10 segundos, con la nuca larga y sin apretar.",
+            "Vuelve despacio a la posición inicial.",
+            "10 repeticiones."
+          ],
+          "debesNotar": "Un esfuerzo muy ligero y profundo en la parte delantera del cuello. No debe notarse en la mandíbula ni en los músculos de los lados del cuello.",
+          "erroresTipicos": [
+            {
+              "error": "Hacerlo con demasiada fuerza",
+              "comoDetectarlo": "Se marcan los músculos de los lados del cuello o tensas la mandíbula. Baja la intensidad: cuanto más suave, mejor"
+            },
+            {
+              "error": "Levantar la cabeza de la toalla",
+              "comoDetectarlo": "La cabeza deja de deslizarse y pasa a subirse. El movimiento es solo de asentir"
+            },
+            {
+              "error": "Contener la respiración",
+              "comoDetectarlo": "Notas presión en la cara o el pecho. Respira con normalidad todo el rato"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "flexión craneocervical tumbada ejercicio cuello fisioterapia"
+        }
       },
       {
         "id": "p_wall_angels",
         "nombre": "Wall angels",
         "series": 2,
         "reps": 10,
-        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas."
+        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Wall angels",
+          "queEs": "Subir y bajar los brazos, de una W a una Y, con la espalda pegada a la pared. Trabaja la parte baja y media del trapecio y ayuda a abrir el pecho y la espalda alta.",
+          "colocacion": "De pie con la espalda contra la pared, pies a unos 10-15 cm de ella y rodillas ligeramente flexionadas. Costillas hacia abajo. Brazos en W: codos a 90° y el dorso de las manos y los codos tocando la pared.",
+          "ejecucion": [
+            "Desliza los brazos hacia arriba por la pared hasta formar una Y, o hasta donde llegues sin despegar nada.",
+            "Baja despacio de nuevo hasta la W.",
+            "Mantén siempre la cabeza, la espalda alta y las muñecas en contacto con la pared, sin adelantar la cabeza.",
+            "2 series de 10 repeticiones."
+          ],
+          "debesNotar": "Trabajo entre los omóplatos y en la parte alta de la espalda, y un estiramiento del pecho.",
+          "erroresTipicos": [
+            {
+              "error": "Despegar la zona lumbar de la pared arqueando la espalda",
+              "comoDetectarlo": "Notas la espalda baja tensa o metes la mano entre la pared y la lumbar. Con la artropatía facetaria es lo que hay que evitar: aprieta el abdomen y baja las costillas"
+            },
+            {
+              "error": "Despegar codos o muñecas",
+              "comoDetectarlo": "Los dorsos de las manos dejan de tocar la pared. Sube solo hasta donde puedas mantener el contacto"
+            },
+            {
+              "error": "Encoger los hombros hacia las orejas",
+              "comoDetectarlo": "Notas tensión en el cuello. Baja los hombros antes de cada repetición"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "wall angels ejercicio postura hombros"
+        }
       },
       {
         "id": "p_band_pull_apart",
         "nombre": "Band pull-apart (goma)",
         "series": 2,
         "reps": 15,
-        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros."
+        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Band pull-apart (goma)",
+          "queEs": "Abrir una goma elástica hacia los lados con los brazos estirados delante. Trabaja la parte trasera del hombro y el trapecio medio, que compensan los hombros hacia delante.",
+          "colocacion": "De pie, con una goma ligera sujeta con las palmas hacia abajo a la altura del pecho, manos a la anchura de los hombros y brazos casi estirados. Costillas hacia abajo.",
+          "ejecucion": [
+            "Abre la goma llevando las manos hacia los lados, juntando los omóplatos hacia atrás y abajo.",
+            "Llega hasta donde puedas con control, sin que se muevan el cuello ni la espalda.",
+            "Vuelve despacio, sin soltar la goma de golpe.",
+            "2 series de 15 repeticiones."
+          ],
+          "debesNotar": "Trabajo entre los omóplatos y en la parte de atrás del hombro.",
+          "erroresTipicos": [
+            {
+              "error": "Encoger los hombros hacia las orejas",
+              "comoDetectarlo": "Notas el trapecio superior y el cuello tensos. Baja los hombros antes de abrir"
+            },
+            {
+              "error": "Arquear la zona lumbar para abrir más",
+              "comoDetectarlo": "El pecho sale hacia delante y notas la espalda baja. Mantén las costillas hacia abajo"
+            },
+            {
+              "error": "Usar una goma demasiado dura y tirar con impulso",
+              "comoDetectarlo": "Los brazos se doblan o el cuerpo se balancea. Elige una goma más suave"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "band pull apart goma ejercicio deltoide posterior"
+        }
       },
       {
         "id": "p_movilidad_dorsal",
@@ -1745,7 +1866,37 @@ const RUTINA =
           1,
           2
         ],
-        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book)."
+        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book).",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Movilidad dorsal (foam roller u open book)",
+          "queEs": "Mover la columna dorsal, la zona entre los omóplatos, que se pone rígida con el trabajo de mesa y es la que más ayuda a colocar los hombros.",
+          "colocacion": "Foam roller: tumbada boca arriba con el rodillo en horizontal bajo la parte alta de la espalda, a la altura de los omóplatos, rodillas flexionadas, manos detrás de la cabeza sujetando el cuello. Open book: tumbada de lado, rodillas dobladas a 90° y juntas, brazos estirados delante y juntos.",
+          "ejecucion": [
+            "Foam roller: deja caer suavemente la espalda alta sobre el rodillo y muévete despacio, unos 1-2 minutos, sin bajar de los omóplatos. La zona lumbar queda fuera del rodillo.",
+            "Open book: abre el brazo de arriba rotando el tronco hacia atrás, como abriendo un libro, siguiendo la mano con la mirada.",
+            "Vuelve al punto de partida. Las rodillas se quedan apiladas y quietas.",
+            "Open book: 8-10 repeticiones por lado."
+          ],
+          "debesNotar": "Que se abre la zona entre los omóplatos y el pecho. Puede haber molestia suave, nunca dolor agudo.",
+          "erroresTipicos": [
+            {
+              "error": "Arquear la zona lumbar sobre el rodillo",
+              "comoDetectarlo": "Notas la espalda baja hundida. Aprieta ligeramente el abdomen y baja las costillas"
+            },
+            {
+              "error": "Rodar por la zona lumbar o por el cuello",
+              "comoDetectarlo": "El rodillo baja por debajo de los omóplatos. Quédate en la parte dorsal"
+            },
+            {
+              "error": "En el open book, mover las rodillas o la cadera en vez del tronco",
+              "comoDetectarlo": "Las rodillas se separan. Deben quedarse juntas y apoyadas mientras gira el tronco"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "movilidad dorsal foam roller open book ejercicio"
+        }
       }
     ],
     "avisos": [
@@ -1756,7 +1907,11 @@ const RUTINA =
       "Pantalla con el borde superior a la altura de los ojos",
       "Levantarte cada 45-60 minutos y hacer un par de chin tucks"
     ],
-    "ubicacion": "descanso_dinamico"
+    "ubicacion": "descanso_dinamico",
+    "pantalla": {
+      "tipo": "sesion",
+      "descripcion": "Se muestra como una sesión normal: ejercicios desglosados con casilla, series y desplegable 'Cómo se hace' plegado por defecto, con el mismo formato que las fichas de los ejercicios de fuerza."
+    }
   },
   "visualizacion": {
     "fichasTecnicas": {
@@ -2101,15 +2256,24 @@ function fichaTecnicaHtml(ft){
     amarilla: '🟡 Conviene revisar la técnica',
     verde: '🟢 Patrón sencillo, riesgo bajo'
   };
-  let h = '<span class="ficha-prioridad '+ft.prioridad+'">'+(prioLabel[ft.prioridad]||ft.prioridad)+'</span>';
+  let h = '';
+  if(ft.prioridad) h += '<span class="ficha-prioridad '+ft.prioridad+'">'+(prioLabel[ft.prioridad]||ft.prioridad)+'</span>';
   if(ft.queEs) h += '<p>'+ft.queEs+'</p>';
   if(ft.colocacion) h += '<h4>Colocación</h4><p>'+ft.colocacion+'</p>';
   if(ft.ejecucion && ft.ejecucion.length) h += '<h4>Ejecución</h4><ol>'+ft.ejecucion.map(x=>'<li>'+x+'</li>').join('')+'</ol>';
   if(ft.debesNotar) h += '<h4>Debes notar</h4><p>'+ft.debesNotar+'</p>';
   if(ft.errores && ft.errores.length) h += '<h4>Errores típicos</h4><ul>'+ft.errores.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  if(ft.erroresTipicos && ft.erroresTipicos.length){
+    h += '<h4>Errores típicos</h4><ul>'+ft.erroresTipicos.map(function(x){
+      if(typeof x === 'string') return '<li>'+x+'</li>';
+      return '<li><strong>'+x.error+'</strong>'+(x.comoDetectarlo?' — '+x.comoDetectarlo:'')+'</li>';
+    }).join('')+'</ul>';
+  }
   if(ft.truco) h += '<h4>Truco</h4><p>'+ft.truco+'</p>';
   if(ft.nota) h += '<h4>Nota</h4><p>'+ft.nota+'</p>';
   if(ft.porqueHueso) h += '<div class="ficha-porque">🦴 '+ft.porqueHueso+'</div>';
+  if(ft.claveOsea) h += '<div class="ficha-porque">🦴 '+ft.claveOsea+'</div>';
+  if(ft.busquedaYouTube) h += '<a class="ficha-youtube" href="https://www.youtube.com/results?search_query='+encodeURIComponent(ft.busquedaYouTube)+'" target="_blank" rel="noopener">▶ Buscar en YouTube</a>';
   return h;
 }
 
@@ -2126,63 +2290,136 @@ function renderInicio(){
   html += '<div class="card">';
   html += '<div class="text-dim">Hoy es '+DIAS_LABEL[diaKey]+' · '+fmtFechaCorta(hoyISO)+'</div>';
 
+  // El inicio solo SUGIERE (resalta lo de hoy) y ofrece accesos; el contenido
+  // (opciones, sugerencia semanal, postura) vive dentro de cada pantalla.
   if(diaInfo.tipo === 'descanso'){
     html += '<h2 class="badge-descanso">Hoy toca descanso 🌙</h2>';
     html += '<p class="text-dim">Ningún entrenamiento programado. Aprovecha para dormir y comer bien.</p>';
   } else if(diaInfo.tipo === 'fuerza'){
     const sesion = getSesionDef(diaInfo.sesionId);
-    html += '<h2>'+sesion.nombre+'</h2>';
-    html += '<p class="text-dim">'+sesion.descripcion+'</p>';
+    html += '<h2>Hoy toca '+sesion.nombre+'</h2>';
     html += '<p class="text-dim">'+sesion.duracionMin[0]+'-'+sesion.duracionMin[1]+' min</p>';
     html += '<a href="#/sesion/'+sesion.id+'" class="btn btn-primary btn-large">Empezar</a>';
   } else if(diaInfo.tipo === 'dinamico' || diaInfo.tipo === 'suave'){
     const bloque = RUTINA.bloquesSuaves.find(b=>b.id===diaInfo.bloqueId) || RUTINA.bloquesSuaves[0];
-    html += '<h2>'+bloque.nombre+'</h2>';
-    html += '<p class="text-dim">'+bloque.descripcion+'</p>';
-    if(bloque.sugerenciaSemanal && bloque.sugerenciaSemanal.length){
-      html += '<ul class="sugerencia-semanal">';
-      bloque.sugerenciaSemanal.forEach(s=>{ html += '<li>'+s+'</li>'; });
-      html += '</ul>';
-    }
-    bloque.opciones.forEach((op, i)=>{
-      if(esOpcionPostura(op)){
-        // Sin botón propio: la tarjeta entera abre la lista con casillas. Avisos siempre visibles.
-        html += '<div class="opcion-suave opcion-postura" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">';
-        html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+' <span class="postura-abrir">Abrir ›</span></div>';
-        if(op.notas) html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
-        const bp = getBloquePostura();
-        if(bp && bp.avisos && bp.avisos.length) html += avisosBoxHtml(bp.avisos);
-        html += '</div>';
-        return;
-      }
-      html += '<div class="opcion-suave">';
-      html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+'</div>';
-      const metaOp = opcionMetaText(op);
-      if(metaOp) html += '<div class="text-dim">'+metaOp+'</div>';
-      if(op.notas) html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
-      if(op.avisos && op.avisos.length) html += avisosBoxHtml(op.avisos);
-      html += '<button class="btn btn-sm" style="margin-top:8px;" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">Registrar</button>';
-      html += '</div>';
-    });
+    html += '<h2>Hoy toca descanso dinámico</h2>';
+    html += '<a href="#/dinamico/'+bloque.id+'" class="btn btn-primary btn-large">Descanso dinámico</a>';
   }
   html += '</div>';
 
-  html += '<h3>Otra sesión</h3>';
+  html += '<h3>Sesiones de fuerza</h3>';
   html += '<div class="row">';
   ['A','B','C'].forEach(id=>{
-    html += '<a href="#/sesion/'+id+'" class="btn btn-secondary">Fuerza '+id+'</a>';
+    const hoyEs = diaInfo.tipo==='fuerza' && diaInfo.sesionId===id;
+    html += '<a href="#/sesion/'+id+'" class="btn '+(hoyEs?'btn-primary':'btn-secondary')+'">Fuerza '+id+'</a>';
   });
   html += '</div>';
 
-  html += '<h3 style="margin-top:16px;">Registrar día dinámico</h3>';
+  html += '<h3 style="margin-top:16px;">Descanso dinámico</h3>';
   html += '<div class="row">';
   RUTINA.bloquesSuaves.forEach(b=>{
-    html += '<button class="btn btn-secondary" onclick="abrirRegistroSuave(\''+b.id+'\', null)">'+b.nombre+'</button>';
+    const hoyEs = (diaInfo.tipo==='dinamico'||diaInfo.tipo==='suave') && diaInfo.bloqueId===b.id;
+    html += '<a href="#/dinamico/'+b.id+'" class="btn '+(hoyEs?'btn-primary':'btn-secondary')+'">'+b.nombre+'</a>';
   });
   html += '</div>';
 
   document.getElementById('app').innerHTML = html;
   setSemanaBadge();
+}
+
+/* ======================= VISTA: DESCANSO DINÁMICO ======================= */
+function renderBloqueDinamico(bloqueId){
+  setActiveNav('inicio');
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
+  document.getElementById('topbar-title').textContent = bloque.nombre;
+  let html = '';
+  html += '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/\'">←</button><h2 style="margin:0;">'+bloque.nombre+'</h2></div>';
+  html += '<p class="text-dim">'+bloque.descripcion+'</p>';
+  if(bloque.sugerenciaSemanal && bloque.sugerenciaSemanal.length){
+    html += '<ul class="sugerencia-semanal">';
+    bloque.sugerenciaSemanal.forEach(s=>{ html += '<li>'+s+'</li>'; });
+    html += '</ul>';
+  }
+  bloque.opciones.forEach((op, i)=>{
+    if(esOpcionPostura(op)){
+      // La postura abre su propia pantalla (como una sesión). Avisos siempre visibles.
+      html += '<div class="opcion-suave opcion-postura" onclick="location.hash=\'#/postura\'">';
+      html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+' <span class="postura-abrir">Abrir ›</span></div>';
+      if(op.notas) html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
+      const bp = getBloquePostura();
+      if(bp && bp.avisos && bp.avisos.length) html += avisosBoxHtml(bp.avisos);
+      html += '</div>';
+      return;
+    }
+    html += '<div class="opcion-suave">';
+    html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+'</div>';
+    const metaOp = opcionMetaText(op);
+    if(metaOp) html += '<div class="text-dim">'+metaOp+'</div>';
+    if(op.notas) html += '<div class="text-dim" style="margin-top:4px;">'+op.notas+'</div>';
+    if(op.avisos && op.avisos.length) html += avisosBoxHtml(op.avisos);
+    html += '<button class="btn btn-sm" style="margin-top:8px;" onclick="abrirRegistroSuave(\''+bloque.id+'\','+i+')">Registrar</button>';
+    html += '</div>';
+  });
+  document.getElementById('app').innerHTML = html;
+}
+
+/* ======================= VISTA: POSTURA (como una sesión) ======================= */
+function renderPosturaSesion(){
+  setActiveNav('inicio');
+  const bp = getBloquePostura();
+  if(!bp){ location.hash = '#/'; return; }
+  document.getElementById('topbar-title').textContent = bp.nombre;
+  const hoy = todayISO();
+  const entrada = state.diasSuaves.find(d=>d.fecha===hoy && d.tipo==='postura');
+  const marcados = {};
+  if(entrada && entrada.postura) entrada.postura.forEach(id=>{ marcados[id]=true; });
+
+  let html = '';
+  html += '<div class="back-row"><button class="btn-back" onclick="location.hash=\'#/\'">←</button><h2 style="margin:0;">'+bp.nombre+'</h2></div>';
+  if(bp.motivo) html += '<p class="text-dim">'+bp.motivo+'</p>';
+  if(bp.avisos && bp.avisos.length) html += avisosBoxHtml(bp.avisos); // avisos del bloque siempre visibles
+  html += '<div id="ejercicios-wrap">';
+  (bp.ejercicios||[]).forEach(ej=>{ html += renderPosturaEjercicioCard(ej, !!marcados[ej.id]); });
+  html += '</div>';
+  if(bp.habitos && bp.habitos.length){
+    html += '<div class="postura-habitos"><div class="postura-habitos-tit">Hábitos</div><ul>';
+    bp.habitos.forEach(x=>{ html += '<li>'+x+'</li>'; });
+    html += '</ul></div>';
+  }
+  html += '<button class="btn btn-primary btn-large" style="margin-top:12px;" onclick="guardarPostura()">Guardar</button>';
+  document.getElementById('app').innerHTML = html;
+}
+function renderPosturaEjercicioCard(ej, marcado){
+  const ficha = ej.ficha || ej.fichaTecnica;
+  let html = '<div class="ejercicio-card" data-ejercicio="'+ej.id+'">';
+  html += '<div class="ejercicio-header"><h3>'+ej.nombre+'</h3></div>';
+  const meta = posturaEjMetaText(ej);
+  if(meta) html += '<div class="ejercicio-meta">'+meta+'</div>';
+  if(ej.notas) html += '<div class="ejercicio-notas">'+ej.notas+'</div>';
+  if(ej.avisos && ej.avisos.length) html += avisosBoxHtml(ej.avisos);
+  if(ficha){
+    const vis = RUTINA.visualizacion && RUTINA.visualizacion.fichasTecnicas;
+    const plegada = !vis || vis.plegadoPorDefecto !== false; // plegada por defecto
+    html += '<div><button type="button" class="btn-ficha" onclick="toggleFicha(\''+ej.id+'\')">Cómo se hace <span id="arrow-'+ej.id+'">'+(plegada?'▾':'▴')+'</span></button></div>';
+    html += '<div class="ficha-tecnica'+(plegada?' hidden':'')+'" id="ficha-'+ej.id+'">'+fichaTecnicaHtml(ficha)+'</div>';
+  }
+  html += '<label class="estiramiento-check"><input type="checkbox" class="postura-check" id="postura-check-'+ej.id+'" value="'+ej.id+'" '+(marcado?'checked':'')+'> Hecho</label>';
+  html += '</div>';
+  return html;
+}
+function guardarPostura(){
+  const marcados = Array.prototype.slice.call(document.querySelectorAll('.postura-check'))
+    .filter(c=>c.checked).map(c=>c.value);
+  if(!marcados.length){ toast('Marca al menos un ejercicio para guardar'); return; }
+  const bp = getBloquePostura();
+  const hoy = todayISO();
+  const bloqueId = (bp && bp.ubicacion) || 'descanso_dinamico';
+  const ex = state.diasSuaves.find(d=>d.fecha===hoy && d.tipo==='postura');
+  if(ex){ ex.postura = marcados; ex.opcion = bp.nombre; }
+  else { state.diasSuaves.push({ fecha:hoy, bloqueId, tipo:'postura', opcion:bp.nombre, postura:marcados }); }
+  saveState();
+  toast('Postura registrada');
+  location.hash = '#/';
 }
 
 function campoDef(nombre){
@@ -2218,9 +2455,10 @@ function abrirRegistroSuave(bloqueId, opcionIndex){
   const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
   let opciones = '';
   bloque.opciones.forEach((op,i)=>{
+    if(esOpcionPostura(op)) return; // la postura tiene su propia pantalla, no va en el modal
     opciones += '<option value="'+i+'">'+op.nombre+'</option>';
   });
-  const startIdx = (opcionIndex!==null && opcionIndex>=0) ? opcionIndex : 0;
+  const startIdx = (opcionIndex!==null && opcionIndex>=0 && !esOpcionPostura(bloque.opciones[opcionIndex])) ? opcionIndex : (bloque.opciones.findIndex(o=>!esOpcionPostura(o)));
   const html =
     '<button class="modal-close" onclick="cerrarModalSuave()">×</button>'+
     '<h3>Registrar: '+bloque.nombre+'</h3>'+
@@ -2882,6 +3120,8 @@ function router(){
   if(parts.length===0){ renderInicio(); return; }
   if(parts[0]==='sesion' && parts[1]){ renderSesion(parts[1]); setTimeout(inicializarIndicadores,0); return; }
   if(parts[0]==='estiramiento' && parts[1]){ location.hash = '#/sesion/'+parts[1]; return; }
+  if(parts[0]==='dinamico' && parts[1]){ renderBloqueDinamico(parts[1]); return; }
+  if(parts[0]==='postura'){ renderPosturaSesion(); return; }
   if(parts[0]==='historial' && parts[1]){ renderHistorialDetalle(parts[1]); return; }
   if(parts[0]==='historial'){ renderHistorial(); return; }
   if(parts[0]==='ajustes'){ renderAjustes(); return; }
