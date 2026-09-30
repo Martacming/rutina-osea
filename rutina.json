@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.4",
+    "version": "1.5",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -1016,7 +1016,37 @@
         "series": 1,
         "reps": 10,
         "duracionSeg": 5,
-        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día."
+        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Retracción cervical (chin tuck)",
+          "queEs": "Llevar la cabeza hacia atrás en horizontal, sin inclinarla, para colocarla sobre los hombros. Es el ejercicio que más rinde para la cabeza adelantada.",
+          "colocacion": "De pie con la espalda y el culo cerca de la pared, o sentada erguida, o tumbada boca arriba sin almohada gruesa. Mirada al frente, hombros relajados, costillas hacia abajo.",
+          "ejecucion": [
+            "Lleva la barbilla hacia atrás como si quisieras hacerte doble papada, deslizando la cabeza en horizontal.",
+            "La barbilla no sube ni baja: la mirada sigue al frente.",
+            "Mantén 5 segundos y vuelve despacio.",
+            "10 repeticiones. Puedes repetirlo 2-3 veces al día, incluso sentada en la mesa."
+          ],
+          "debesNotar": "Un estiramiento suave en la base del cráneo y algo de trabajo en la parte delantera del cuello. Nunca dolor, hormigueo ni mareo.",
+          "erroresTipicos": [
+            {
+              "error": "Bajar la barbilla hacia el pecho",
+              "comoDetectarlo": "La mirada se va al suelo: eso es flexión, no retracción. La cabeza tiene que ir hacia atrás, no hacia abajo"
+            },
+            {
+              "error": "Sacar pecho o arquear la zona lumbar para 'ponerte recta'",
+              "comoDetectarlo": "Notas la espalda baja tensa. Con la artropatía facetaria, la postura correcta es alargarte, no arquearte"
+            },
+            {
+              "error": "Empujar con fuerza",
+              "comoDetectarlo": "Notas tensión en la mandíbula o el cuello. Es un movimiento suave"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "chin tuck retracción cervical ejercicio fisioterapia"
+        }
       },
       {
         "id": "p_flexion_craneocervical",
@@ -1027,21 +1057,111 @@
           5,
           10
         ],
-        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta."
+        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Flexión craneocervical tumbada",
+          "queEs": "Un 'asentimiento' muy suave que activa los flexores profundos del cuello, los que se debilitan con la cabeza adelantada, sin usar los superficiales.",
+          "colocacion": "Boca arriba, rodillas flexionadas y pies apoyados. Toalla fina doblada bajo la cabeza, de forma que la barbilla no quede ni levantada ni pegada al pecho.",
+          "ejecucion": [
+            "Asiente con la cabeza de forma muy suave, como diciendo 'sí' a cámara lenta. El movimiento es pequeñísimo: la cabeza se desliza sobre la toalla.",
+            "Mantén 5-10 segundos, con la nuca larga y sin apretar.",
+            "Vuelve despacio a la posición inicial.",
+            "10 repeticiones."
+          ],
+          "debesNotar": "Un esfuerzo muy ligero y profundo en la parte delantera del cuello. No debe notarse en la mandíbula ni en los músculos de los lados del cuello.",
+          "erroresTipicos": [
+            {
+              "error": "Hacerlo con demasiada fuerza",
+              "comoDetectarlo": "Se marcan los músculos de los lados del cuello o tensas la mandíbula. Baja la intensidad: cuanto más suave, mejor"
+            },
+            {
+              "error": "Levantar la cabeza de la toalla",
+              "comoDetectarlo": "La cabeza deja de deslizarse y pasa a subirse. El movimiento es solo de asentir"
+            },
+            {
+              "error": "Contener la respiración",
+              "comoDetectarlo": "Notas presión en la cara o el pecho. Respira con normalidad todo el rato"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "flexión craneocervical tumbada ejercicio cuello fisioterapia"
+        }
       },
       {
         "id": "p_wall_angels",
         "nombre": "Wall angels",
         "series": 2,
         "reps": 10,
-        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas."
+        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Wall angels",
+          "queEs": "Subir y bajar los brazos, de una W a una Y, con la espalda pegada a la pared. Trabaja la parte baja y media del trapecio y ayuda a abrir el pecho y la espalda alta.",
+          "colocacion": "De pie con la espalda contra la pared, pies a unos 10-15 cm de ella y rodillas ligeramente flexionadas. Costillas hacia abajo. Brazos en W: codos a 90° y el dorso de las manos y los codos tocando la pared.",
+          "ejecucion": [
+            "Desliza los brazos hacia arriba por la pared hasta formar una Y, o hasta donde llegues sin despegar nada.",
+            "Baja despacio de nuevo hasta la W.",
+            "Mantén siempre la cabeza, la espalda alta y las muñecas en contacto con la pared, sin adelantar la cabeza.",
+            "2 series de 10 repeticiones."
+          ],
+          "debesNotar": "Trabajo entre los omóplatos y en la parte alta de la espalda, y un estiramiento del pecho.",
+          "erroresTipicos": [
+            {
+              "error": "Despegar la zona lumbar de la pared arqueando la espalda",
+              "comoDetectarlo": "Notas la espalda baja tensa o metes la mano entre la pared y la lumbar. Con la artropatía facetaria es lo que hay que evitar: aprieta el abdomen y baja las costillas"
+            },
+            {
+              "error": "Despegar codos o muñecas",
+              "comoDetectarlo": "Los dorsos de las manos dejan de tocar la pared. Sube solo hasta donde puedas mantener el contacto"
+            },
+            {
+              "error": "Encoger los hombros hacia las orejas",
+              "comoDetectarlo": "Notas tensión en el cuello. Baja los hombros antes de cada repetición"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "wall angels ejercicio postura hombros"
+        }
       },
       {
         "id": "p_band_pull_apart",
         "nombre": "Band pull-apart (goma)",
         "series": 2,
         "reps": 15,
-        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros."
+        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros.",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Band pull-apart (goma)",
+          "queEs": "Abrir una goma elástica hacia los lados con los brazos estirados delante. Trabaja la parte trasera del hombro y el trapecio medio, que compensan los hombros hacia delante.",
+          "colocacion": "De pie, con una goma ligera sujeta con las palmas hacia abajo a la altura del pecho, manos a la anchura de los hombros y brazos casi estirados. Costillas hacia abajo.",
+          "ejecucion": [
+            "Abre la goma llevando las manos hacia los lados, juntando los omóplatos hacia atrás y abajo.",
+            "Llega hasta donde puedas con control, sin que se muevan el cuello ni la espalda.",
+            "Vuelve despacio, sin soltar la goma de golpe.",
+            "2 series de 15 repeticiones."
+          ],
+          "debesNotar": "Trabajo entre los omóplatos y en la parte de atrás del hombro.",
+          "erroresTipicos": [
+            {
+              "error": "Encoger los hombros hacia las orejas",
+              "comoDetectarlo": "Notas el trapecio superior y el cuello tensos. Baja los hombros antes de abrir"
+            },
+            {
+              "error": "Arquear la zona lumbar para abrir más",
+              "comoDetectarlo": "El pecho sale hacia delante y notas la espalda baja. Mantén las costillas hacia abajo"
+            },
+            {
+              "error": "Usar una goma demasiado dura y tirar con impulso",
+              "comoDetectarlo": "Los brazos se doblan o el cuerpo se balancea. Elige una goma más suave"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "band pull apart goma ejercicio deltoide posterior"
+        }
       },
       {
         "id": "p_movilidad_dorsal",
@@ -1050,7 +1170,37 @@
           1,
           2
         ],
-        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book)."
+        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book).",
+        "tipo": "postura",
+        "registraCarga": false,
+        "ficha": {
+          "nombre": "Movilidad dorsal (foam roller u open book)",
+          "queEs": "Mover la columna dorsal, la zona entre los omóplatos, que se pone rígida con el trabajo de mesa y es la que más ayuda a colocar los hombros.",
+          "colocacion": "Foam roller: tumbada boca arriba con el rodillo en horizontal bajo la parte alta de la espalda, a la altura de los omóplatos, rodillas flexionadas, manos detrás de la cabeza sujetando el cuello. Open book: tumbada de lado, rodillas dobladas a 90° y juntas, brazos estirados delante y juntos.",
+          "ejecucion": [
+            "Foam roller: deja caer suavemente la espalda alta sobre el rodillo y muévete despacio, unos 1-2 minutos, sin bajar de los omóplatos. La zona lumbar queda fuera del rodillo.",
+            "Open book: abre el brazo de arriba rotando el tronco hacia atrás, como abriendo un libro, siguiendo la mano con la mirada.",
+            "Vuelve al punto de partida. Las rodillas se quedan apiladas y quietas.",
+            "Open book: 8-10 repeticiones por lado."
+          ],
+          "debesNotar": "Que se abre la zona entre los omóplatos y el pecho. Puede haber molestia suave, nunca dolor agudo.",
+          "erroresTipicos": [
+            {
+              "error": "Arquear la zona lumbar sobre el rodillo",
+              "comoDetectarlo": "Notas la espalda baja hundida. Aprieta ligeramente el abdomen y baja las costillas"
+            },
+            {
+              "error": "Rodar por la zona lumbar o por el cuello",
+              "comoDetectarlo": "El rodillo baja por debajo de los omóplatos. Quédate en la parte dorsal"
+            },
+            {
+              "error": "En el open book, mover las rodillas o la cadera en vez del tronco",
+              "comoDetectarlo": "Las rodillas se separan. Deben quedarse juntas y apoyadas mientras gira el tronco"
+            }
+          ],
+          "claveOsea": null,
+          "busquedaYouTube": "movilidad dorsal foam roller open book ejercicio"
+        }
       }
     ],
     "avisos": [
@@ -1061,7 +1211,11 @@
       "Pantalla con el borde superior a la altura de los ojos",
       "Levantarte cada 45-60 minutos y hacer un par de chin tucks"
     ],
-    "ubicacion": "descanso_dinamico"
+    "ubicacion": "descanso_dinamico",
+    "pantalla": {
+      "tipo": "sesion",
+      "descripcion": "Se muestra como una sesión normal: ejercicios desglosados con casilla, series y desplegable 'Cómo se hace' plegado por defecto, con el mismo formato que las fichas de los ejercicios de fuerza."
+    }
   },
   "visualizacion": {
     "fichasTecnicas": {
