@@ -321,6 +321,8 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 .grupo-tag.grupo-equilibrio{color:var(--accent-dim);border-color:var(--accent-dim);}
 .sugerencia-semanal{margin:6px 0 12px;padding-left:20px;color:var(--text-dim);font-size:0.88rem;}
 .sugerencia-semanal li{margin-bottom:4px;}
+.opcion-ejercicios{margin:14px 0;}
+.opcion-ej-titulo{font-weight:700;font-size:1.02rem;margin:6px 0 8px;}
 .opcion-postura{cursor:pointer;border-color:var(--accent-dim);}
 .postura-abrir{float:right;color:var(--accent);font-size:0.8rem;font-weight:700;}
 .postura-lista{margin:8px 0;}
@@ -385,7 +387,7 @@ svg.grafica{width:100%;height:220px;background:var(--surface2);border-radius:10p
 const RUTINA =
 {
   "meta": {
-    "version": "1.5",
+    "version": "1.6",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -1372,7 +1374,9 @@ const RUTINA =
           "campos": [
             "duracionMin"
           ],
-          "notas": "La mejor opción para la cadera. Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional."
+          "notas": "La mejor opción para la cadera. Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional.",
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "cinta_inclinada",
@@ -1382,7 +1386,9 @@ const RUTINA =
             "duracionMin",
             "inclinacionPct"
           ],
-          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10%."
+          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10%.",
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "remo_maquina",
@@ -1390,7 +1396,9 @@ const RUTINA =
           "grupo": "neutro",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "eliptica",
@@ -1398,7 +1406,9 @@ const RUTINA =
           "grupo": "neutro",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "bici_sentada",
@@ -1407,7 +1417,9 @@ const RUTINA =
           "campos": [
             "duracionMin"
           ],
-          "notas": "Si es spinning, en día suave mantente en 120-135 ppm."
+          "notas": "Si es spinning, en día suave mantente en 120-135 ppm.",
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "yoga",
@@ -1415,7 +1427,9 @@ const RUTINA =
           "grupo": "equilibrio",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "pilates",
@@ -1426,7 +1440,9 @@ const RUTINA =
           ],
           "avisos": [
             "Avisa al instructor de la osteopenia y de la deshidratación discal lumbar: pide alternativas a los ejercicios de flexión de columna (roll-ups, teasers, el cien)."
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "barre",
@@ -1434,34 +1450,129 @@ const RUTINA =
           "grupo": "equilibrio",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "movilidad_hombro",
           "nombre": "Movilidad de hombro (rotaciones)",
           "grupo": "movilidad",
-          "series": 3,
-          "reps": 10,
-          "porHombro": true,
-          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para."
+          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para.",
+          "render": "sets",
+          "registraCarga": false,
+          "modo": "ejercicios",
+          "ejercicios": [
+            {
+              "id": "mov_hombro",
+              "nombre": "Rotaciones de hombro (todas las combinaciones)",
+              "tipo": "movilidad",
+              "series": 3,
+              "reps": 10,
+              "porHombro": true,
+              "registraCarga": false,
+              "sinFicha": true
+            }
+          ]
         },
         {
           "id": "isometricos",
           "nombre": "Isométricos: gemelo + sentadilla en pared",
           "grupo": "tendon",
-          "series": 3,
-          "duracionSeg": [
-            30,
-            45
+          "render": "sets",
+          "notas": "Unos 5 minutos al final de otra actividad. Opcional.",
+          "ejercicios": [
+            {
+              "id": "iso_gemelo",
+              "nombre": "Isométrico de gemelo",
+              "tipo": "isometrico",
+              "series": 3,
+              "duracionSeg": [
+                30,
+                45
+              ],
+              "registraCarga": false,
+              "registraSegundos": true,
+              "ficha": {
+                "nombre": "Isométrico de gemelo",
+                "queEs": "Ponerte de puntillas y mantener la posición, sin moverte. Carga el gemelo y el tendón de Aquiles sin impacto y los prepara para el bloque de saltos.",
+                "colocacion": "De pie, cerca de una pared o un soporte al que puedas tocar con los dedos solo para el equilibrio. Pies a la anchura de la cadera, peso repartido entre los dos pies.",
+                "ejecucion": [
+                  "Sube hasta la altura máxima de puntillas.",
+                  "Mantén 30-45 segundos sin bajar ni balancearte.",
+                  "Baja despacio.",
+                  "3 series, con un minuto de descanso entre ellas."
+                ],
+                "debesNotar": "Tensión sostenida en los gemelos y en la parte de atrás del tobillo. Es esfuerzo, no dolor agudo.",
+                "erroresTipicos": [
+                  {
+                    "error": "Dejar caer los talones poco a poco",
+                    "comoDetectarlo": "A mitad de serie estás más baja que al empezar. Vuelve a subir al máximo y acorta el tiempo si hace falta"
+                  },
+                  {
+                    "error": "Apoyarte demasiado en la pared",
+                    "comoDetectarlo": "Si quitas los dedos, pierdes el equilibrio. La pared es solo para estabilizarte, no para cargar peso"
+                  },
+                  {
+                    "error": "Seguir con dolor en el tendón de Aquiles o en la zona de la espinilla",
+                    "comoDetectarlo": "Notas un dolor punzante en vez de esfuerzo muscular. Para, y tienes el antecedente de tendinitis tibial: es un motivo para no insistir"
+                  }
+                ],
+                "claveOsea": "Prepara el tendón de Aquiles para la progresión del bloque de impacto.",
+                "busquedaYouTube": "isométrico de gemelo puntillas mantenido ejercicio"
+              }
+            },
+            {
+              "id": "iso_wall_sit",
+              "nombre": "Sentadilla isométrica en pared",
+              "tipo": "isometrico",
+              "series": 3,
+              "duracionSeg": [
+                30,
+                45
+              ],
+              "registraCarga": false,
+              "registraSegundos": true,
+              "ficha": {
+                "nombre": "Sentadilla isométrica en pared (wall sit)",
+                "queEs": "Sentarte sin silla, apoyada en la pared, y mantener la posición sin moverte. Trabaja cuádriceps y glúteo con carga axial, sin material.",
+                "colocacion": "Espalda y glúteos apoyados en la pared, pies a la anchura de la cadera y a unos 50-60 cm de ella, lo justo para que las rodillas queden sobre los tobillos al bajar.",
+                "ejecucion": [
+                  "Baja deslizando la espalda por la pared hasta que las rodillas queden a unos 90°, o menos si te molesta.",
+                  "Rodillas alineadas con los tobillos y peso repartido en toda la planta del pie.",
+                  "Mantén 30-45 segundos respirando con normalidad, con los brazos cruzados o colgando, sin apoyarlos en los muslos.",
+                  "Sube despacio empujando con los pies. 3 series."
+                ],
+                "debesNotar": "Quemazón en los muslos y algo en los glúteos. Nunca dolor en las rodillas.",
+                "erroresTipicos": [
+                  {
+                    "error": "Rodillas por delante de la punta de los pies",
+                    "comoDetectarlo": "Pies demasiado cerca de la pared. Aléjalos un poco"
+                  },
+                  {
+                    "error": "Apoyar las manos en los muslos",
+                    "comoDetectarlo": "Empujas con los brazos y el ejercicio se vuelve más fácil. Déjalas libres"
+                  },
+                  {
+                    "error": "Arquear la zona lumbar separándola de la pared",
+                    "comoDetectarlo": "Notas la espalda baja tensa o cabe la mano entre la pared y la lumbar. Aprieta el abdomen para pegar la espalda"
+                  }
+                ],
+                "claveOsea": "Carga axial sobre columna y cadera, sin material.",
+                "busquedaYouTube": "sentadilla isométrica en pared wall sit técnica"
+              }
+            }
           ],
-          "notas": "Unos 5 minutos al final de otra actividad. Opcional."
+          "modo": "ejercicios"
         },
         {
           "id": "postura",
           "nombre": "Postura: cuello y espalda alta (bloque de 5 min)",
           "grupo": "postura",
           "referencia": "bloquePostura",
-          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad."
+          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad.",
+          "render": "pantalla",
+          "modo": "ejercicios"
         },
         {
           "id": "otra",
@@ -1470,7 +1581,9 @@ const RUTINA =
           "campos": [
             "textoLibre",
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         }
       ]
     }
@@ -2351,6 +2464,12 @@ function renderBloqueDinamico(bloqueId){
       html += '</div>';
       return;
     }
+    if(op.modo === 'ejercicios' && op.ejercicios && op.ejercicios.length){
+      // Sin botón ni modal: ejercicios desglosados en tarjetas con casillas por serie.
+      html += renderOpcionEjercicios(bloque.id, op);
+      return;
+    }
+    // modo "registro": botón Registrar (minutos, inclinación…) vía modal.
     html += '<div class="opcion-suave">';
     html += '<div class="nombre">'+op.nombre+grupoTagHtml(op.grupo)+'</div>';
     const metaOp = opcionMetaText(op);
@@ -2361,6 +2480,85 @@ function renderBloqueDinamico(bloqueId){
     html += '</div>';
   });
   document.getElementById('app').innerHTML = html;
+}
+
+/* Opción con modo "ejercicios": tarjetas por ejercicio con casilla por serie
+   (y segundos si registraSegundos). Se guarda una entrada, con fecha, solo si
+   se marca algo; el guardado es automático al marcar. */
+function renderOpcionEjercicios(bloqueId, op){
+  const hoy = todayISO();
+  const entrada = state.diasSuaves.find(d=>d.fecha===hoy && d.tipo==='ejercicios' && d.opcionId===op.id);
+  const marcas = (entrada && entrada.marcas) || {};
+  let h = '<div class="opcion-ejercicios" data-opcion="'+op.id+'">';
+  h += '<div class="opcion-ej-titulo">'+op.nombre+grupoTagHtml(op.grupo)+'</div>';
+  if(op.notas) h += '<div class="text-dim" style="margin-bottom:6px;">'+op.notas+'</div>';
+  if(op.avisos && op.avisos.length) h += avisosBoxHtml(op.avisos);
+  op.ejercicios.forEach(ej=>{ h += renderEjercicioSetsCard(bloqueId, op.id, ej, marcas[ej.id]||[]); });
+  h += '</div>';
+  return h;
+}
+function renderEjercicioSetsCard(bloqueId, opcionId, ej, marcasEj){
+  const ficha = ej.ficha || ej.fichaTecnica;
+  let html = '<div class="ejercicio-card" data-ejercicio="'+ej.id+'">';
+  html += '<div class="ejercicio-header"><h3>'+ej.nombre+'</h3></div>';
+  const meta = posturaEjMetaText(ej);
+  if(meta) html += '<div class="ejercicio-meta">'+meta+'</div>';
+  if(ej.notas) html += '<div class="ejercicio-notas">'+ej.notas+'</div>';
+  if(ej.avisos && ej.avisos.length) html += avisosBoxHtml(ej.avisos);
+  if(ficha && !ej.sinFicha){
+    const vis = RUTINA.visualizacion && RUTINA.visualizacion.fichasTecnicas;
+    const plegada = !vis || vis.plegadoPorDefecto !== false;
+    html += '<div><button type="button" class="btn-ficha" onclick="toggleFicha(\''+ej.id+'\')">Cómo se hace <span id="arrow-'+ej.id+'">'+(plegada?'▾':'▴')+'</span></button></div>';
+    html += '<div class="ficha-tecnica'+(plegada?' hidden':'')+'" id="ficha-'+ej.id+'">'+fichaTecnicaHtml(ficha)+'</div>';
+  }
+  const n = ej.series || 1;
+  const rangoSeg = Array.isArray(ej.duracionSeg) ? ej.duracionSeg[0]+'-'+ej.duracionSeg[1] : (ej.duracionSeg!=null ? ''+ej.duracionSeg : '');
+  html += '<div class="series-list">';
+  for(let i=0;i<n;i++){
+    const m = marcasEj[i] || {};
+    html += '<div class="serie-row">';
+    html += '<div class="serie-label">S'+(i+1)+'</div>';
+    if(ej.registraSegundos){
+      html += '<div class="reps-group">';
+      html += '<input type="number" class="reps-input" id="opc-'+opcionId+'-'+ej.id+'-'+i+'-seg" placeholder="'+rangoSeg+'" value="'+(m.seg!=null?m.seg:'')+'" oninput="guardarOpcionEjercicios(\''+bloqueId+'\',\''+opcionId+'\')">';
+      html += '<span class="field-unit">seg</span>';
+      html += '</div>';
+    }
+    html += '<input type="checkbox" id="opc-'+opcionId+'-'+ej.id+'-'+i+'-chk" '+(m.hecha?'checked':'')+' onchange="guardarOpcionEjercicios(\''+bloqueId+'\',\''+opcionId+'\')">';
+    html += '</div>';
+  }
+  html += '</div></div>';
+  return html;
+}
+function guardarOpcionEjercicios(bloqueId, opcionId){
+  const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
+  const op = (bloque.opciones||[]).find(o=>o.id===opcionId);
+  if(!op) return;
+  const marcas = {};
+  let algo = false;
+  (op.ejercicios||[]).forEach(ej=>{
+    const n = ej.series || 1;
+    const arr = [];
+    for(let i=0;i<n;i++){
+      const chk = document.getElementById('opc-'+opcionId+'-'+ej.id+'-'+i+'-chk');
+      const segEl = document.getElementById('opc-'+opcionId+'-'+ej.id+'-'+i+'-seg');
+      const hecha = chk ? chk.checked : false;
+      if(hecha) algo = true;
+      const o = { hecha:hecha };
+      if(segEl) o.seg = (Number(segEl.value)||null);
+      arr[i] = o;
+    }
+    marcas[ej.id] = arr;
+  });
+  const hoy = todayISO();
+  const ex = state.diasSuaves.find(d=>d.fecha===hoy && d.tipo==='ejercicios' && d.opcionId===opcionId);
+  if(algo){
+    if(ex){ ex.marcas = marcas; ex.opcion = op.nombre; }
+    else { state.diasSuaves.push({ fecha:hoy, bloqueId, tipo:'ejercicios', opcionId, opcion:op.nombre, marcas }); }
+  } else if(ex){
+    state.diasSuaves = state.diasSuaves.filter(d=>d!==ex);
+  }
+  saveState();
 }
 
 /* ======================= VISTA: POSTURA (como una sesión) ======================= */
@@ -2453,12 +2651,13 @@ function renderCamposSuave(bloqueId){
 }
 function abrirRegistroSuave(bloqueId, opcionIndex){
   const bloque = RUTINA.bloquesSuaves.find(b=>b.id===bloqueId) || RUTINA.bloquesSuaves[0];
+  const esRegistro = (op)=> op && op.modo !== 'ejercicios' && !esOpcionPostura(op);
   let opciones = '';
   bloque.opciones.forEach((op,i)=>{
-    if(esOpcionPostura(op)) return; // la postura tiene su propia pantalla, no va en el modal
+    if(!esRegistro(op)) return; // solo opciones de registro; ejercicios/postura tienen su propia UI
     opciones += '<option value="'+i+'">'+op.nombre+'</option>';
   });
-  const startIdx = (opcionIndex!==null && opcionIndex>=0 && !esOpcionPostura(bloque.opciones[opcionIndex])) ? opcionIndex : (bloque.opciones.findIndex(o=>!esOpcionPostura(o)));
+  const startIdx = (opcionIndex!==null && opcionIndex>=0 && esRegistro(bloque.opciones[opcionIndex])) ? opcionIndex : bloque.opciones.findIndex(esRegistro);
   const html =
     '<button class="modal-close" onclick="cerrarModalSuave()">×</button>'+
     '<h3>Registrar: '+bloque.nombre+'</h3>'+
