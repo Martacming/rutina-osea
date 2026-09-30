@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.5",
+    "version": "1.6",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -676,7 +676,9 @@
           "campos": [
             "duracionMin"
           ],
-          "notas": "La mejor opción para la cadera. Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional."
+          "notas": "La mejor opción para la cadera. Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional.",
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "cinta_inclinada",
@@ -686,7 +688,9 @@
             "duracionMin",
             "inclinacionPct"
           ],
-          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10%."
+          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10%.",
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "remo_maquina",
@@ -694,7 +698,9 @@
           "grupo": "neutro",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "eliptica",
@@ -702,7 +708,9 @@
           "grupo": "neutro",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "bici_sentada",
@@ -711,7 +719,9 @@
           "campos": [
             "duracionMin"
           ],
-          "notas": "Si es spinning, en día suave mantente en 120-135 ppm."
+          "notas": "Si es spinning, en día suave mantente en 120-135 ppm.",
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "yoga",
@@ -719,7 +729,9 @@
           "grupo": "equilibrio",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "pilates",
@@ -730,7 +742,9 @@
           ],
           "avisos": [
             "Avisa al instructor de la osteopenia y de la deshidratación discal lumbar: pide alternativas a los ejercicios de flexión de columna (roll-ups, teasers, el cien)."
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "barre",
@@ -738,34 +752,129 @@
           "grupo": "equilibrio",
           "campos": [
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         },
         {
           "id": "movilidad_hombro",
           "nombre": "Movilidad de hombro (rotaciones)",
           "grupo": "movilidad",
-          "series": 3,
-          "reps": 10,
-          "porHombro": true,
-          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para."
+          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para.",
+          "render": "sets",
+          "registraCarga": false,
+          "modo": "ejercicios",
+          "ejercicios": [
+            {
+              "id": "mov_hombro",
+              "nombre": "Rotaciones de hombro (todas las combinaciones)",
+              "tipo": "movilidad",
+              "series": 3,
+              "reps": 10,
+              "porHombro": true,
+              "registraCarga": false,
+              "sinFicha": true
+            }
+          ]
         },
         {
           "id": "isometricos",
           "nombre": "Isométricos: gemelo + sentadilla en pared",
           "grupo": "tendon",
-          "series": 3,
-          "duracionSeg": [
-            30,
-            45
+          "render": "sets",
+          "notas": "Unos 5 minutos al final de otra actividad. Opcional.",
+          "ejercicios": [
+            {
+              "id": "iso_gemelo",
+              "nombre": "Isométrico de gemelo",
+              "tipo": "isometrico",
+              "series": 3,
+              "duracionSeg": [
+                30,
+                45
+              ],
+              "registraCarga": false,
+              "registraSegundos": true,
+              "ficha": {
+                "nombre": "Isométrico de gemelo",
+                "queEs": "Ponerte de puntillas y mantener la posición, sin moverte. Carga el gemelo y el tendón de Aquiles sin impacto y los prepara para el bloque de saltos.",
+                "colocacion": "De pie, cerca de una pared o un soporte al que puedas tocar con los dedos solo para el equilibrio. Pies a la anchura de la cadera, peso repartido entre los dos pies.",
+                "ejecucion": [
+                  "Sube hasta la altura máxima de puntillas.",
+                  "Mantén 30-45 segundos sin bajar ni balancearte.",
+                  "Baja despacio.",
+                  "3 series, con un minuto de descanso entre ellas."
+                ],
+                "debesNotar": "Tensión sostenida en los gemelos y en la parte de atrás del tobillo. Es esfuerzo, no dolor agudo.",
+                "erroresTipicos": [
+                  {
+                    "error": "Dejar caer los talones poco a poco",
+                    "comoDetectarlo": "A mitad de serie estás más baja que al empezar. Vuelve a subir al máximo y acorta el tiempo si hace falta"
+                  },
+                  {
+                    "error": "Apoyarte demasiado en la pared",
+                    "comoDetectarlo": "Si quitas los dedos, pierdes el equilibrio. La pared es solo para estabilizarte, no para cargar peso"
+                  },
+                  {
+                    "error": "Seguir con dolor en el tendón de Aquiles o en la zona de la espinilla",
+                    "comoDetectarlo": "Notas un dolor punzante en vez de esfuerzo muscular. Para, y tienes el antecedente de tendinitis tibial: es un motivo para no insistir"
+                  }
+                ],
+                "claveOsea": "Prepara el tendón de Aquiles para la progresión del bloque de impacto.",
+                "busquedaYouTube": "isométrico de gemelo puntillas mantenido ejercicio"
+              }
+            },
+            {
+              "id": "iso_wall_sit",
+              "nombre": "Sentadilla isométrica en pared",
+              "tipo": "isometrico",
+              "series": 3,
+              "duracionSeg": [
+                30,
+                45
+              ],
+              "registraCarga": false,
+              "registraSegundos": true,
+              "ficha": {
+                "nombre": "Sentadilla isométrica en pared (wall sit)",
+                "queEs": "Sentarte sin silla, apoyada en la pared, y mantener la posición sin moverte. Trabaja cuádriceps y glúteo con carga axial, sin material.",
+                "colocacion": "Espalda y glúteos apoyados en la pared, pies a la anchura de la cadera y a unos 50-60 cm de ella, lo justo para que las rodillas queden sobre los tobillos al bajar.",
+                "ejecucion": [
+                  "Baja deslizando la espalda por la pared hasta que las rodillas queden a unos 90°, o menos si te molesta.",
+                  "Rodillas alineadas con los tobillos y peso repartido en toda la planta del pie.",
+                  "Mantén 30-45 segundos respirando con normalidad, con los brazos cruzados o colgando, sin apoyarlos en los muslos.",
+                  "Sube despacio empujando con los pies. 3 series."
+                ],
+                "debesNotar": "Quemazón en los muslos y algo en los glúteos. Nunca dolor en las rodillas.",
+                "erroresTipicos": [
+                  {
+                    "error": "Rodillas por delante de la punta de los pies",
+                    "comoDetectarlo": "Pies demasiado cerca de la pared. Aléjalos un poco"
+                  },
+                  {
+                    "error": "Apoyar las manos en los muslos",
+                    "comoDetectarlo": "Empujas con los brazos y el ejercicio se vuelve más fácil. Déjalas libres"
+                  },
+                  {
+                    "error": "Arquear la zona lumbar separándola de la pared",
+                    "comoDetectarlo": "Notas la espalda baja tensa o cabe la mano entre la pared y la lumbar. Aprieta el abdomen para pegar la espalda"
+                  }
+                ],
+                "claveOsea": "Carga axial sobre columna y cadera, sin material.",
+                "busquedaYouTube": "sentadilla isométrica en pared wall sit técnica"
+              }
+            }
           ],
-          "notas": "Unos 5 minutos al final de otra actividad. Opcional."
+          "modo": "ejercicios"
         },
         {
           "id": "postura",
           "nombre": "Postura: cuello y espalda alta (bloque de 5 min)",
           "grupo": "postura",
           "referencia": "bloquePostura",
-          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad."
+          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad.",
+          "render": "pantalla",
+          "modo": "ejercicios"
         },
         {
           "id": "otra",
@@ -774,7 +883,9 @@
           "campos": [
             "textoLibre",
             "duracionMin"
-          ]
+          ],
+          "render": "registro",
+          "modo": "registro"
         }
       ]
     }
