@@ -1,4 +1,4 @@
-const CACHE = 'rutina-osea-v6';
+const CACHE = 'rutina-osea-v7';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function(e){

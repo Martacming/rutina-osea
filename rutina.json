@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.6",
+    "version": "2.2",
     "fecha": "2026-08-04",
     "usuario": "Marta",
     "objetivo": "Densidad ósea prioritaria (cadera > columna), con ganancia muscular como vía",
@@ -28,7 +28,7 @@
       "proteinaMin": 94,
       "proteinaMax": 118
     },
-    "fechaActualizacion": "2026-09-30",
+    "fechaActualizacion": "2026-10-05",
     "resonancias": {
       "fecha": "2026-09-20",
       "centro": "Affidea San Francisco de Asís",
@@ -43,12 +43,47 @@
         "implicacion": "La hiperlordosis cervical es postural: relacionada con 8h sentada y altura de pantalla."
       },
       "conclusion": "Sin hallazgos que contraindiquen ningún ejercicio. Se levanta la restricción de peso muerto y rumano, y la de trabajo unilateral."
+    },
+    "estructura": "4 sesiones de fuerza (A martes, B miércoles, C jueves, D viernes) + 2 días de descanso dinámico (DD1 sábado, DD2 domingo). Traumatólogo: con tres días de fuerza basta; cuatro es una opción válida.",
+    "convencionPeso": {
+      "regla": "Anota siempre el número que ves. Con una mancuerna en cada mano: lo que pone en UNA mancuerna. Con una sola pieza (barra, una mancuerna con las dos manos): el peso de esa pieza. En máquinas y poleas: lo que marca la máquina.",
+      "porMancuerna": [
+        "Peso muerto rumano",
+        "Paseo del granjero",
+        "Elevaciones laterales",
+        "Pájaros",
+        "Gemelos con mancuernas",
+        "Step-up con mancuernas"
+      ],
+      "totalUnaPieza": [
+        "Sentadilla",
+        "Hip thrust"
+      ],
+      "maquinaOPolea": [
+        "Prensa",
+        "Curl femoral",
+        "Leg extension",
+        "Abductor",
+        "Aductor",
+        "Rear kick",
+        "Press de hombro",
+        "Press de pecho",
+        "Contractor",
+        "Tríceps",
+        "Jalón",
+        "Remo",
+        "Curl de bíceps en polea",
+        "Pallof"
+      ],
+      "avisoHistorial": "Antes de esta versión, el rumano (16) y el paseo del granjero (16 y 24) se anotaban en TOTAL. Al anotar por mancuerna (8 y 8-12) la app marcará una bajada que no es real, solo la primera vez.",
+      "asistencia": "Dominadas asistidas: kg de asistencia que marca la máquina. Más peso = más fácil, así que se progresa bajándolo."
     }
   },
   "semana": [
     {
       "dia": "lunes",
-      "tipo": "descanso"
+      "tipo": "descanso",
+      "registra": false
     },
     {
       "dia": "martes",
@@ -57,42 +92,37 @@
     },
     {
       "dia": "miercoles",
-      "tipo": "dinamico",
-      "bloqueId": "descanso_dinamico"
-    },
-    {
-      "dia": "jueves",
       "tipo": "fuerza",
       "sesionId": "B"
     },
     {
-      "dia": "viernes",
-      "tipo": "descanso",
-      "bloqueId": null,
-      "registra": false
-    },
-    {
-      "dia": "sabado",
+      "dia": "jueves",
       "tipo": "fuerza",
       "sesionId": "C"
     },
     {
+      "dia": "viernes",
+      "tipo": "fuerza",
+      "sesionId": "D"
+    },
+    {
+      "dia": "sabado",
+      "tipo": "dinamico",
+      "sesionId": "DD1"
+    },
+    {
       "dia": "domingo",
       "tipo": "dinamico",
-      "bloqueId": "descanso_dinamico"
+      "sesionId": "DD2"
     }
   ],
   "sesiones": [
     {
       "id": "A",
-      "nombre": "Fuerza A — Tren inferior + carga axial",
+      "nombre": "Fuerza A — Piernas y carga axial",
       "dia": "martes",
-      "intensidad": "alta",
-      "duracionMin": [
-        50,
-        60
-      ],
-      "descripcion": "La sesión más importante de la semana para tu columna lumbar.",
+      "tipo": "fuerza",
+      "descripcion": "Sentadilla, prensa, step-up y paseo del granjero: la carga axial de la semana.",
       "ejercicios": [
         {
           "id": "a_est_dinamicos",
@@ -108,7 +138,7 @@
           "nombre": "Sentadilla",
           "tipo": "principal",
           "series": 4,
-          "repsMin": 6,
+          "repsMin": 8,
           "repsMax": 8,
           "registraCarga": true,
           "progresion": "goblet → multipower → barra",
@@ -117,29 +147,22 @@
             "columna_lumbar",
             "cadera"
           ],
-          "video": ""
+          "video": "",
+          "pesoPor": "total",
+          "pesoPorTexto": "kg en total (una sola pieza)"
         },
         {
-          "id": "a_peso_muerto_rumano",
-          "nombre": "Peso muerto rumano",
-          "tipo": "principal",
-          "series": 4,
-          "repsMin": 6,
-          "repsMax": 8,
+          "id": "a_prensa",
+          "nombre": "Prensa de piernas (Biostrength)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
           "registraCarga": true,
-          "progresion": "mancuernas → barra",
-          "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar. REINCORPORACIÓN tras 2 meses sin carga: empezar en 5 kg y subir 2,5 kg/semana solo si no hay molestia lumbar en las 48h siguientes.",
-          "sitiosOseos": [
-            "columna_lumbar",
-            "cadera"
-          ],
+          "notas": "Accesorio, aquí sí vale la máquina",
           "video": "",
-          "reincorporacion": {
-            "estado": "progresiva desde 2026-09-30",
-            "pesoInicial": 5,
-            "incrementoSemanal": 2.5,
-            "condicion": "Subir solo si NO hay molestia lumbar en las 48h posteriores. Si aparece, volver al peso anterior."
-          }
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
         },
         {
           "id": "a_zancadas",
@@ -162,40 +185,22 @@
             "NO usar cajón blando o inestable: reduce la fuerza que puedes producir y añade riesgo de caída (crítico con cadera T-score -2,4)",
             "NO subir la altura como progresión: más altura = más compensación y más riesgo, sin más estímulo óseo",
             "El equilibrio se entrena aparte, sin carga: yoga y barre del domingo"
-          ]
-        },
-        {
-          "id": "a_prensa",
-          "nombre": "Prensa de piernas (Biostrength)",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 10,
-          "repsMax": 12,
-          "registraCarga": true,
-          "notas": "Accesorio, aquí sí vale la máquina",
-          "video": ""
-        },
-        {
-          "id": "a_curl_femoral",
-          "nombre": "Curl femoral (Biostrength)",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 10,
-          "repsMax": 12,
-          "registraCarga": true,
-          "notas": "Accesorio",
-          "video": ""
+          ],
+          "pesoPor": "mancuerna",
+          "pesoPorTexto": "kg por mancuerna"
         },
         {
           "id": "a_leg_extension",
           "nombre": "Extensión de cuádriceps (leg extension)",
           "tipo": "accesorio",
           "series": 3,
-          "repsMin": 10,
-          "repsMax": 12,
+          "repsMin": 8,
+          "repsMax": 10,
           "registraCarga": true,
           "notas": "Cuádriceps aislado. Complementa el curl femoral (antagonista). Sentada, sin carga sobre la columna: apto si hay molestia lumbar. Extiende sin bloquear la rodilla de golpe, baja controlando",
-          "video": ""
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
         },
         {
           "id": "a_gemelos",
@@ -209,7 +214,9 @@
           "sitiosOseos": [
             "tibia"
           ],
-          "video": ""
+          "video": "",
+          "pesoPor": "mancuerna",
+          "pesoPorTexto": "kg por mancuerna"
         },
         {
           "id": "a_abductor",
@@ -228,7 +235,9 @@
           "avisos": [
             "Haz UNA de las dos versiones, no ambas",
             "De pie: agárrate a los soportes sin inclinar el tronco hacia el lado contrario"
-          ]
+          ],
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
         },
         {
           "id": "a_aductor",
@@ -239,22 +248,9 @@
           "repsMax": 15,
           "registraCarga": true,
           "notas": "Equilibra el trabajo de cadera. PENDIENTE: pedir al personal de Viding que recalibren esta máquina (conformidad >300%, la carga registrada no se corresponde con la real)",
-          "video": ""
-        },
-        {
-          "id": "a_rear_kick",
-          "nombre": "Rear kick (patada de glúteo, de pie)",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 12,
-          "repsMax": 15,
-          "porPierna": true,
-          "registraCarga": true,
-          "notas": "Extensión de cadera de pie, una pierna cada vez. Complementa el hip thrust desde otro ángulo. Movimiento controlado, sin impulso",
-          "avisos": [
-            "NO arquear la lumbar al llevar la pierna atrás: mismo aviso facetario que el hip thrust. El movimiento sale de la cadera, no de la espalda"
-          ],
-          "video": ""
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
         },
         {
           "id": "a_farmer",
@@ -273,166 +269,9 @@
           ],
           "video": "",
           "progresion": "Subir peso de forma agresiva: el agarre se adapta rápido. Variante suitcase (una sola mano) para anti-flexión lateral",
-          "variante": "Suitcase carry: peso en una sola mano, alternando. Cubre el plano anti-flexión lateral"
-        },
-        {
-          "id": "a_est_estaticos",
-          "nombre": "Estiramientos estáticos",
-          "tipo": "estiramiento",
-          "series": 1,
-          "registraCarga": false,
-          "notas": "Al terminar la sesión.",
-          "avisos": [
-            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
-          ],
-          "video": ""
-        }
-      ]
-    },
-    {
-      "id": "B",
-      "nombre": "Fuerza B — Tren superior, énfasis en hombro",
-      "dia": "jueves",
-      "intensidad": "media-alta",
-      "duracionMin": [
-        45,
-        55
-      ],
-      "descripcion": "El press de hombro es tu punto más débil documentado. De pie, además, aporta carga axial.",
-      "ejercicios": [
-        {
-          "id": "b_est_dinamicos",
-          "nombre": "Estiramientos dinámicos",
-          "tipo": "estiramiento",
-          "series": 1,
-          "registraCarga": false,
-          "notas": "Al empezar la sesión.",
-          "video": ""
-        },
-        {
-          "id": "b_press_militar",
-          "nombre": "Press de hombro sentada (máquina)",
-          "tipo": "principal",
-          "series": 4,
-          "repsMin": 6,
-          "repsMax": 8,
-          "registraCarga": true,
-          "notas": "Decisión propia: sentada en máquina por comodidad. NOTA: al estar sentada se pierde la carga axial sobre columna que daba la versión de pie — compensado subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí",
-          "sitiosOseos": [],
-          "video": "",
-          "avisos": [
-            "No arquear la lumbar para ayudarte a empujar: con artropatía facetaria L3-S1, esa compensación irrita las facetas"
-          ]
-        },
-        {
-          "id": "b_remo",
-          "nombre": "Remo (Biostrength o barra)",
-          "tipo": "principal",
-          "series": 4,
-          "repsMin": 8,
-          "repsMax": 10,
-          "registraCarga": true,
-          "notas": "Si es con barra, remo Pendlay de pie: mejor para columna",
-          "sitiosOseos": [
-            "columna_toracica"
-          ],
-          "video": ""
-        },
-        {
-          "id": "b_press_pecho",
-          "nombre": "Press de pecho (Biostrength)",
-          "tipo": "principal",
-          "series": 3,
-          "repsMin": 8,
-          "repsMax": 10,
-          "registraCarga": true,
-          "notas": "Prueba el agarre neutro: más amable con el hombro",
-          "video": ""
-        },
-        {
-          "id": "b_contractor",
-          "nombre": "Contractor pectoral (pec deck)",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 12,
-          "repsMax": 15,
-          "registraCarga": true,
-          "notas": "Aislamiento de pectoral, después del press (compuesto primero, aislamiento después). Asiento a la altura del PECHO, no de los hombros",
-          "avisos": [
-            "NO llevar los codos demasiado atrás al abrir: carga la cápsula anterior del hombro, que es tu punto débil. Para al notar el estiramiento, sin buscar rango máximo"
-          ],
-          "video": ""
-        },
-        {
-          "id": "b_jalon",
-          "nombre": "Jalón al pecho / dominadas asistidas",
-          "tipo": "principal",
-          "series": 3,
-          "repsMin": 8,
-          "repsMax": 10,
-          "registraCarga": true,
-          "notas": "",
-          "video": ""
-        },
-        {
-          "id": "b_pajaros",
-          "nombre": "Pájaros (deltoide posterior)",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 12,
-          "repsMax": 15,
-          "registraCarga": true,
-          "notas": "Parte de atrás del hombro y espalda alta: contrarresta hombros hacia delante y cabeza adelantada. MUY ligero, mucho menos que el de Ricardo. Pecho apoyado en el respaldo, codos con flexión suave, abre llevando los omóplatos hacia atrás y hacia abajo.",
-          "avisos": [
-            "Cuello neutro: no adelantes la cabeza ni extiendas el cuello",
-            "No encojas los hombros hacia las orejas"
-          ],
-          "video": ""
-        },
-        {
-          "id": "b_elevaciones",
-          "nombre": "Elevaciones laterales",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 12,
-          "repsMax": 15,
-          "registraCarga": true,
-          "notas": "Deltoides medio. Brazos casi rectos, sube hasta la altura del hombro, sin impulso. VARIANTE RECOMENDADA: de espaldas a la pared, pies 10-15 cm separados de ella. Elimina el balanceo y te avisa si compensas con el tronco",
-          "video": "",
-          "variante": "Wall-supported: espalda apoyada en la pared, pies 10-15 cm separados. Probablemente tengas que bajar el peso respecto a la versión libre: antes parte del trabajo lo hacía el impulso. Es más honesto, aunque el número sea menor"
-        },
-        {
-          "id": "b_biceps",
-          "nombre": "Curl de bíceps",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 10,
-          "repsMax": 12,
-          "registraCarga": true,
-          "notas": "Codos pegados al cuerpo, sube flexionando el codo, baja controlando",
-          "video": ""
-        },
-        {
-          "id": "b_triceps",
-          "nombre": "Extensión de tríceps",
-          "tipo": "accesorio",
-          "series": 3,
-          "repsMin": 10,
-          "repsMax": 12,
-          "registraCarga": true,
-          "notas": "Codo fijo (al techo o pegado al cuerpo según variante), extiende el brazo, vuelve controlando. Normal mover más peso que en bíceps",
-          "video": ""
-        },
-        {
-          "id": "b_rotacion_externa",
-          "nombre": "Rotación externa de hombro (goma)",
-          "tipo": "accesorio",
-          "series": 2,
-          "reps": 15,
-          "porLado": true,
-          "registraCarga": false,
-          "notas": "Manguito rotador. Codo pegado al costado, antebrazo gira hacia fuera. Los press y jalones trabajan los músculos grandes; estos estabilizadores pequeños son los que fallan primero. Debería ayudarte a progresar en el press",
-          "video": ""
+          "variante": "Suitcase carry: peso en una sola mano, alternando. Cubre el plano anti-flexión lateral",
+          "pesoPor": "mancuerna",
+          "pesoPorTexto": "kg por mancuerna"
         },
         {
           "id": "b_plancha_alta",
@@ -456,6 +295,140 @@
           ]
         },
         {
+          "id": "a_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "nombre": "Fuerza B — Pecho, hombro y tríceps",
+      "dia": "miercoles",
+      "tipo": "fuerza",
+      "descripcion": "Empuje. El press de hombro es tu punto más débil documentado.",
+      "ejercicios": [
+        {
+          "id": "b_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "b_press_militar",
+          "nombre": "Press de hombro sentada (máquina)",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Decisión propia: sentada en máquina por comodidad. NOTA: al estar sentada se pierde la carga axial sobre columna que daba la versión de pie — compensado subiendo peso en el farmer's carry. Sigue siendo tu punto débil documentado: prioriza progresar aquí",
+          "sitiosOseos": [],
+          "video": "",
+          "avisos": [
+            "No arquear la lumbar para ayudarte a empujar: con artropatía facetaria L3-S1, esa compensación irrita las facetas"
+          ],
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "b_press_pecho",
+          "nombre": "Press de pecho (Biostrength)",
+          "tipo": "principal",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Prueba el agarre neutro: más amable con el hombro",
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "b_contractor",
+          "nombre": "Contractor pectoral (pec deck)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Aislamiento de pectoral, después del press (compuesto primero, aislamiento después). Asiento a la altura del PECHO, no de los hombros",
+          "avisos": [
+            "NO llevar los codos demasiado atrás al abrir: carga la cápsula anterior del hombro, que es tu punto débil. Para al notar el estiramiento, sin buscar rango máximo"
+          ],
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "b_elevaciones",
+          "nombre": "Elevaciones laterales",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Deltoides medio. Brazos casi rectos, sube hasta la altura del hombro, sin impulso. VARIANTE RECOMENDADA: de espaldas a la pared, pies 10-15 cm separados de ella. Elimina el balanceo y te avisa si compensas con el tronco",
+          "video": "",
+          "variante": "Wall-supported: espalda apoyada en la pared, pies 10-15 cm separados. Probablemente tengas que bajar el peso respecto a la versión libre: antes parte del trabajo lo hacía el impulso. Es más honesto, aunque el número sea menor",
+          "pesoPor": "mancuerna",
+          "pesoPorTexto": "kg por mancuerna"
+        },
+        {
+          "id": "b_pajaros",
+          "nombre": "Pájaros (deltoide posterior)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 8,
+          "repsMax": 10,
+          "registraCarga": true,
+          "notas": "Parte de atrás del hombro y espalda alta: contrarresta hombros hacia delante y cabeza adelantada. MUY ligero, mucho menos que el de Ricardo. Pecho apoyado en el respaldo, codos con flexión suave, abre llevando los omóplatos hacia atrás y hacia abajo.",
+          "avisos": [
+            "Cuello neutro: no adelantes la cabeza ni extiendas el cuello",
+            "No encojas los hombros hacia las orejas"
+          ],
+          "video": "",
+          "pesoPor": "mancuerna",
+          "pesoPorTexto": "kg por mancuerna"
+        },
+        {
+          "id": "b_triceps",
+          "nombre": "Extensión de tríceps",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Codo fijo (al techo o pegado al cuerpo según variante), extiende el brazo, vuelve controlando. Normal mover más peso que en bíceps",
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "c_pallof",
+          "nombre": "Pallof press",
+          "tipo": "core",
+          "series": 3,
+          "porLado": true,
+          "registraCarga": true,
+          "notas": "Anti-rotación, protege columna",
+          "video": "",
+          "repsMin": 10,
+          "repsMax": 12,
+          "pesoPor": "polea",
+          "pesoPorTexto": "kg que marca la polea"
+        },
+        {
           "id": "b_est_estaticos",
           "nombre": "Estiramientos estáticos",
           "tipo": "estiramiento",
@@ -471,14 +444,10 @@
     },
     {
       "id": "C",
-      "nombre": "Fuerza C — Full body + impacto",
-      "dia": "sabado",
-      "intensidad": "alta",
-      "duracionMin": [
-        50,
-        60
-      ],
-      "descripcion": "Carga más alta y menos repeticiones. El bloque de impacto va al principio, con el cuerpo fresco.",
+      "nombre": "Fuerza C — Espalda y bíceps",
+      "dia": "jueves",
+      "tipo": "fuerza",
+      "descripcion": "Tracción, más hiperextensión controlada de lumbar.",
       "ejercicios": [
         {
           "id": "c_est_dinamicos",
@@ -490,129 +459,110 @@
           "video": ""
         },
         {
-          "id": "c_impacto",
-          "nombre": "Bloque de impacto",
-          "tipo": "impacto",
-          "referenciaProtocolo": "protocolo_impacto",
-          "registraCarga": false,
-          "notas": "Ver protocolo de impacto — la fase depende de la semana. Al principio de la sesión",
-          "sitiosOseos": [
-            "cuello_femoral",
-            "tibia"
+          "id": "c_dominadas_asistidas",
+          "nombre": "Dominadas asistidas (opcional)",
+          "tipo": "principal",
+          "opcional": true,
+          "series": 3,
+          "repsMin": 6,
+          "repsMax": 8,
+          "registraCarga": true,
+          "pesoPor": "asistencia",
+          "pesoPorTexto": "kg de ASISTENCIA (más peso = más fácil; progresas bajándolo)",
+          "mejorSiBaja": true,
+          "reglaSubidaInversa": "Si completas las 3 series de 8 con técnica limpia, la próxima vez BAJA la asistencia 2,5-5 kg. Objetivo a largo plazo: llegar a asistencia 0 y hacer una dominada sin ayuda.",
+          "notas": "Primer paso para aprender a hacer dominadas sin ayuda. Opcional: si un día no la haces, no pasa nada, no se registra nada. Va la primera de la sesión, con el cuerpo fresco.",
+          "avisos": [
+            "Sin encoger los hombros hacia las orejas. Si aparece tensión en el cuello, para esa serie y pasa al jalón."
           ],
+          "ficha": {
+            "nombre": "Dominadas asistidas",
+            "queEs": "Una dominada con ayuda: la máquina te descarga parte de tu peso corporal para que puedas hacer el movimiento completo mientras te vuelves más fuerte. Es el primer paso para llegar a hacer dominadas sin ayuda.",
+            "colocacion": "Sobre la plataforma de la máquina, agarre algo más ancho que los hombros o con las palmas enfrentadas si la máquina lo permite (es más fácil y más amable con el hombro). Brazos estirados abajo, con los hombros alejados de las orejas.",
+            "ejecucion": [
+              "Antes de tirar, baja los hombros alejándolos de las orejas, con los omóplatos hacia abajo y atrás.",
+              "Tira llevando los codos hacia las caderas hasta que la barbilla pase la barra, mirando al frente y sin adelantar la cabeza.",
+              "Baja despacio, en unos 3 segundos, hasta estirar los brazos del todo.",
+              "3 series de 6-8. Cuando completes las 3 series de 8 con técnica limpia, baja la asistencia 2,5-5 kg."
+            ],
+            "debesNotar": "Trabajo en la espalda, a los lados bajo las axilas (dorsal ancho), y en el bíceps. No debe notarse en el cuello ni encima de los hombros.",
+            "erroresTipicos": [
+              {
+                "error": "Encoger los hombros hacia las orejas",
+                "comoDetectarlo": "Notas el cuello y el trapecio tensos. Empieza cada repetición bajando los hombros, antes de doblar los codos"
+              },
+              {
+                "error": "Balancearte o tirar con impulso",
+                "comoDetectarlo": "El cuerpo se mece de delante atrás. Hazlo más lento; si hace falta, sube la asistencia"
+              },
+              {
+                "error": "No estirar los brazos del todo abajo",
+                "comoDetectarlo": "Empiezas la siguiente repetición con los codos doblados. El recorrido completo es lo que construye la fuerza"
+              },
+              {
+                "error": "Dejarte caer en la bajada",
+                "comoDetectarlo": "Bajas en menos de un segundo. La bajada lenta es la mitad del trabajo y la que más te acerca a la dominada sin ayuda"
+              },
+              {
+                "error": "Adelantar la cabeza para pasar la barra",
+                "comoDetectarlo": "La cabeza va por delante de la barra. Lleva el pecho hacia la barra, no la barbilla"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "dominadas asistidas máquina técnica progresión"
+          },
           "video": ""
         },
         {
-          "id": "c_peso_muerto",
-          "nombre": "Peso muerto convencional o sumo",
-          "tipo": "principal",
-          "series": 4,
-          "repsMin": 5,
-          "repsMax": 6,
-          "registraCarga": true,
-          "notas": "Carga más alta que el martes, menos reps. REINCORPORACIÓN progresiva: priorizar primero el rumano de la sesión A. Subir 2,5 kg/semana.",
-          "sitiosOseos": [
-            "columna_lumbar",
-            "cadera"
-          ],
-          "video": "",
-          "reincorporacion": {
-            "estado": "progresiva desde 2026-09-30",
-            "incrementoSemanal": 2.5,
-            "condicion": "El rumano va primero. Subir solo sin molestia lumbar en 48h."
-          }
-        },
-        {
-          "id": "c_hip_thrust",
-          "nombre": "Hip thrust",
+          "id": "b_jalon",
+          "nombre": "Jalón al pecho (agarre cerrado)",
           "tipo": "principal",
           "series": 4,
           "repsMin": 8,
           "repsMax": 10,
           "registraCarga": true,
-          "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente",
+          "notas": "Agarre cerrado, sentada. Tira llevando los codos hacia abajo y ligeramente atrás, sin balancear el cuerpo.",
           "video": "",
           "avisos": [
-            "No arquear la lumbar al final del recorrido: con artropatía facetaria L3-S1, la hiperextensión es lo que irrita las facetas. Subir hasta línea recta hombros-rodillas, no más"
-          ]
+            "Tira por delante, nunca tras la nuca, y sin encoger los hombros hacia las orejas (trapecio derecho y zona cervical)."
+          ],
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
         },
         {
-          "id": "c_press_hombro",
-          "nombre": "Press de hombro (variante distinta al jueves)",
+          "id": "b_remo",
+          "nombre": "Remo (Biostrength o barra)",
           "tipo": "principal",
-          "series": 3,
+          "series": 4,
           "repsMin": 8,
           "repsMax": 10,
           "registraCarga": true,
-          "notas": "Arnold press, push press o landmine. Si lo haces sentada, no aporta carga axial",
-          "sitiosOseos": [],
-          "video": ""
-        },
-        {
-          "id": "c_remo_jalon",
-          "nombre": "Remo o jalón",
-          "tipo": "principal",
-          "series": 3,
-          "repsMin": 8,
-          "repsMax": 10,
-          "registraCarga": true,
-          "notas": "",
-          "video": ""
-        },
-        {
-          "id": "c_wall_sit",
-          "nombre": "Sentadilla isométrica en pared (wall sit)",
-          "tipo": "core",
-          "series": 3,
-          "duracionSeg": [
-            30,
-            45
+          "notas": "Si es con barra, remo Pendlay de pie: mejor para columna",
+          "sitiosOseos": [
+            "columna_toracica"
           ],
-          "registraCarga": false,
-          "notas": "Espalda contra la pared, rodillas a 90°. Cuádriceps y tendón rotuliano con carga axial, sin material. También lo tienes como opción en el bloque isométrico del miércoles",
-          "video": ""
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
         },
         {
-          "id": "c_pallof",
-          "nombre": "Pallof press",
-          "tipo": "core",
+          "id": "b_biceps",
+          "nombre": "Curl de bíceps en polea",
+          "tipo": "accesorio",
           "series": 3,
-          "reps": 10,
-          "porLado": true,
+          "repsMin": 10,
+          "repsMax": 12,
           "registraCarga": true,
-          "notas": "Anti-rotación, protege columna",
-          "video": ""
-        },
-        {
-          "id": "c_dead_bug",
-          "nombre": "Dead bug",
-          "tipo": "core",
-          "series": 3,
-          "reps": 8,
-          "porLado": true,
-          "registraCarga": false,
-          "notas": "Tumbada boca arriba, lumbar pegada al suelo todo el rato. Baja brazo y pierna contrarios sin que la espalda se despegue. Si se despega, reduce el rango. Core anti-extensión, sin flexión de columna",
-          "video": ""
-        },
-        {
-          "id": "c_plancha_lateral",
-          "nombre": "Plancha lateral",
-          "tipo": "core",
-          "series": 2,
-          "duracionSeg": [
-            20,
-            30
-          ],
-          "porLado": true,
-          "registraCarga": false,
-          "notas": "Apoyada en el antebrazo, cuerpo en línea recta. Core anti-flexión lateral: el plano que faltaba (la plancha alta cubre el frontal y el Pallof la rotación). Si molesta la lumbar, apoya las rodillas",
-          "video": ""
+          "notas": "Codos pegados al cuerpo, sube flexionando el codo, baja controlando",
+          "video": "",
+          "pesoPor": "polea",
+          "pesoPorTexto": "kg que marca la polea"
         },
         {
           "id": "c_extension_espalda",
-          "nombre": "Extensión de espalda (banco romano o superman)",
+          "nombre": "Hiperextensión en banco romano (rango controlado, lento)",
           "tipo": "principal",
-          "series": 2,
+          "series": 3,
           "repsMin": 10,
           "repsMax": 12,
           "registraCarga": false,
@@ -622,28 +572,617 @@
           ],
           "video": "",
           "avisos": [
-            "NO hiperextender: subir solo hasta la línea recta con las piernas. La artropatía facetaria L3-S1 se irrita en extensión"
-          ]
-        },
-        {
-          "id": "c_farmer",
-          "nombre": "Paseo del granjero",
-          "tipo": "principal",
-          "series": 3,
-          "distanciaM": [
-            30,
-            40
+            "NO hiperextender: subir solo hasta la línea recta con las piernas. La artropatía facetaria L3-S1 se irrita en extensión",
+            "Sube SOLO hasta la línea recta con las piernas, sin hiperextender: la artropatía facetaria L3-S1 se irrita en extensión."
           ],
-          "registraCarga": true,
-          "notas": "Fuente principal de carga axial. Prioriza subir peso. Alterna con variante suitcase (una mano)",
-          "sitiosOseos": [
-            "columna_lumbar",
-            "muñeca"
-          ],
-          "video": ""
+          "pesoPor": "total",
+          "pesoPorTexto": "kg extra que sostienes (0 = solo tu cuerpo)"
         },
         {
           "id": "c_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "nombre": "Fuerza D — Piernas",
+      "dia": "viernes",
+      "tipo": "fuerza",
+      "descripcion": "Peso muerto rumano y hip thrust: bisagra de cadera y glúteo.",
+      "ejercicios": [
+        {
+          "id": "d_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "a_prensa",
+          "nombre": "Prensa de piernas (Biostrength)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Accesorio, aquí sí vale la máquina",
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "a_peso_muerto_rumano",
+          "nombre": "Peso muerto rumano",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 8,
+          "repsMax": 8,
+          "registraCarga": true,
+          "progresion": "mancuernas → barra",
+          "notas": "El mejor estímulo para L1-L4. Bisagra de cadera, NO flexión lumbar. REINCORPORACIÓN tras 2 meses sin carga: empezar en 5 kg y subir 2,5 kg/semana solo si no hay molestia lumbar en las 48h siguientes.",
+          "sitiosOseos": [
+            "columna_lumbar",
+            "cadera"
+          ],
+          "video": "",
+          "reincorporacion": {
+            "estado": "en curso: 16 kg (8 por mancuerna) desde 2026-09-29, sin molestia lumbar",
+            "criterio": "Mantener hasta consolidar técnica; subir 2,5 kg solo cuando se cumplan las condiciones de la regla de subida."
+          },
+          "pesoPor": "mancuerna",
+          "pesoPorTexto": "kg por mancuerna"
+        },
+        {
+          "id": "a_curl_femoral",
+          "nombre": "Curl femoral (Biostrength)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Accesorio",
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "a_rear_kick",
+          "nombre": "Rear kick (patada de glúteo, de pie)",
+          "tipo": "accesorio",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 12,
+          "porPierna": true,
+          "registraCarga": true,
+          "notas": "Extensión de cadera de pie, una pierna cada vez. Complementa el hip thrust desde otro ángulo. Movimiento controlado, sin impulso",
+          "avisos": [
+            "NO arquear la lumbar al llevar la pierna atrás: mismo aviso facetario que el hip thrust. El movimiento sale de la cadera, no de la espalda"
+          ],
+          "video": "",
+          "pesoPor": "maquina",
+          "pesoPorTexto": "kg que marca la máquina"
+        },
+        {
+          "id": "c_hip_thrust",
+          "nombre": "Hip thrust",
+          "tipo": "principal",
+          "series": 4,
+          "repsMin": 10,
+          "repsMax": 12,
+          "registraCarga": true,
+          "notas": "Excelente para glúteo. No es axial, pero sí muy útil muscularmente",
+          "video": "",
+          "avisos": [
+            "No arquear la lumbar al final del recorrido: con artropatía facetaria L3-S1, la hiperextensión es lo que irrita las facetas. Subir hasta línea recta hombros-rodillas, no más"
+          ],
+          "pesoPor": "total",
+          "pesoPorTexto": "kg en total (barra o una sola mancuerna)"
+        },
+        {
+          "id": "c_plancha_lateral",
+          "nombre": "Plancha lateral",
+          "tipo": "core",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Apoyada en el antebrazo, cuerpo en línea recta. Core anti-flexión lateral: el plano que faltaba (la plancha alta cubre el frontal y el Pallof la rotación). Si molesta la lumbar, apoya las rodillas",
+          "video": ""
+        },
+        {
+          "id": "d_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "DD1",
+      "nombre": "Descanso dinámico — sábado",
+      "dia": "sabado",
+      "tipo": "dinamico",
+      "descripcion": "Equilibrio, aeróbico que carga la cadera (steps y cinta inclinada) y todo el trabajo de hombro.",
+      "ejercicios": [
+        {
+          "id": "dd1_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "dd_equilibrio",
+          "nombre": "Equilibrio a una pierna",
+          "tipo": "equilibrio",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "porPierna": true,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión, con el cuerpo fresco. Junto a una pared o soporte por si pierdes el equilibrio.",
+          "avisos": [
+            "Con una pared o un soporte al alcance de la mano."
+          ],
+          "ficha": {
+            "nombre": "Equilibrio a una pierna",
+            "queEs": "Mantenerte de pie sobre una sola pierna. Entrena el equilibrio y la estabilidad de cadera y tobillo, que es lo que previene las caídas, y las caídas son lo que convierte una osteopenia en fractura.",
+            "colocacion": "De pie junto a una pared o un soporte al alcance de la mano, descalza o con calzado plano. Pies a la anchura de la cadera y la mirada en un punto fijo al frente.",
+            "ejecucion": [
+              "Pasa el peso a una pierna y levanta la otra unos centímetros, con la rodilla de apoyo ligeramente flexionada.",
+              "Mantén 30 segundos con la cadera nivelada y el tronco erguido, respirando con normalidad.",
+              "Cambia de pierna. 3 series por pierna.",
+              "Progresión, cuando se te quede fácil: primero con la punta de los dedos rozando la pared, luego sin tocarla, luego girando despacio la cabeza a los lados. Con los ojos cerrados solo al final y con la pared al alcance."
+            ],
+            "debesNotar": "Pequeñas correcciones constantes en el pie y el tobillo, y trabajo en el glúteo de la pierna de apoyo.",
+            "erroresTipicos": [
+              {
+                "error": "Que la cadera se caiga hacia el lado de la pierna levantada",
+                "comoDetectarlo": "Un lado de la cintura se hunde. Nivela la pelvis: es el glúteo medio, el mismo que trabajas con el abductor"
+              },
+              {
+                "error": "Agarrarte a la pared con toda la mano",
+                "comoDetectarlo": "Cargas peso en el brazo. Usa solo la punta de los dedos y, cuando puedas, nada"
+              },
+              {
+                "error": "Apoyar con la rodilla bloqueada",
+                "comoDetectarlo": "Notas la rodilla rígida. Mantenla ligeramente flexionada"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "equilibrio a una pierna ejercicio prevención de caídas progresión"
+          },
+          "video": ""
+        },
+        {
+          "id": "dd_steps",
+          "nombre": "Máquina de steps",
+          "tipo": "aerobico",
+          "registraCarga": false,
+          "campos": [
+            "duracionMin"
+          ],
+          "objetivoMin": 15,
+          "notas": "Sin agarrarte al pasamanos (activa trapecio y cuello). Ritmo conversacional.",
+          "video": ""
+        },
+        {
+          "id": "p_band_pull_apart",
+          "nombre": "Band pull-apart (goma)",
+          "series": 2,
+          "reps": 15,
+          "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros.",
+          "tipo": "postura",
+          "registraCarga": false,
+          "ficha": {
+            "nombre": "Band pull-apart (goma)",
+            "queEs": "Abrir una goma elástica hacia los lados con los brazos estirados delante. Trabaja la parte trasera del hombro y el trapecio medio, que compensan los hombros hacia delante.",
+            "colocacion": "De pie, con una goma ligera sujeta con las palmas hacia abajo a la altura del pecho, manos a la anchura de los hombros y brazos casi estirados. Costillas hacia abajo.",
+            "ejecucion": [
+              "Abre la goma llevando las manos hacia los lados, juntando los omóplatos hacia atrás y abajo.",
+              "Llega hasta donde puedas con control, sin que se muevan el cuello ni la espalda.",
+              "Vuelve despacio, sin soltar la goma de golpe.",
+              "2 series de 15 repeticiones."
+            ],
+            "debesNotar": "Trabajo entre los omóplatos y en la parte de atrás del hombro.",
+            "erroresTipicos": [
+              {
+                "error": "Encoger los hombros hacia las orejas",
+                "comoDetectarlo": "Notas el trapecio superior y el cuello tensos. Baja los hombros antes de abrir"
+              },
+              {
+                "error": "Arquear la zona lumbar para abrir más",
+                "comoDetectarlo": "El pecho sale hacia delante y notas la espalda baja. Mantén las costillas hacia abajo"
+              },
+              {
+                "error": "Usar una goma demasiado dura y tirar con impulso",
+                "comoDetectarlo": "Los brazos se doblan o el cuerpo se balancea. Elige una goma más suave"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "band pull apart goma ejercicio deltoide posterior"
+          }
+        },
+        {
+          "id": "mov_hombro",
+          "nombre": "Rotaciones de hombro (todas las combinaciones)",
+          "tipo": "movilidad",
+          "series": 3,
+          "reps": 10,
+          "porHombro": true,
+          "registraCarga": false,
+          "sinFicha": true
+        },
+        {
+          "id": "b_rotacion_externa",
+          "nombre": "Rotación externa de hombro (goma)",
+          "tipo": "accesorio",
+          "series": 2,
+          "reps": 15,
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Manguito rotador. Codo pegado al costado, antebrazo gira hacia fuera. Los press y jalones trabajan los músculos grandes; estos estabilizadores pequeños son los que fallan primero. Debería ayudarte a progresar en el press",
+          "video": ""
+        },
+        {
+          "id": "dd_cinta",
+          "nombre": "Cinta con inclinación",
+          "tipo": "aerobico",
+          "registraCarga": false,
+          "campos": [
+            "duracionMin",
+            "inclinacionPct"
+          ],
+          "objetivoMin": 10,
+          "notas": "Anota la inclinación (%) de cada sesión. Referencia: 6-10 %.",
+          "video": "",
+          "inclinacionObjetivoPct": [
+            6,
+            10
+          ]
+        },
+        {
+          "id": "dd_remo",
+          "nombre": "Remo (máquina)",
+          "tipo": "aerobico",
+          "registraCarga": false,
+          "campos": [
+            "duracionMin"
+          ],
+          "objetivoMin": 10,
+          "notas": "Espalda neutra: el movimiento sale de las piernas y la cadera, sin redondear la zona lumbar al inicio de cada tirón.",
+          "video": ""
+        },
+        {
+          "id": "dd1_est_estaticos",
+          "nombre": "Estiramientos estáticos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al terminar la sesión.",
+          "avisos": [
+            "Sin flexión profunda de columna sostenida (evita isquiotibiales de pie, inclinada hacia delante con rodillas rectas)."
+          ],
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "DD2",
+      "nombre": "Descanso dinámico — domingo",
+      "dia": "domingo",
+      "tipo": "dinamico",
+      "descripcion": "Impacto, isométricos, postura y equilibrio de la espalda alta.",
+      "ejercicios": [
+        {
+          "id": "dd2_est_dinamicos",
+          "nombre": "Estiramientos dinámicos",
+          "tipo": "estiramiento",
+          "series": 1,
+          "registraCarga": false,
+          "notas": "Al empezar la sesión.",
+          "video": ""
+        },
+        {
+          "id": "c_impacto",
+          "nombre": "Saltos con altura (bloque de impacto, fase 3)",
+          "tipo": "impacto",
+          "referenciaProtocolo": "protocolo_impacto",
+          "registraCarga": false,
+          "notas": "Ver protocolo de impacto — la fase depende de la semana. Al principio de la sesión",
+          "sitiosOseos": [
+            "cuello_femoral",
+            "tibia"
+          ],
+          "video": "",
+          "series": 3,
+          "repsMin": 10,
+          "repsMax": 15
+        },
+        {
+          "id": "iso_wall_sit",
+          "nombre": "Sentadilla isométrica en pared",
+          "tipo": "isometrico",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "registraCarga": false,
+          "registraSegundos": true,
+          "ficha": {
+            "nombre": "Sentadilla isométrica en pared (wall sit)",
+            "queEs": "Sentarte sin silla, apoyada en la pared, y mantener la posición sin moverte. Trabaja cuádriceps y glúteo con carga axial, sin material.",
+            "colocacion": "Espalda y glúteos apoyados en la pared, pies a la anchura de la cadera y a unos 50-60 cm de ella, lo justo para que las rodillas queden sobre los tobillos al bajar.",
+            "ejecucion": [
+              "Baja deslizando la espalda por la pared hasta que las rodillas queden a unos 90°, o menos si te molesta.",
+              "Rodillas alineadas con los tobillos y peso repartido en toda la planta del pie.",
+              "Mantén 30-45 segundos respirando con normalidad, con los brazos cruzados o colgando, sin apoyarlos en los muslos.",
+              "Sube despacio empujando con los pies. 3 series."
+            ],
+            "debesNotar": "Quemazón en los muslos y algo en los glúteos. Nunca dolor en las rodillas.",
+            "erroresTipicos": [
+              {
+                "error": "Rodillas por delante de la punta de los pies",
+                "comoDetectarlo": "Pies demasiado cerca de la pared. Aléjalos un poco"
+              },
+              {
+                "error": "Apoyar las manos en los muslos",
+                "comoDetectarlo": "Empujas con los brazos y el ejercicio se vuelve más fácil. Déjalas libres"
+              },
+              {
+                "error": "Arquear la zona lumbar separándola de la pared",
+                "comoDetectarlo": "Notas la espalda baja tensa o cabe la mano entre la pared y la lumbar. Aprieta el abdomen para pegar la espalda"
+              }
+            ],
+            "claveOsea": "Carga axial sobre columna y cadera, sin material.",
+            "busquedaYouTube": "sentadilla isométrica en pared wall sit técnica"
+          }
+        },
+        {
+          "id": "iso_gemelo",
+          "nombre": "Isométrico de gemelo",
+          "tipo": "isometrico",
+          "series": 3,
+          "duracionSeg": [
+            30,
+            45
+          ],
+          "registraCarga": false,
+          "registraSegundos": true,
+          "ficha": {
+            "nombre": "Isométrico de gemelo",
+            "queEs": "Ponerte de puntillas y mantener la posición, sin moverte. Carga el gemelo y el tendón de Aquiles sin impacto y los prepara para el bloque de saltos.",
+            "colocacion": "De pie, cerca de una pared o un soporte al que puedas tocar con los dedos solo para el equilibrio. Pies a la anchura de la cadera, peso repartido entre los dos pies.",
+            "ejecucion": [
+              "Sube hasta la altura máxima de puntillas.",
+              "Mantén 30-45 segundos sin bajar ni balancearte.",
+              "Baja despacio.",
+              "3 series, con un minuto de descanso entre ellas."
+            ],
+            "debesNotar": "Tensión sostenida en los gemelos y en la parte de atrás del tobillo. Es esfuerzo, no dolor agudo.",
+            "erroresTipicos": [
+              {
+                "error": "Dejar caer los talones poco a poco",
+                "comoDetectarlo": "A mitad de serie estás más baja que al empezar. Vuelve a subir al máximo y acorta el tiempo si hace falta"
+              },
+              {
+                "error": "Apoyarte demasiado en la pared",
+                "comoDetectarlo": "Si quitas los dedos, pierdes el equilibrio. La pared es solo para estabilizarte, no para cargar peso"
+              },
+              {
+                "error": "Seguir con dolor en el tendón de Aquiles o en la zona de la espinilla",
+                "comoDetectarlo": "Notas un dolor punzante en vez de esfuerzo muscular. Para, y tienes el antecedente de tendinitis tibial: es un motivo para no insistir"
+              }
+            ],
+            "claveOsea": "Prepara el tendón de Aquiles para la progresión del bloque de impacto.",
+            "busquedaYouTube": "isométrico de gemelo puntillas mantenido ejercicio"
+          }
+        },
+        {
+          "id": "p_wall_angels",
+          "nombre": "Wall angels",
+          "series": 2,
+          "reps": 10,
+          "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas.",
+          "tipo": "postura",
+          "registraCarga": false,
+          "ficha": {
+            "nombre": "Wall angels",
+            "queEs": "Subir y bajar los brazos, de una W a una Y, con la espalda pegada a la pared. Trabaja la parte baja y media del trapecio y ayuda a abrir el pecho y la espalda alta.",
+            "colocacion": "De pie con la espalda contra la pared, pies a unos 10-15 cm de ella y rodillas ligeramente flexionadas. Costillas hacia abajo. Brazos en W: codos a 90° y el dorso de las manos y los codos tocando la pared.",
+            "ejecucion": [
+              "Desliza los brazos hacia arriba por la pared hasta formar una Y, o hasta donde llegues sin despegar nada.",
+              "Baja despacio de nuevo hasta la W.",
+              "Mantén siempre la cabeza, la espalda alta y las muñecas en contacto con la pared, sin adelantar la cabeza.",
+              "2 series de 10 repeticiones."
+            ],
+            "debesNotar": "Trabajo entre los omóplatos y en la parte alta de la espalda, y un estiramiento del pecho.",
+            "erroresTipicos": [
+              {
+                "error": "Despegar la zona lumbar de la pared arqueando la espalda",
+                "comoDetectarlo": "Notas la espalda baja tensa o metes la mano entre la pared y la lumbar. Con la artropatía facetaria es lo que hay que evitar: aprieta el abdomen y baja las costillas"
+              },
+              {
+                "error": "Despegar codos o muñecas",
+                "comoDetectarlo": "Los dorsos de las manos dejan de tocar la pared. Sube solo hasta donde puedas mantener el contacto"
+              },
+              {
+                "error": "Encoger los hombros hacia las orejas",
+                "comoDetectarlo": "Notas tensión en el cuello. Baja los hombros antes de cada repetición"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "wall angels ejercicio postura hombros"
+          }
+        },
+        {
+          "id": "p_chin_tuck",
+          "nombre": "Retracción cervical (chin tuck)",
+          "series": 1,
+          "reps": 10,
+          "duracionSeg": 5,
+          "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día.",
+          "tipo": "postura",
+          "registraCarga": false,
+          "ficha": {
+            "nombre": "Retracción cervical (chin tuck)",
+            "queEs": "Llevar la cabeza hacia atrás en horizontal, sin inclinarla, para colocarla sobre los hombros. Es el ejercicio que más rinde para la cabeza adelantada.",
+            "colocacion": "De pie con la espalda y el culo cerca de la pared, o sentada erguida, o tumbada boca arriba sin almohada gruesa. Mirada al frente, hombros relajados, costillas hacia abajo.",
+            "ejecucion": [
+              "Lleva la barbilla hacia atrás como si quisieras hacerte doble papada, deslizando la cabeza en horizontal.",
+              "La barbilla no sube ni baja: la mirada sigue al frente.",
+              "Mantén 5 segundos y vuelve despacio.",
+              "10 repeticiones. Puedes repetirlo 2-3 veces al día, incluso sentada en la mesa."
+            ],
+            "debesNotar": "Un estiramiento suave en la base del cráneo y algo de trabajo en la parte delantera del cuello. Nunca dolor, hormigueo ni mareo.",
+            "erroresTipicos": [
+              {
+                "error": "Bajar la barbilla hacia el pecho",
+                "comoDetectarlo": "La mirada se va al suelo: eso es flexión, no retracción. La cabeza tiene que ir hacia atrás, no hacia abajo"
+              },
+              {
+                "error": "Sacar pecho o arquear la zona lumbar para 'ponerte recta'",
+                "comoDetectarlo": "Notas la espalda baja tensa. Con la artropatía facetaria, la postura correcta es alargarte, no arquearte"
+              },
+              {
+                "error": "Empujar con fuerza",
+                "comoDetectarlo": "Notas tensión en la mandíbula o el cuello. Es un movimiento suave"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "chin tuck retracción cervical ejercicio fisioterapia"
+          }
+        },
+        {
+          "id": "p_flexion_craneocervical",
+          "nombre": "Flexión craneocervical tumbada",
+          "series": 1,
+          "reps": 10,
+          "duracionSeg": [
+            5,
+            10
+          ],
+          "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta.",
+          "tipo": "postura",
+          "registraCarga": false,
+          "ficha": {
+            "nombre": "Flexión craneocervical tumbada",
+            "queEs": "Un 'asentimiento' muy suave que activa los flexores profundos del cuello, los que se debilitan con la cabeza adelantada, sin usar los superficiales.",
+            "colocacion": "Boca arriba, rodillas flexionadas y pies apoyados. Toalla fina doblada bajo la cabeza, de forma que la barbilla no quede ni levantada ni pegada al pecho.",
+            "ejecucion": [
+              "Asiente con la cabeza de forma muy suave, como diciendo 'sí' a cámara lenta. El movimiento es pequeñísimo: la cabeza se desliza sobre la toalla.",
+              "Mantén 5-10 segundos, con la nuca larga y sin apretar.",
+              "Vuelve despacio a la posición inicial.",
+              "10 repeticiones."
+            ],
+            "debesNotar": "Un esfuerzo muy ligero y profundo en la parte delantera del cuello. No debe notarse en la mandíbula ni en los músculos de los lados del cuello.",
+            "erroresTipicos": [
+              {
+                "error": "Hacerlo con demasiada fuerza",
+                "comoDetectarlo": "Se marcan los músculos de los lados del cuello o tensas la mandíbula. Baja la intensidad: cuanto más suave, mejor"
+              },
+              {
+                "error": "Levantar la cabeza de la toalla",
+                "comoDetectarlo": "La cabeza deja de deslizarse y pasa a subirse. El movimiento es solo de asentir"
+              },
+              {
+                "error": "Contener la respiración",
+                "comoDetectarlo": "Notas presión en la cara o el pecho. Respira con normalidad todo el rato"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "flexión craneocervical tumbada ejercicio cuello fisioterapia"
+          }
+        },
+        {
+          "id": "p_movilidad_dorsal",
+          "nombre": "Movilidad dorsal",
+          "duracionMin": [
+            1,
+            2
+          ],
+          "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book).",
+          "tipo": "postura",
+          "registraCarga": false,
+          "ficha": {
+            "nombre": "Movilidad dorsal (foam roller u open book)",
+            "queEs": "Mover la columna dorsal, la zona entre los omóplatos, que se pone rígida con el trabajo de mesa y es la que más ayuda a colocar los hombros.",
+            "colocacion": "Foam roller: tumbada boca arriba con el rodillo en horizontal bajo la parte alta de la espalda, a la altura de los omóplatos, rodillas flexionadas, manos detrás de la cabeza sujetando el cuello. Open book: tumbada de lado, rodillas dobladas a 90° y juntas, brazos estirados delante y juntos.",
+            "ejecucion": [
+              "Foam roller: deja caer suavemente la espalda alta sobre el rodillo y muévete despacio, unos 1-2 minutos, sin bajar de los omóplatos. La zona lumbar queda fuera del rodillo.",
+              "Open book: abre el brazo de arriba rotando el tronco hacia atrás, como abriendo un libro, siguiendo la mano con la mirada.",
+              "Vuelve al punto de partida. Las rodillas se quedan apiladas y quietas.",
+              "Open book: 8-10 repeticiones por lado."
+            ],
+            "debesNotar": "Que se abre la zona entre los omóplatos y el pecho. Puede haber molestia suave, nunca dolor agudo.",
+            "erroresTipicos": [
+              {
+                "error": "Arquear la zona lumbar sobre el rodillo",
+                "comoDetectarlo": "Notas la espalda baja hundida. Aprieta ligeramente el abdomen y baja las costillas"
+              },
+              {
+                "error": "Rodar por la zona lumbar o por el cuello",
+                "comoDetectarlo": "El rodillo baja por debajo de los omóplatos. Quédate en la parte dorsal"
+              },
+              {
+                "error": "En el open book, mover las rodillas o la cadera en vez del tronco",
+                "comoDetectarlo": "Las rodillas se separan. Deben quedarse juntas y apoyadas mientras gira el tronco"
+              }
+            ],
+            "claveOsea": null,
+            "busquedaYouTube": "movilidad dorsal foam roller open book ejercicio"
+          }
+        },
+        {
+          "id": "dd_eliptica",
+          "nombre": "Elíptica",
+          "tipo": "aerobico",
+          "registraCarga": false,
+          "campos": [
+            "duracionMin"
+          ],
+          "objetivoMin": 10,
+          "notas": "",
+          "video": ""
+        },
+        {
+          "id": "c_dead_bug",
+          "nombre": "Dead bug",
+          "tipo": "core",
+          "series": 3,
+          "reps": 15,
+          "porLado": true,
+          "registraCarga": false,
+          "notas": "Tumbada boca arriba, lumbar pegada al suelo todo el rato. Baja brazo y pierna contrarios sin que la espalda se despegue. Si se despega, reduce el rango. Core anti-extensión, sin flexión de columna",
+          "video": ""
+        },
+        {
+          "id": "dd2_est_estaticos",
           "nombre": "Estiramientos estáticos",
           "tipo": "estiramiento",
           "series": 1,
@@ -659,14 +1198,12 @@
   ],
   "bloquesSuaves": [
     {
-      "id": "descanso_dinamico",
-      "nombre": "Descanso dinámico",
-      "descripcion": "Actividad suave a elegir. Se marca lo que hagas; si no vas, no se registra nada.",
+      "id": "descanso_libre",
+      "nombre": "Descanso dinámico libre",
+      "descripcion": "Para los días que quieras improvisar o hacer yoga, barre o pilates en lugar de lo previsto. Si no vas, no se registra nada.",
       "sugerenciaSemanal": [
-        "Al menos una vez por semana: steps o cinta con inclinación (son las únicas opciones de la lista que cargan la cadera).",
-        "Una vez por semana: yoga, barre o pilates (equilibrio y prevención de caídas).",
-        "El resto queda libre: lo que te apetezca.",
-        "Postura: el bloque de 5 minutos, en cada día de descanso dinámico."
+        "Steps y cinta con inclinación son las únicas opciones de la lista que cargan la cadera.",
+        "Yoga, barre o pilates aportan equilibrio y prevención de caídas."
       ],
       "opciones": [
         {
@@ -755,126 +1292,6 @@
           ],
           "render": "registro",
           "modo": "registro"
-        },
-        {
-          "id": "movilidad_hombro",
-          "nombre": "Movilidad de hombro (rotaciones)",
-          "grupo": "movilidad",
-          "notas": "Todas las combinaciones de rotación, sin carga. Si aparece dolor en el cuello, para.",
-          "render": "sets",
-          "registraCarga": false,
-          "modo": "ejercicios",
-          "ejercicios": [
-            {
-              "id": "mov_hombro",
-              "nombre": "Rotaciones de hombro (todas las combinaciones)",
-              "tipo": "movilidad",
-              "series": 3,
-              "reps": 10,
-              "porHombro": true,
-              "registraCarga": false,
-              "sinFicha": true
-            }
-          ]
-        },
-        {
-          "id": "isometricos",
-          "nombre": "Isométricos: gemelo + sentadilla en pared",
-          "grupo": "tendon",
-          "render": "sets",
-          "notas": "Unos 5 minutos al final de otra actividad. Opcional.",
-          "ejercicios": [
-            {
-              "id": "iso_gemelo",
-              "nombre": "Isométrico de gemelo",
-              "tipo": "isometrico",
-              "series": 3,
-              "duracionSeg": [
-                30,
-                45
-              ],
-              "registraCarga": false,
-              "registraSegundos": true,
-              "ficha": {
-                "nombre": "Isométrico de gemelo",
-                "queEs": "Ponerte de puntillas y mantener la posición, sin moverte. Carga el gemelo y el tendón de Aquiles sin impacto y los prepara para el bloque de saltos.",
-                "colocacion": "De pie, cerca de una pared o un soporte al que puedas tocar con los dedos solo para el equilibrio. Pies a la anchura de la cadera, peso repartido entre los dos pies.",
-                "ejecucion": [
-                  "Sube hasta la altura máxima de puntillas.",
-                  "Mantén 30-45 segundos sin bajar ni balancearte.",
-                  "Baja despacio.",
-                  "3 series, con un minuto de descanso entre ellas."
-                ],
-                "debesNotar": "Tensión sostenida en los gemelos y en la parte de atrás del tobillo. Es esfuerzo, no dolor agudo.",
-                "erroresTipicos": [
-                  {
-                    "error": "Dejar caer los talones poco a poco",
-                    "comoDetectarlo": "A mitad de serie estás más baja que al empezar. Vuelve a subir al máximo y acorta el tiempo si hace falta"
-                  },
-                  {
-                    "error": "Apoyarte demasiado en la pared",
-                    "comoDetectarlo": "Si quitas los dedos, pierdes el equilibrio. La pared es solo para estabilizarte, no para cargar peso"
-                  },
-                  {
-                    "error": "Seguir con dolor en el tendón de Aquiles o en la zona de la espinilla",
-                    "comoDetectarlo": "Notas un dolor punzante en vez de esfuerzo muscular. Para, y tienes el antecedente de tendinitis tibial: es un motivo para no insistir"
-                  }
-                ],
-                "claveOsea": "Prepara el tendón de Aquiles para la progresión del bloque de impacto.",
-                "busquedaYouTube": "isométrico de gemelo puntillas mantenido ejercicio"
-              }
-            },
-            {
-              "id": "iso_wall_sit",
-              "nombre": "Sentadilla isométrica en pared",
-              "tipo": "isometrico",
-              "series": 3,
-              "duracionSeg": [
-                30,
-                45
-              ],
-              "registraCarga": false,
-              "registraSegundos": true,
-              "ficha": {
-                "nombre": "Sentadilla isométrica en pared (wall sit)",
-                "queEs": "Sentarte sin silla, apoyada en la pared, y mantener la posición sin moverte. Trabaja cuádriceps y glúteo con carga axial, sin material.",
-                "colocacion": "Espalda y glúteos apoyados en la pared, pies a la anchura de la cadera y a unos 50-60 cm de ella, lo justo para que las rodillas queden sobre los tobillos al bajar.",
-                "ejecucion": [
-                  "Baja deslizando la espalda por la pared hasta que las rodillas queden a unos 90°, o menos si te molesta.",
-                  "Rodillas alineadas con los tobillos y peso repartido en toda la planta del pie.",
-                  "Mantén 30-45 segundos respirando con normalidad, con los brazos cruzados o colgando, sin apoyarlos en los muslos.",
-                  "Sube despacio empujando con los pies. 3 series."
-                ],
-                "debesNotar": "Quemazón en los muslos y algo en los glúteos. Nunca dolor en las rodillas.",
-                "erroresTipicos": [
-                  {
-                    "error": "Rodillas por delante de la punta de los pies",
-                    "comoDetectarlo": "Pies demasiado cerca de la pared. Aléjalos un poco"
-                  },
-                  {
-                    "error": "Apoyar las manos en los muslos",
-                    "comoDetectarlo": "Empujas con los brazos y el ejercicio se vuelve más fácil. Déjalas libres"
-                  },
-                  {
-                    "error": "Arquear la zona lumbar separándola de la pared",
-                    "comoDetectarlo": "Notas la espalda baja tensa o cabe la mano entre la pared y la lumbar. Aprieta el abdomen para pegar la espalda"
-                  }
-                ],
-                "claveOsea": "Carga axial sobre columna y cadera, sin material.",
-                "busquedaYouTube": "sentadilla isométrica en pared wall sit técnica"
-              }
-            }
-          ],
-          "modo": "ejercicios"
-        },
-        {
-          "id": "postura",
-          "nombre": "Postura: cuello y espalda alta (bloque de 5 min)",
-          "grupo": "postura",
-          "referencia": "bloquePostura",
-          "notas": "Abre el bloque de postura con sus ejercicios y casillas. Puede hacerse a continuación de cualquier otra actividad.",
-          "render": "pantalla",
-          "modo": "ejercicios"
         },
         {
           "id": "otra",
@@ -994,7 +1411,13 @@
         "accesoriosLigeros": 1
       },
       "noBajar": "No bajar peso sin motivo concreto (técnica que falla o molestia). Bajadas sin razón borran semanas de trabajo.",
-      "diagnostico2026_09": "Registro sep 2026: sentadilla estancada en 20 kg durante 4 sesiones, prensa en 50 desde agosto, y varios retrocesos sin motivo (curl 7,5→3 kg, farmer 24→16 kg, jalón 30→25). Sin sobrecarga progresiva no hay adaptación muscular ni ósea. Este es el principal freno identificado."
+      "diagnostico2026_09": "Registro sep 2026: sentadilla estancada en 20 kg durante 4 sesiones, prensa en 50 desde agosto, y varios retrocesos sin motivo (curl 7,5→3 kg, farmer 24→16 kg, jalón 30→25). Sin sobrecarga progresiva no hay adaptación muscular ni ósea. Este es el principal freno identificado.",
+      "condiciones": [
+        "Dos o tres sesiones seguidas con ese peso y todas las series en el rango alto de repeticiones.",
+        "Técnica limpia (idealmente grabada de lado) y con 2 repeticiones de reserva.",
+        "Ninguna molestia lumbar en las 48 horas siguientes."
+      ],
+      "nota": "Decisión propia (oct 2026): no subir de peso hasta consolidar la técnica con los pesos actuales."
     }
   },
   "evitar": [
@@ -1115,219 +1538,38 @@
       "prioridad": "baja"
     }
   ],
-  "bloquePostura": {
-    "nombre": "Postura: cuello y espalda alta",
-    "duracionMin": 5,
-    "frecuencia": "Dentro de los días de descanso dinámico, como una opción más. Entre semana, chin tucks sueltos cada vez que te levantes de la mesa: no hace falta registrarlos.",
-    "motivo": "RM cervical 20/09/2026: hiperlordosis cervical. Además, la cabeza adelantada y los hombros hacia delante suelen acompañar al trabajo de mesa. La postura funcional mejora con fuerza y resistencia de la musculatura profunda del cuello y la espalda alta, más hábitos.",
-    "ejercicios": [
-      {
-        "id": "p_chin_tuck",
-        "nombre": "Retracción cervical (chin tuck)",
-        "series": 1,
-        "reps": 10,
-        "duracionSeg": 5,
-        "notas": "Espalda contra la pared o tumbada. Barbilla hacia atrás, como haciendo doble papada, sin bajar la cabeza. 2-3 veces al día.",
-        "tipo": "postura",
-        "registraCarga": false,
-        "ficha": {
-          "nombre": "Retracción cervical (chin tuck)",
-          "queEs": "Llevar la cabeza hacia atrás en horizontal, sin inclinarla, para colocarla sobre los hombros. Es el ejercicio que más rinde para la cabeza adelantada.",
-          "colocacion": "De pie con la espalda y el culo cerca de la pared, o sentada erguida, o tumbada boca arriba sin almohada gruesa. Mirada al frente, hombros relajados, costillas hacia abajo.",
-          "ejecucion": [
-            "Lleva la barbilla hacia atrás como si quisieras hacerte doble papada, deslizando la cabeza en horizontal.",
-            "La barbilla no sube ni baja: la mirada sigue al frente.",
-            "Mantén 5 segundos y vuelve despacio.",
-            "10 repeticiones. Puedes repetirlo 2-3 veces al día, incluso sentada en la mesa."
-          ],
-          "debesNotar": "Un estiramiento suave en la base del cráneo y algo de trabajo en la parte delantera del cuello. Nunca dolor, hormigueo ni mareo.",
-          "erroresTipicos": [
-            {
-              "error": "Bajar la barbilla hacia el pecho",
-              "comoDetectarlo": "La mirada se va al suelo: eso es flexión, no retracción. La cabeza tiene que ir hacia atrás, no hacia abajo"
-            },
-            {
-              "error": "Sacar pecho o arquear la zona lumbar para 'ponerte recta'",
-              "comoDetectarlo": "Notas la espalda baja tensa. Con la artropatía facetaria, la postura correcta es alargarte, no arquearte"
-            },
-            {
-              "error": "Empujar con fuerza",
-              "comoDetectarlo": "Notas tensión en la mandíbula o el cuello. Es un movimiento suave"
-            }
-          ],
-          "claveOsea": null,
-          "busquedaYouTube": "chin tuck retracción cervical ejercicio fisioterapia"
-        }
-      },
-      {
-        "id": "p_flexion_craneocervical",
-        "nombre": "Flexión craneocervical tumbada",
-        "series": 1,
-        "reps": 10,
-        "duracionSeg": [
-          5,
-          10
-        ],
-        "notas": "Boca arriba, toalla fina bajo la cabeza. Asiente muy suave, a cámara lenta, y aguanta.",
-        "tipo": "postura",
-        "registraCarga": false,
-        "ficha": {
-          "nombre": "Flexión craneocervical tumbada",
-          "queEs": "Un 'asentimiento' muy suave que activa los flexores profundos del cuello, los que se debilitan con la cabeza adelantada, sin usar los superficiales.",
-          "colocacion": "Boca arriba, rodillas flexionadas y pies apoyados. Toalla fina doblada bajo la cabeza, de forma que la barbilla no quede ni levantada ni pegada al pecho.",
-          "ejecucion": [
-            "Asiente con la cabeza de forma muy suave, como diciendo 'sí' a cámara lenta. El movimiento es pequeñísimo: la cabeza se desliza sobre la toalla.",
-            "Mantén 5-10 segundos, con la nuca larga y sin apretar.",
-            "Vuelve despacio a la posición inicial.",
-            "10 repeticiones."
-          ],
-          "debesNotar": "Un esfuerzo muy ligero y profundo en la parte delantera del cuello. No debe notarse en la mandíbula ni en los músculos de los lados del cuello.",
-          "erroresTipicos": [
-            {
-              "error": "Hacerlo con demasiada fuerza",
-              "comoDetectarlo": "Se marcan los músculos de los lados del cuello o tensas la mandíbula. Baja la intensidad: cuanto más suave, mejor"
-            },
-            {
-              "error": "Levantar la cabeza de la toalla",
-              "comoDetectarlo": "La cabeza deja de deslizarse y pasa a subirse. El movimiento es solo de asentir"
-            },
-            {
-              "error": "Contener la respiración",
-              "comoDetectarlo": "Notas presión en la cara o el pecho. Respira con normalidad todo el rato"
-            }
-          ],
-          "claveOsea": null,
-          "busquedaYouTube": "flexión craneocervical tumbada ejercicio cuello fisioterapia"
-        }
-      },
-      {
-        "id": "p_wall_angels",
-        "nombre": "Wall angels",
-        "series": 2,
-        "reps": 10,
-        "notas": "Espalda contra la pared, brazos en W y subes a Y sin despegar espalda ni muñecas.",
-        "tipo": "postura",
-        "registraCarga": false,
-        "ficha": {
-          "nombre": "Wall angels",
-          "queEs": "Subir y bajar los brazos, de una W a una Y, con la espalda pegada a la pared. Trabaja la parte baja y media del trapecio y ayuda a abrir el pecho y la espalda alta.",
-          "colocacion": "De pie con la espalda contra la pared, pies a unos 10-15 cm de ella y rodillas ligeramente flexionadas. Costillas hacia abajo. Brazos en W: codos a 90° y el dorso de las manos y los codos tocando la pared.",
-          "ejecucion": [
-            "Desliza los brazos hacia arriba por la pared hasta formar una Y, o hasta donde llegues sin despegar nada.",
-            "Baja despacio de nuevo hasta la W.",
-            "Mantén siempre la cabeza, la espalda alta y las muñecas en contacto con la pared, sin adelantar la cabeza.",
-            "2 series de 10 repeticiones."
-          ],
-          "debesNotar": "Trabajo entre los omóplatos y en la parte alta de la espalda, y un estiramiento del pecho.",
-          "erroresTipicos": [
-            {
-              "error": "Despegar la zona lumbar de la pared arqueando la espalda",
-              "comoDetectarlo": "Notas la espalda baja tensa o metes la mano entre la pared y la lumbar. Con la artropatía facetaria es lo que hay que evitar: aprieta el abdomen y baja las costillas"
-            },
-            {
-              "error": "Despegar codos o muñecas",
-              "comoDetectarlo": "Los dorsos de las manos dejan de tocar la pared. Sube solo hasta donde puedas mantener el contacto"
-            },
-            {
-              "error": "Encoger los hombros hacia las orejas",
-              "comoDetectarlo": "Notas tensión en el cuello. Baja los hombros antes de cada repetición"
-            }
-          ],
-          "claveOsea": null,
-          "busquedaYouTube": "wall angels ejercicio postura hombros"
-        }
-      },
-      {
-        "id": "p_band_pull_apart",
-        "nombre": "Band pull-apart (goma)",
-        "series": 2,
-        "reps": 15,
-        "notas": "Abre la goma llevando los omóplatos hacia atrás, sin encoger los hombros.",
-        "tipo": "postura",
-        "registraCarga": false,
-        "ficha": {
-          "nombre": "Band pull-apart (goma)",
-          "queEs": "Abrir una goma elástica hacia los lados con los brazos estirados delante. Trabaja la parte trasera del hombro y el trapecio medio, que compensan los hombros hacia delante.",
-          "colocacion": "De pie, con una goma ligera sujeta con las palmas hacia abajo a la altura del pecho, manos a la anchura de los hombros y brazos casi estirados. Costillas hacia abajo.",
-          "ejecucion": [
-            "Abre la goma llevando las manos hacia los lados, juntando los omóplatos hacia atrás y abajo.",
-            "Llega hasta donde puedas con control, sin que se muevan el cuello ni la espalda.",
-            "Vuelve despacio, sin soltar la goma de golpe.",
-            "2 series de 15 repeticiones."
-          ],
-          "debesNotar": "Trabajo entre los omóplatos y en la parte de atrás del hombro.",
-          "erroresTipicos": [
-            {
-              "error": "Encoger los hombros hacia las orejas",
-              "comoDetectarlo": "Notas el trapecio superior y el cuello tensos. Baja los hombros antes de abrir"
-            },
-            {
-              "error": "Arquear la zona lumbar para abrir más",
-              "comoDetectarlo": "El pecho sale hacia delante y notas la espalda baja. Mantén las costillas hacia abajo"
-            },
-            {
-              "error": "Usar una goma demasiado dura y tirar con impulso",
-              "comoDetectarlo": "Los brazos se doblan o el cuerpo se balancea. Elige una goma más suave"
-            }
-          ],
-          "claveOsea": null,
-          "busquedaYouTube": "band pull apart goma ejercicio deltoide posterior"
-        }
-      },
-      {
-        "id": "p_movilidad_dorsal",
-        "nombre": "Movilidad dorsal",
-        "duracionMin": [
-          1,
-          2
-        ],
-        "notas": "Foam roller a la altura de los omóplatos, o rotaciones tumbada de lado (open book).",
-        "tipo": "postura",
-        "registraCarga": false,
-        "ficha": {
-          "nombre": "Movilidad dorsal (foam roller u open book)",
-          "queEs": "Mover la columna dorsal, la zona entre los omóplatos, que se pone rígida con el trabajo de mesa y es la que más ayuda a colocar los hombros.",
-          "colocacion": "Foam roller: tumbada boca arriba con el rodillo en horizontal bajo la parte alta de la espalda, a la altura de los omóplatos, rodillas flexionadas, manos detrás de la cabeza sujetando el cuello. Open book: tumbada de lado, rodillas dobladas a 90° y juntas, brazos estirados delante y juntos.",
-          "ejecucion": [
-            "Foam roller: deja caer suavemente la espalda alta sobre el rodillo y muévete despacio, unos 1-2 minutos, sin bajar de los omóplatos. La zona lumbar queda fuera del rodillo.",
-            "Open book: abre el brazo de arriba rotando el tronco hacia atrás, como abriendo un libro, siguiendo la mano con la mirada.",
-            "Vuelve al punto de partida. Las rodillas se quedan apiladas y quietas.",
-            "Open book: 8-10 repeticiones por lado."
-          ],
-          "debesNotar": "Que se abre la zona entre los omóplatos y el pecho. Puede haber molestia suave, nunca dolor agudo.",
-          "erroresTipicos": [
-            {
-              "error": "Arquear la zona lumbar sobre el rodillo",
-              "comoDetectarlo": "Notas la espalda baja hundida. Aprieta ligeramente el abdomen y baja las costillas"
-            },
-            {
-              "error": "Rodar por la zona lumbar o por el cuello",
-              "comoDetectarlo": "El rodillo baja por debajo de los omóplatos. Quédate en la parte dorsal"
-            },
-            {
-              "error": "En el open book, mover las rodillas o la cadera en vez del tronco",
-              "comoDetectarlo": "Las rodillas se separan. Deben quedarse juntas y apoyadas mientras gira el tronco"
-            }
-          ],
-          "claveOsea": null,
-          "busquedaYouTube": "movilidad dorsal foam roller open book ejercicio"
-        }
-      }
-    ],
-    "avisos": [
-      "NO corrijas arqueando la lumbar: con la artropatía facetaria L3-S1 esa postura irrita. La sensación correcta es alargarte, costillas hacia abajo y pelvis neutra.",
-      "Si algún ejercicio provoca hormigueo en los brazos, mareo o dolor: parar y comentarlo al traumatólogo."
-    ],
-    "habitos": [
-      "Pantalla con el borde superior a la altura de los ojos",
-      "Levantarte cada 45-60 minutos y hacer un par de chin tucks"
-    ],
-    "ubicacion": "descanso_dinamico",
-    "pantalla": {
-      "tipo": "sesion",
-      "descripcion": "Se muestra como una sesión normal: ejercicios desglosados con casilla, series y desplegable 'Cómo se hace' plegado por defecto, con el mismo formato que las fichas de los ejercicios de fuerza."
+  "ejerciciosArchivados": [
+    {
+      "id": "c_peso_muerto",
+      "nombre": "Peso muerto convencional o sumo",
+      "motivo": "Fuera del plan desde 2026-10-05; el rumano cubre la bisagra de cadera."
+    },
+    {
+      "id": "c_wall_sit",
+      "nombre": "Sentadilla isométrica en pared (wall sit)",
+      "motivo": "Pasa a DD2 con el id iso_wall_sit."
+    },
+    {
+      "id": "c_press_hombro",
+      "nombre": "Press de hombro (variante distinta al jueves)",
+      "motivo": "Fuera del plan desde 2026-10-05."
+    },
+    {
+      "id": "c_remo_jalon",
+      "nombre": "Remo o jalón",
+      "motivo": "Sustituido por el remo y el jalón de la sesión C."
+    },
+    {
+      "id": "b_flexiones",
+      "nombre": "Flexiones con manos elevadas",
+      "motivo": "Fuera del plan."
+    },
+    {
+      "id": "b_biceps_triceps",
+      "nombre": "Curl de bíceps + extensión de tríceps",
+      "motivo": "Separados hace tiempo en b_biceps y b_triceps."
     }
-  },
+  ],
   "visualizacion": {
     "fichasTecnicas": {
       "plegadoPorDefecto": true,
